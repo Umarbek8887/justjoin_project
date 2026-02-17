@@ -1,0 +1,11 @@
+uv add dotenv
+uv add psycopg2-binary
+uv add pillow
+uv add isort
+uv add flake8
+uv add requests
+uv add django-jazzmin
+uv add django-debug-toolbar
+uv add django-ckeditor-5
+uv add django-celery-beat
+uv add django-celery-results
