@@ -4,6 +4,7 @@ uv add pillow
 uv add isort
 uv add flake8
 uv add requests
+uv add flower
 uv add django-jazzmin
 uv add django-debug-toolbar
 uv add django-ckeditor-5
