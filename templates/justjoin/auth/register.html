@@ -1,0 +1,146 @@
+{% extends 'justjoin/auth/auth-base.html' %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main_content %}
+        <a href="{% url 'login_page' %}" class="back-arrow">←</a>
+        <div class="card">
+            <h1 class="card-title">Create account</h1>
+
+            <!-- Social buttons -->
+            <div class="social-btns">
+                <button class="social-btn" id="googleBtn">
+                    <svg width="18" height="18" viewBox="0 0 48 48">
+                        <path fill="#EA4335"
+                              d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4"
+                              d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05"
+                              d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853"
+                              d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                        <path fill="none" d="M0 0h48v48H0z"/>
+                    </svg>
+                    Sign up with Google
+                </button>
+
+                <button class="social-btn linkedin-active" id="linkedinBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Sign up with Linkedin
+                </button>
+
+                <button class="social-btn" id="githubBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    Sign up with GitHub
+                </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-text">Or</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="field">
+                <label for="email">Email address <span class="required">*</span></label>
+                <input type="email" id="email" placeholder="name@domain.com" autocomplete="email"/>
+                <span class="field-error" id="emailError"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="field">
+                <label for="password">Password <span class="required">*</span></label>
+                <div class="password-wrap">
+                    <input type="password" id="password" placeholder="At least 8 characters"/>
+                    <button class="eye-btn" id="eyeBtn1" type="button">
+                        <svg id="eyeIcon1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Password rules -->
+                <ul class="rules" id="passwordRules">
+                    <li class="rule" id="rule-length">
+                        <span class="rule-icon">✕</span> At least 8 characters
+                    </li>
+                    <li class="rule" id="rule-number">
+                        <span class="rule-icon">✕</span> At least one number (0-9)
+                    </li>
+                    <li class="rule" id="rule-upper">
+                        <span class="rule-icon">✕</span> At least one uppercase letter (A-Z)
+                    </li>
+                    <li class="rule" id="rule-lower">
+                        <span class="rule-icon">✕</span> At least one lowercase letter (a-z)
+                    </li>
+                    <li class="rule" id="rule-special">
+                        <span class="rule-icon">✕</span> At least one special character (!@#$%^&*)
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Repeat password -->
+            <div class="field">
+                <label for="repeatPassword">Repeat password <span class="required">*</span></label>
+                <div class="password-wrap">
+                    <input type="password" id="repeatPassword" placeholder="Same password as above"/>
+                    <button class="eye-btn" id="eyeBtn2" type="button">
+                        <svg id="eyeIcon2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </button>
+                </div>
+                <span class="field-error" id="repeatError"></span>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="termsCheck"/>
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">
+              I have read and accept <a href="#" class="link">the Terms of Service and the Privacy Policy</a>.*
+              <button class="show-more" id="showMore1" type="button">Show more</button>
+              <span class="extra-text" id="extra1" style="display:none">
+                By creating an account you agree to our Terms of Service and Privacy Policy which govern your use of our platform.
+              </span>
+            </span>
+                </label>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="marketingCheck"/>
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">
+              I want to receive marketing information from Just Join IT and Just Join IT's partners to my e-mail address.
+              <button class="show-more" id="showMore2" type="button">Show more</button>
+              <span class="extra-text" id="extra2" style="display:none">
+                We'll send you job alerts, company updates, and relevant offers. You can unsubscribe any time.
+              </span>
+            </span>
+                </label>
+            </div>
+
+            <button class="btn-submit" type="submit">Create account</button>
+        </div>
+{% endblock %}
+
+
+
+

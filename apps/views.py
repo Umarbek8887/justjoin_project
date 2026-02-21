@@ -1,10 +1,62 @@
 import urllib
 
 import requests
+from django.contrib.auth import login
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import FormView, CreateView, TemplateView
 
+from apps.forms import LoginForm, RegisterModelForm
+from apps.mixins import LoginNotRequiredMixin
 from root import settings
+
+
+
+class LoginFormView(LoginNotRequiredMixin, FormView):
+    template_name = 'justjoin/auth/login-by-email.html'
+    form_class = LoginForm
+    redirect_authenticated_user = True
+    # success_url = reverse_lazy('product_list_page')
+
+    def form_valid(self, form):
+        login(self.request, form.user)
+        return super().form_valid(form)
+
+
+
+class RegisterCreateView(LoginNotRequiredMixin, CreateView):
+    template_name = 'justjoin/auth/register.html'
+    redirect_authenticated_user = True
+    # success_url = reverse_lazy('product_list_page')
+    form_class = RegisterModelForm
+
+    def form_valid(self, form):
+        user = form.save(False)
+        user.is_active = False
+        user.save()
+
+        # send_registration_link(user, f"http://{self.request.get_host()}")
+        # messages.success(self.request, "Ro'yxatdan muvaffaqiyatli o'tdingiz! Pochtangizni tekshiring.")
+        return redirect(self.success_url)
+
+
+
+# Test
+class ForgotPassword(TemplateView):
+    template_name = 'justjoin/auth/password-reset.html'
+
+# Test
+class SoicialLoginView(TemplateView):
+    template_name = 'justjoin/auth/login-by-soicial.html'
+
+
+
+
+
+
+
+
 
 
 

@@ -17,6 +17,7 @@
 cmake-build-*/
 .idea
 .idea/**/mongoSettings.xml
+apps/migrations
 *.iws
 out/
 .idea_modules/

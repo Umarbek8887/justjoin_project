@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="uz">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>justjoin.it — Sign in</title>
+    <link rel="stylesheet" href="{% static 'assests/css/style.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
+          rel="stylesheet"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="brand">
+        <span class="brand-name">justjoin.it</span>
+        <span class="brand-sub">#1 Job Board for tech industry in Europe</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#">Job offers</a></li>
+        <li><a href="#">Salary calculator</a></li>
+        <li><a href="#">Company Profiles</a></li>
+        <li><a href="#">Geek</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button class="btn-post">Post a Job</button>
+        <button class="btn-signin-nav">Sign in</button>
+        <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle theme">☀</button>
+        <button class="icon-btn" title="Menu">☰</button>
+    </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+    <div class="form-wrapper">
+        {% block main_content %}
+
+        {% endblock %}
+    </div>
+</main>
+<script src="{% static 'assests/js/script.js' %}"></script>
+</body>
+</html>
