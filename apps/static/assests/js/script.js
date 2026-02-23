@@ -55,13 +55,18 @@ if (emailBtn) {
 }
 
 
-// ===== PASSWORD TOGGLE — login.html (eyeBtn, name="password") =====
+// ===== LOGIN PAGE =====
+const loginPwInput       = document.querySelector('input[name="password"]');
+const loginEmail         = document.querySelector('input[name="email"]');
+const loginSubmit        = document.getElementById('submit');
+const loginEmailError    = document.getElementById('emailError');
+const loginPasswordError = document.getElementById('passwordError');
+
+// Eye toggle
 const eyeBtn = document.getElementById('eyeBtn');
-if (eyeBtn) {
-  const pwInput = document.querySelector('input[name="password"]');
+if (eyeBtn && loginPwInput) {
   const eyeIcon = document.getElementById('eyeIcon');
   let visible = false;
-
   const eyeOpenSVG = `
     <circle cx="12" cy="12" r="3"/>
     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -71,23 +76,52 @@ if (eyeBtn) {
     <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
     <line x1="1" y1="1" x2="23" y2="23"/>
   `;
-
   eyeBtn.addEventListener('click', () => {
     visible = !visible;
-    pwInput.type = visible ? 'text' : 'password';
-    eyeIcon.innerHTML = visible ? eyeOpenSVG : eyeClosedSVG;
+    loginPwInput.type = visible ? 'text' : 'password';
+    if (eyeIcon) eyeIcon.innerHTML = visible ? eyeOpenSVG : eyeClosedSVG;
+  });
+}
+
+// Active button + validation
+if (loginEmail && loginSubmit && loginPwInput) {
+  function updateLoginBtn() {
+    const hasInput = loginEmail.value.length > 0 || loginPwInput.value.length > 0;
+    loginSubmit.classList.toggle('active', hasInput);
+  }
+
+  loginEmail.addEventListener('input', () => {
+    if (loginEmail.value) {
+      if (loginEmailError) loginEmailError.textContent = '';
+      loginEmail.classList.remove('error-input');
+    }
+    updateLoginBtn();
   });
 
-  // Submit button color — login.html
-  const loginEmail  = document.querySelector('input[name="email"]');
-  const loginSubmit = document.getElementById('submit');
-  if (loginEmail && loginSubmit) {
-    function updateLoginBtn() {
-      const hasInput = loginEmail.value.length > 0 || pwInput.value.length > 0;
-      loginSubmit.classList.toggle('active', hasInput);
+  loginPwInput.addEventListener('input', () => {
+    if (loginPwInput.value) {
+      if (loginPasswordError) loginPasswordError.textContent = '';
+      loginPwInput.classList.remove('error-input');
     }
-    loginEmail.addEventListener('input', updateLoginBtn);
-    pwInput.addEventListener('input', updateLoginBtn);
+    updateLoginBtn();
+  });
+
+  const loginForm = loginSubmit.closest('form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      let hasError = false;
+      if (!loginEmail.value.trim()) {
+        if (loginEmailError) loginEmailError.textContent = 'Email is required.';
+        loginEmail.classList.add('error-input');
+        hasError = true;
+      }
+      if (!loginPwInput.value.trim()) {
+        if (loginPasswordError) loginPasswordError.textContent = 'Password is required.';
+        loginPwInput.classList.add('error-input');
+        hasError = true;
+      }
+      if (hasError) e.preventDefault();
+    });
   }
 }
 
@@ -163,7 +197,8 @@ if (eyeBtn1) {
     const passOk   = Object.values(rules).every(fn => fn(passwordInput.value));
     const repeatOk = repeatInput.value === passwordInput.value && repeatInput.value.length > 0;
     const termsOk  = termsCheck.checked;
-    submitBtn.disabled = !(emailOk && passOk && repeatOk && termsOk);
+    const allOk    = emailOk && passOk && repeatOk && termsOk;
+    allOk ? submitBtn.classList.add('active') : submitBtn.classList.remove('active');
   }
 
   if (passwordInput) {
@@ -253,53 +288,4 @@ if (eyeBtn1) {
       }, 1400);
     });
   }
-}
-
-const resetBtn = document.getElementById('resetBtn');
-if (resetBtn) {
-  const resetEmail = document.getElementById('resetEmail');
-  const resetEmailError = document.getElementById('resetEmailError');
-
-  function isValidEmail(val) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
-  }
-
-  resetEmail.addEventListener('blur', () => {
-    if (resetEmail.value && !isValidEmail(resetEmail.value)) {
-      resetEmailError.textContent = 'Please enter a valid email address.';
-      resetEmail.classList.add('error-input');
-    } else {
-      resetEmailError.textContent = '';
-      resetEmail.classList.remove('error-input');
-    }
-  });
-
-  resetBtn.addEventListener('click', () => {
-    if (!resetEmail.value) {
-      resetEmailError.textContent = 'Email is required.';
-      resetEmail.classList.add('error-input');
-      resetEmail.focus();
-      return;
-    }
-    if (!isValidEmail(resetEmail.value)) {
-      resetEmailError.textContent = 'Please enter a valid email address.';
-      resetEmail.classList.add('error-input');
-      resetEmail.focus();
-      return;
-    }
-
-    resetBtn.textContent = 'Sending…';
-    resetBtn.disabled = true;
-
-    setTimeout(() => {
-      resetBtn.textContent = '✓ Reset link sent!';
-      setTimeout(() => {
-        resetBtn.textContent = 'Reset password';
-        resetBtn.disabled = false;
-        resetEmail.value = '';
-        resetEmailError.textContent = '';
-        resetEmail.classList.remove('error-input');
-      }, 2500);
-    }, 1200);
-  });
 }

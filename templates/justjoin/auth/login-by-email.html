@@ -16,7 +16,7 @@
                 {% csrf_token %}
                 <div class="field">
                     <label for="email">Email <span class="required">*</span></label>
-                    <input class="form-control" type="email" name="email" placeholder="Email address"/>
+                    <input type="email" name="email" placeholder="Email address"/>
                     <span class="field-error" id="emailError"></span>
                 </div>
 
@@ -25,6 +25,7 @@
                     <div class="password-wrap">
                         <input type="password" name="password" placeholder="At least 8 characters"
                                autocomplete="current-password"/>
+
                         <button class="eye-btn" id="eyeBtn" type="button" title="Show/hide password">
                             <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                  viewBox="0 0 24 24"

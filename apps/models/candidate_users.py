@@ -34,7 +34,7 @@ class CandidateUser(Model):
     linkedin_link = CharField(max_length=255, null=True, blank=True)
     other_link = CharField(max_length=255, null=True, blank=True)
     message_to_employee = TextField(null=True)
-    image = ImageField(upload_to='media/profile-avatar/%Y/%m/%d', null=True)
+    image = ImageField(upload_to='media/profile/avatar/%Y/%m/%d', null=True)
     current_position = CharField(max_length=128, null=True)
     years_of_exp = PositiveSmallIntegerField(default=0, db_default=0)
     location = CharField(max_length=128, null=True)
