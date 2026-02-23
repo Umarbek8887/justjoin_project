@@ -56,11 +56,12 @@ if (emailBtn) {
 
 
 // ===== LOGIN PAGE =====
-const loginPwInput       = document.querySelector('input[name="password"]');
-const loginEmail         = document.querySelector('input[name="email"]');
-const loginSubmit        = document.getElementById('submit');
-const loginEmailError    = document.getElementById('emailError');
+const loginPwInput = document.getElementById('passwordInput');
+const loginEmail = document.getElementById('emailInput');
+const loginSubmit = document.getElementById('submit');
+const loginEmailError = document.getElementById('emailError');
 const loginPasswordError = document.getElementById('passwordError');
+const loginForm = document.getElementById('loginForm');
 
 // Eye toggle
 const eyeBtn = document.getElementById('eyeBtn');
@@ -83,8 +84,8 @@ if (eyeBtn && loginPwInput) {
   });
 }
 
-// Active button + validation
-if (loginEmail && loginSubmit && loginPwInput) {
+// Active button toggle
+if (loginEmail && loginPwInput && loginSubmit) {
   function updateLoginBtn() {
     const hasInput = loginEmail.value.length > 0 || loginPwInput.value.length > 0;
     loginSubmit.classList.toggle('active', hasInput);
@@ -105,24 +106,27 @@ if (loginEmail && loginSubmit && loginPwInput) {
     }
     updateLoginBtn();
   });
+}
 
-  const loginForm = loginSubmit.closest('form');
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      let hasError = false;
-      if (!loginEmail.value.trim()) {
-        if (loginEmailError) loginEmailError.textContent = 'Email is required.';
-        loginEmail.classList.add('error-input');
-        hasError = true;
-      }
-      if (!loginPwInput.value.trim()) {
-        if (loginPasswordError) loginPasswordError.textContent = 'Password is required.';
-        loginPwInput.classList.add('error-input');
-        hasError = true;
-      }
-      if (hasError) e.preventDefault();
-    });
-  }
+// Form submit validation
+if (loginForm) {
+  loginForm.addEventListener('submit', (e) => {
+    let hasError = false;
+
+    if (!loginEmail || !loginEmail.value.trim()) {
+      if (loginEmailError) loginEmailError.textContent = 'Email is required.';
+      if (loginEmail) loginEmail.classList.add('error-input');
+      hasError = true;
+    }
+
+    if (!loginPwInput || !loginPwInput.value.trim()) {
+      if (loginPasswordError) loginPasswordError.textContent = 'Password is required.';
+      if (loginPwInput) loginPwInput.classList.add('error-input');
+      hasError = true;
+    }
+
+    if (hasError) e.preventDefault();
+  });
 }
 
 
@@ -142,8 +146,8 @@ if (eyeBtn1) {
 
   function setupPasswordToggle(inputId, btnId, iconId) {
     const input = document.getElementById(inputId);
-    const btn   = document.getElementById(btnId);
-    const icon  = document.getElementById(iconId);
+    const btn = document.getElementById(btnId);
+    const icon = document.getElementById(iconId);
     if (!input || !btn || !icon) return;
     let vis = false;
     btn.addEventListener('click', () => {
@@ -158,28 +162,28 @@ if (eyeBtn1) {
 
   // Password rules
   const passwordInput = document.getElementById('password');
-  const repeatInput   = document.getElementById('repeatPassword');
-  const repeatError   = document.getElementById('repeatError');
-  const emailInput    = document.getElementById('email');
-  const emailError    = document.getElementById('emailError');
-  const termsCheck    = document.getElementById('termsCheck');
-  const submitBtn     = document.getElementById('submitBtn');
+  const repeatInput = document.getElementById('repeatPassword');
+  const repeatError = document.getElementById('repeatError');
+  const emailInput = document.getElementById('email');
+  const emailError = document.getElementById('emailError');
+  const termsCheck = document.getElementById('termsCheck');
+  const submitBtn = document.getElementById('submitBtn');
 
   const rules = {
-    'rule-length':  v => v.length >= 8,
-    'rule-number':  v => /[0-9]/.test(v),
-    'rule-upper':   v => /[A-Z]/.test(v),
-    'rule-lower':   v => /[a-z]/.test(v),
+    'rule-length': v => v.length >= 8,
+    'rule-number': v => /[0-9]/.test(v),
+    'rule-upper': v => /[A-Z]/.test(v),
+    'rule-lower': v => /[a-z]/.test(v),
     'rule-special': v => /[!@#$%^&*]/.test(v),
   };
 
   function checkRules(val) {
     let allValid = true;
     for (const [id, fn] of Object.entries(rules)) {
-      const li   = document.getElementById(id);
+      const li = document.getElementById(id);
       if (!li) continue;
       const icon = li.querySelector('.rule-icon');
-      const ok   = fn(val);
+      const ok = fn(val);
       li.classList.toggle('valid', ok);
       icon.textContent = ok ? '✓' : '✕';
       if (!ok) allValid = false;
@@ -193,11 +197,11 @@ if (eyeBtn1) {
 
   function updateSubmit() {
     if (!submitBtn) return;
-    const emailOk  = isValidEmail(emailInput.value);
-    const passOk   = Object.values(rules).every(fn => fn(passwordInput.value));
+    const emailOk = isValidEmail(emailInput.value);
+    const passOk = Object.values(rules).every(fn => fn(passwordInput.value));
     const repeatOk = repeatInput.value === passwordInput.value && repeatInput.value.length > 0;
-    const termsOk  = termsCheck.checked;
-    const allOk    = emailOk && passOk && repeatOk && termsOk;
+    const termsOk = termsCheck.checked;
+    const allOk = emailOk && passOk && repeatOk && termsOk;
     allOk ? submitBtn.classList.add('active') : submitBtn.classList.remove('active');
   }
 
@@ -242,7 +246,7 @@ if (eyeBtn1) {
 
   // Show more toggles
   function setupShowMore(btnId, extraId) {
-    const btn   = document.getElementById(btnId);
+    const btn = document.getElementById(btnId);
     const extra = document.getElementById(extraId);
     if (!btn || !extra) return;
     let open = false;
@@ -258,8 +262,8 @@ if (eyeBtn1) {
   // Submit
   if (submitBtn) {
     submitBtn.addEventListener('click', () => {
-      const emailOk  = isValidEmail(emailInput.value);
-      const passOk   = Object.values(rules).every(fn => fn(passwordInput.value));
+      const emailOk = isValidEmail(emailInput.value);
+      const passOk = Object.values(rules).every(fn => fn(passwordInput.value));
       const repeatOk = repeatInput.value === passwordInput.value && repeatInput.value.length > 0;
 
       if (!emailOk) {

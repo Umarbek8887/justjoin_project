@@ -2,48 +2,95 @@
 {% load static %}
 
 {% block title %}
-    Login
+Login
 {% endblock %}
 
 {% block main_content %}
-        <div class="form-header">
-            <a href="{% url 'login_page' %}" class="back-arrow" title="Back">←</a>
-            <h1 class="form-title">Sign in to account</h1>
+<div class="form-header">
+    <a href="{% url 'login_page' %}" class="back-arrow" title="Back">←</a>
+    <h1 class="form-title">Sign in to account</h1>
+</div>
+<div class="card">
+    <p class="card-subtitle">Enter email and password to your account</p>
+    <form method="POST" action="{% url 'login_page' %}" id="loginForm" novalidate>
+        {% csrf_token %}
+        <div class="field">
+            <label for="email">Email<span class="required">*</span></label>
+            <input type="email" name="email" id="emailInput" placeholder="Email address" required />
+            <span class="field-error" id="emailError"></span>
         </div>
-        <div class="card">
-            <p class="card-subtitle">Enter email and password to your account</p>
-            <form method="POST" action="{% url 'login_page' %}">
-                {% csrf_token %}
-                <div class="field">
-                    <label for="email">Email <span class="required">*</span></label>
-                    <input type="email" name="email" placeholder="Email address"/>
-                    <span class="field-error" id="emailError"></span>
-                </div>
 
-                <div class="field">
-                    <label for="password">Password <span class="required">*</span></label>
-                    <div class="password-wrap">
-                        <input type="password" name="password" placeholder="At least 8 characters"
-                               autocomplete="current-password"/>
+        <div class="field">
+            <label for="password">Password<span class="required">*</span></label>
+            <div class="password-wrap">
+                <input type="password" name="password" id="passwordInput" placeholder="At least 8 characters"
+                    autocomplete="current-password" required />
 
-                        <button class="eye-btn" id="eyeBtn" type="button" title="Show/hide password">
-                            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                 viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-                                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-                                <line x1="1" y1="1" x2="23" y2="23"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <span class="field-error" id="passwordError"></span>
-                </div>
-                <button class="btn-submit" id="submit" type="submit">Sign in</button>
-            </form>
-            <a href="{% url 'password_reset_page' %}" class="forgot-link">Forgot your password?</a>
+                <button class="eye-btn" id="eyeBtn" type="button" title="Show/hide password">
+                    <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path>
+                        <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                </button>
+            </div>
+            <span class="field-error" id="passwordError"></span>
         </div>
+        <button class="btn-submit" id="submit" type="submit">Sign in</button>
+    </form>
+    <a href="{% url 'password_reset_page' %}" class="forgot-link">Forgot your password?</a>
+</div>
 {% endblock %}
 
+{% block extra_scripts %}
+<script>
+    (function () {
+        var form = document.getElementById('loginForm');
+        var emailEl = document.getElementById('emailInput');
+        var pwdEl = document.getElementById('passwordInput');
+        var emailErr = document.getElementById('emailError');
+        var pwdErr = document.getElementById('passwordError');
+        var submitBtn = document.getElementById('submit');
 
+        if (!form) return;
 
+        /* Inputga yozilganda xatoni tozala */
+        emailEl.addEventListener('input', function () {
+            emailErr.textContent = '';
+            emailEl.classList.remove('error-input');
+            submitBtn.classList.toggle('active', emailEl.value.length > 0 || pwdEl.value.length > 0);
+        });
+
+        pwdEl.addEventListener('input', function () {
+            pwdErr.textContent = '';
+            pwdEl.classList.remove('error-input');
+            submitBtn.classList.toggle('active', emailEl.value.length > 0 || pwdEl.value.length > 0);
+        });
+
+        /* Submit validatsiyasi */
+        form.addEventListener('submit', function (e) {
+            var hasError = false;
+
+            if (!emailEl.value.trim()) {
+                emailErr.textContent = 'Email is required.';
+                emailEl.classList.add('error-input');
+                hasError = true;
+            }
+
+            if (!pwdEl.value.trim()) {
+                pwdErr.textContent = 'Password is required.';
+                pwdEl.classList.add('error-input');
+                hasError = true;
+            }
+
+            if (hasError) {
+                e.preventDefault();   /* Backendga YUBORMA */
+                e.stopPropagation();
+                return false;
+            }
+        });
+    })();
+</script>
+{% endblock %}

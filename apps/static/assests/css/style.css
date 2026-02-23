@@ -1,5 +1,7 @@
 /* ===== RESET & BASE ===== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -94,7 +96,9 @@ body {
   transition: color var(--transition);
 }
 
-.nav-links a:hover { color: var(--accent2); }
+.nav-links a:hover {
+  color: var(--accent2);
+}
 
 .nav-actions {
   display: flex;
@@ -152,7 +156,9 @@ body {
   transition: background var(--transition), border-color var(--transition);
 }
 
-.icon-btn:hover { background: var(--border); }
+.icon-btn:hover {
+  background: var(--border);
+}
 
 
 /* ===== MAIN ===== */
@@ -166,8 +172,15 @@ body {
 
 /* ===== ANIMATION ===== */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
@@ -280,20 +293,24 @@ body {
   padding: 0.8rem 1rem;
   background: var(--card-bg);
   color: var(--text);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   font-family: 'DM Sans', sans-serif;
   cursor: pointer;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
   transition: border-color var(--transition), background var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .social-btn:hover {
   border-color: var(--text-muted);
   transform: translateY(-1px);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-.social-btn:active { transform: translateY(0); }
+.social-btn:active {
+  transform: translateY(0);
+}
 
 .linkedin-active {
   border-color: var(--text);
@@ -358,7 +375,9 @@ body {
   transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
 }
 
-.field input::placeholder { color: var(--text-muted); }
+.field input::placeholder {
+  color: var(--text-muted);
+}
 
 .field input:focus {
   border-color: var(--accent2);
@@ -384,7 +403,9 @@ body {
   align-items: center;
 }
 
-.password-wrap input { padding-right: 2.8rem; }
+.password-wrap input {
+  padding-right: 2.8rem;
+}
 
 .eye-btn {
   position: absolute;
@@ -399,7 +420,9 @@ body {
   transition: color var(--transition);
 }
 
-.eye-btn:hover { color: var(--text); }
+.eye-btn:hover {
+  color: var(--text);
+}
 
 
 /* ===== PASSWORD RULES ===== */
@@ -430,8 +453,13 @@ body {
   transition: color var(--transition);
 }
 
-.rule.valid { color: var(--success); }
-.rule.valid .rule-icon { color: var(--success); }
+.rule.valid {
+  color: var(--success);
+}
+
+.rule.valid .rule-icon {
+  color: var(--success);
+}
 
 
 /* ===== CHECKBOXES ===== */
@@ -470,12 +498,12 @@ body {
   position: relative;
 }
 
-.checkbox-label input:checked + .checkmark {
+.checkbox-label input:checked+.checkmark {
   background: var(--accent2);
   border-color: var(--accent2);
 }
 
-.checkbox-label input:checked + .checkmark::after {
+.checkbox-label input:checked+.checkmark::after {
   content: '';
   display: block;
   width: 5px;
@@ -497,7 +525,9 @@ body {
   text-decoration: none;
 }
 
-.link:hover { text-decoration: underline; }
+.link:hover {
+  text-decoration: underline;
+}
 
 .show-more {
   background: none;
@@ -511,7 +541,9 @@ body {
   margin-left: 2px;
 }
 
-.show-more:hover { color: var(--text); }
+.show-more:hover {
+  color: var(--text);
+}
 
 .extra-text {
   display: block;
@@ -538,8 +570,8 @@ body {
   cursor: pointer;
   letter-spacing: 0.01em;
   transition: background var(--transition), color var(--transition),
-              border-color var(--transition), transform var(--transition),
-              box-shadow var(--transition);
+    border-color var(--transition), transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .btn-submit.active {
@@ -554,7 +586,9 @@ body {
   box-shadow: 0 6px 24px rgba(217, 70, 184, 0.45);
 }
 
-.btn-submit.active:active { transform: translateY(0); }
+.btn-submit.active:active {
+  transform: translateY(0);
+}
 
 /* register.html — "Create account" (always gradient) */
 /* landing.html  — "Sign in using address email" */
@@ -590,27 +624,28 @@ body {
   width: 100%;
   padding: 0.8rem;
   border-radius: 50px;
-  border: 1.5px solid var(--border);
-  background: var(--card-bg);
-  color: #ffffff;
+  border: none;
+  background: linear-gradient(135deg, #f472b6, #d946b8, #8b5cf6);
+  color: #fff;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'DM Sans', sans-serif;
   cursor: pointer;
   letter-spacing: 0.01em;
   text-decoration: none;
-  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 18px rgba(217, 70, 184, 0.35);
+  transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .btn-email:hover {
-  border-color: var(--text-muted);
+  opacity: 0.92;
   transform: translateY(-1px);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 6px 24px rgba(217, 70, 184, 0.45);
 }
 
 .btn-email:active {
   transform: translateY(0);
-  box-shadow: none;
+  box-shadow: 0 2px 10px rgba(217, 70, 184, 0.3);
 }
 
 .btn-submit-solid:disabled {
@@ -690,8 +725,19 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 700px) {
-  .nav-links { display: none; }
-  .btn-post  { display: none; }
-  .navbar    { padding: 0 1rem; }
-  .card      { padding: 1.5rem 1.2rem; }
+  .nav-links {
+    display: none;
+  }
+
+  .btn-post {
+    display: none;
+  }
+
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .card {
+    padding: 1.5rem 1.2rem;
+  }
 }
