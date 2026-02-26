@@ -1,5 +1,5 @@
 from django.db.models import Model, CharField, TextChoices, ForeignKey, CASCADE, FloatField, SlugField, Index, \
-    PositiveIntegerField, Q, F
+    PositiveIntegerField, Q, F, BooleanField
 from django.db.models.constraints import CheckConstraint
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
@@ -50,18 +50,29 @@ class TechStackLevel(TextChoices):
     MASTER = "master", "Master"
 
 
+class SalaryType(TextChoices):
+    HOURLY = "hourly", "Hourly"
+    MONTHLY = "monthly", "Monthly"
+
+
 class JobOffer(Model):
     name = CharField(max_length=255)
     description = CKEditor5Field(blank=True)
     main_language = CharField(max_length=128)
     slug = SlugField(max_length=255, blank=True, unique=True)
+
     working_mode = CharField(choices=WorkingMode.choices, max_length=32, default=WorkingMode.HYBRID)
     contract_type = CharField(choices=ContractType.choices, max_length=32, default=ContractType.INTERNSHIP)
     working_type = CharField(choices=WorkingType.choices, max_length=32, default=WorkingType.FULL_TIME)
     required_experience = CharField(choices=Experience.choices, max_length=32, default=Experience.JUNIOR)
+
+    undisclosed_salary = BooleanField(default=False)
     salary_min = PositiveIntegerField(null=True, blank=True)
     salary_max = PositiveIntegerField(null=True, blank=True)
+
     currency = CharField(max_length=10, default="USD")
+    salary_type = CharField(choices=SalaryType.choices, max_length=12, default=SalaryType.HOURLY)
+
     location = CharField(max_length=255)
     lat = FloatField(blank=True, null=True)
     long = FloatField(blank=True, null=True)
