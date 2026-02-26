@@ -1,6 +1,8 @@
 from django.db.models import Model, CharField, TextChoices, ForeignKey, CASCADE, FloatField, SlugField, Index, \
     PositiveIntegerField, Q, F, BooleanField
 from django.db.models.constraints import CheckConstraint
+from django.utils.timezone import now
+from django.db.models.fields import DateTimeField
 from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -52,26 +54,31 @@ class TechStackLevel(TextChoices):
 
 class SalaryType(TextChoices):
     HOURLY = "hourly", "Hourly"
+    DAILY = "daily", "Daily"
+    WEEKLY = "weekly", "Weekly"
     MONTHLY = "monthly", "Monthly"
+    # YEARLY = "yearly", "Yearly"
 
 
 class JobOffer(Model):
     name = CharField(max_length=255)
     description = CKEditor5Field(blank=True)
-    main_language = CharField(max_length=128)
+    programming_language = CharField(max_length=128)
     slug = SlugField(max_length=255, blank=True, unique=True)
+    updated_at = DateTimeField(auto_now_add=True)
+    created_at = DateTimeField(auto_now=True)
 
     working_mode = CharField(choices=WorkingMode.choices, max_length=32, default=WorkingMode.HYBRID)
     contract_type = CharField(choices=ContractType.choices, max_length=32, default=ContractType.INTERNSHIP)
     working_type = CharField(choices=WorkingType.choices, max_length=32, default=WorkingType.FULL_TIME)
     required_experience = CharField(choices=Experience.choices, max_length=32, default=Experience.JUNIOR)
+    salary_type = CharField(choices=SalaryType.choices, max_length=12, default=SalaryType.MONTHLY)
 
     undisclosed_salary = BooleanField(default=False)
     salary_min = PositiveIntegerField(null=True, blank=True)
     salary_max = PositiveIntegerField(null=True, blank=True)
 
     currency = CharField(max_length=10, default="USD")
-    salary_type = CharField(choices=SalaryType.choices, max_length=12, default=SalaryType.HOURLY)
 
     location = CharField(max_length=255)
     lat = FloatField(blank=True, null=True)
@@ -80,7 +87,7 @@ class JobOffer(Model):
     company = ForeignKey('apps.Company', on_delete=CASCADE, related_name='job_offers')
 
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
-        self.slug = slugify(f"{self.company.slug}-{self.name}-{self.company.location_name}")
+        self.slug = slugify(f"{self.company.slug}-{self.name}-{self.company.location_name}-{self.programming_language}")
         if not self.location:
             self.location = self.company.location_name
             self.lat = self.company.lat
@@ -102,6 +109,13 @@ class JobOffer(Model):
         #         name="salary_min_lte_salary_max"
         #     )
         # ]
+    @property
+    def is_new(self):
+        return self.created_at > now().replace(hour=0, minute=0, second=0)
+
+    @property
+    def image(self):
+        return self.company.image
 
 
 
