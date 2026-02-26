@@ -36,14 +36,20 @@ class RegisterModelForm(ModelForm):
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
 
-        if User.objects.filter(email=email).exists():
-            raise ValidationError("Email already exists")
+        if email:
+            cleaned_data['email'] = email.lower()
+            if User.objects.filter(email=cleaned_data['email']).exists():
+                raise ValidationError("Email already exists")
 
-        if cleaned_data['password'] != cleaned_data.pop('confirm_password'):
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+
+        if password and confirm_password and password != confirm_password:
             raise ValidationError("Passwords don't match")
 
-        cleaned_data['password'] = make_password(cleaned_data['password'])
-        cleaned_data['username'] = cleaned_data['username'].lower()
+        if password:
+            cleaned_data['password'] = make_password(password)
+
         return cleaned_data
 
 

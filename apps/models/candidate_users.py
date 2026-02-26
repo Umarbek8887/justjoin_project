@@ -36,12 +36,12 @@ class CandidateUser(Model):
     message_to_employee = TextField(null=True)
     image = ImageField(upload_to='media/profile/avatar/%Y/%m/%d', null=True)
     current_position = CharField(max_length=128, null=True)
-    years_of_exp = PositiveSmallIntegerField(default=0, db_default=0)
+    years_of_exp = PositiveSmallIntegerField(default=0, db_default=0, null=True)
     location = CharField(max_length=128, null=True)
     native_lang = CharField(max_length=128, null=True)
-    job_status = CharField(choices=SituationType.choices, max_length=64, default=SituationType.I_NEED_A_JOB_ASAP)
+    job_status = CharField(choices=SituationType.choices, max_length=64, default=SituationType.I_NEED_A_JOB_ASAP, null=True)
     availability_after = CharField(choices=AvailabilityAfter.choices, max_length=20,
-                                   default=AvailabilityAfter.RIGHT_AWAY)
+                                   default=AvailabilityAfter.RIGHT_AWAY, null=True)
     cv_file = FileField(upload_to='media/cv/%Y/%m/%d', null=True, blank=True)
 
     class Meta:
@@ -59,7 +59,7 @@ class CandidateOtherPosition(Model):
 
 
 class CandidateSkill(Model):
-    tech_stack = CharField(max_length=128, null=False)
+    tech_stack = CharField(max_length=128)
     level = PositiveSmallIntegerField(default=0, db_default=0)
     candidate_user = ForeignKey('apps.CandidateUser', CASCADE, related_name='candidate_skills')
 

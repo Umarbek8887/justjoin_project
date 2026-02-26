@@ -53,6 +53,7 @@ class TechStackLevel(TextChoices):
 class JobOffer(Model):
     name = CharField(max_length=255)
     description = CKEditor5Field(blank=True)
+    main_language = CharField(max_length=128)
     slug = SlugField(max_length=255, blank=True, unique=True)
     working_mode = CharField(choices=WorkingMode.choices, max_length=32, default=WorkingMode.HYBRID)
     contract_type = CharField(choices=ContractType.choices, max_length=32, default=ContractType.INTERNSHIP)
@@ -79,16 +80,17 @@ class JobOffer(Model):
         indexes = [
             Index(fields=["slug"]),
             Index(fields=["working_mode"]),
+            Index(fields=["main_language"]),
             Index(fields=["working_type"]),
             Index(fields=["required_experience"]),
             Index(fields=["contract_type"])
         ]
-        constraints = [
-            CheckConstraint(
-                check=Q(salary_min__lte=F("salary_max")),
-                name="salary_min_lte_salary_max"
-            )
-        ]
+        # constraints = [
+        #     CheckConstraint(
+        #         check=Q(salary_min__lte=F("salary_max")),
+        #         name="salary_min_lte_salary_max"
+        #     )
+        # ]
 
 
 

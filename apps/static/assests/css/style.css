@@ -191,7 +191,7 @@ body {
   animation: fadeUp 0.45s ease both;
 }
 
-/* landing.html — wrapper centered column */
+/* login.html — wrapper centered column */
 .form-wrapper.centered {
   display: flex;
   flex-direction: column;
@@ -221,7 +221,7 @@ body {
   color: var(--text);
 }
 
-/* landing.html — page title above card */
+/* login.html — page title above card */
 .page-title {
   font-family: 'Syne', sans-serif;
   font-size: 1.35rem;
@@ -591,7 +591,7 @@ body {
 }
 
 /* register.html — "Create account" (always gradient) */
-/* landing.html  — "Sign in using address email" */
+/* login.html  — "Sign in using address email" */
 .btn-submit-solid {
   width: 100%;
   padding: 0.8rem;
@@ -619,7 +619,7 @@ body {
   box-shadow: 0 2px 10px rgba(217, 70, 184, 0.3);
 }
 
-/* landing.html — "Sign in using address email" — oq font, border bilan */
+/* login.html — "Sign in using address email" — oq font, border bilan */
 .btn-email {
   width: 100%;
   padding: 0.8rem;
@@ -672,7 +672,7 @@ body {
   text-decoration-color: var(--accent2);
 }
 
-/* landing.html — "Don't have an account? Sign up" */
+/* login.html — "Don't have an account? Sign up" */
 .signup-text {
   text-align: center;
   font-size: 0.88rem;

@@ -35,7 +35,7 @@ if (themeToggleBtn) {
 }
 
 
-// ===== SOCIAL BUTTONS (landing.html + register.html) =====
+// ===== SOCIAL BUTTONS (login.html + register.html) =====
 const googleBtn = document.getElementById('googleBtn');
 if (googleBtn) googleBtn.addEventListener('click', () => showToast('Redirecting to Google…'));
 
@@ -46,7 +46,7 @@ const githubBtn = document.getElementById('githubBtn');
 if (githubBtn) githubBtn.addEventListener('click', () => showToast('Redirecting to GitHub…'));
 
 
-// ===== EMAIL BUTTON → login page (landing.html) =====
+// ===== EMAIL BUTTON → login page (login.html) =====
 const emailBtn = document.getElementById('emailBtn');
 if (emailBtn) {
   emailBtn.addEventListener('click', () => {
@@ -167,7 +167,8 @@ if (eyeBtn1) {
   const emailInput = document.getElementById('email');
   const emailError = document.getElementById('emailError');
   const termsCheck = document.getElementById('termsCheck');
-  const submitBtn = document.getElementById('submitBtn');
+  const submitBtn = document.getElementById('createBtn');
+  const registerForm = submitBtn ? submitBtn.closest('form') : null;
 
   const rules = {
     'rule-length': v => v.length >= 8,
@@ -260,8 +261,8 @@ if (eyeBtn1) {
   setupShowMore('showMore2', 'extra2');
 
   // Submit
-  if (submitBtn) {
-    submitBtn.addEventListener('click', () => {
+  if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
       const emailOk = isValidEmail(emailInput.value);
       const passOk = Object.values(rules).every(fn => fn(passwordInput.value));
       const repeatOk = repeatInput.value === passwordInput.value && repeatInput.value.length > 0;
@@ -270,26 +271,30 @@ if (eyeBtn1) {
         emailError.textContent = 'Please enter a valid email address.';
         emailInput.classList.add('error-input');
         emailInput.focus();
+        e.preventDefault();
         return;
       }
-      if (!passOk) { passwordInput.focus(); return; }
+      if (!passOk) { 
+        passwordInput.focus(); 
+        e.preventDefault();
+        return; 
+      }
       if (!repeatOk) {
         repeatError.textContent = 'Passwords do not match.';
         repeatInput.classList.add('error-input');
         repeatInput.focus();
+        e.preventDefault();
         return;
       }
-      if (!termsCheck.checked) { showToast('Please accept the Terms of Service.'); return; }
+      if (!termsCheck.checked) { 
+        showToast('Please accept the Terms of Service.'); 
+        e.preventDefault();
+        return; 
+      }
 
+      // If everything ok, let it submit to django via POST
       submitBtn.textContent = 'Creating account…';
       submitBtn.disabled = true;
-      setTimeout(() => {
-        submitBtn.textContent = '✓ Account created!';
-        setTimeout(() => {
-          submitBtn.textContent = 'Create account';
-          submitBtn.disabled = false;
-        }, 2500);
-      }, 1400);
     });
   }
 }

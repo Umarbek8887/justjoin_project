@@ -28,7 +28,46 @@
         </ul>
         <div class="nav-actions">
             <button class="btn-post">Post a Job</button>
-            <button class="btn-signin-nav">Sign in</button>
+
+            <div class="signin-dropdown-wrap" id="signinWrap">
+                <button class="btn-signin-nav" id="signinToggle">Sign in</button>
+                <div class="signin-dropdown" id="signinDropdown">
+
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="8" r="4"/>
+                                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                                </svg>
+                            </span>
+                            <span>Candidate zone</span>
+                        </div>
+                        <a href="{% url 'login_page' %}" class="dropdown-item">Sign in to Candidate's profile</a>
+                        <a href="{% url 'register_page' %}" class="dropdown-item">Create an account at Candidate profile</a>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="9" cy="7" r="3"/>
+                                    <path d="M3 20c0-3.3 2.7-6 6-6"/>
+                                    <circle cx="17" cy="11" r="2"/>
+                                    <path d="M13 20c0-2.2 1.8-4 4-4s4 1.8 4 4"/>
+                                </svg>
+                            </span>
+                            <span>Recruiter zone</span>
+                        </div>
+                        <a href="#" class="dropdown-item">Sign in to Employer's panel</a>
+                        <a href="#" class="dropdown-item">Create an account at Employer Panel</a>
+                    </div>
+
+                </div>
+            </div>
+
             <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle theme">☀</button>
             <button class="icon-btn" title="Menu">☰</button>
         </div>

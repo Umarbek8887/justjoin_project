@@ -6,10 +6,11 @@ Register
 {% endblock %}
 
 {% block main_content %}
-<a href="{% url 'login_page' %}" class="back-arrow">←</a>
+<div class="form-header">
+    <a href="{% url 'login_page' %}" class="back-arrow" title="Back">←</a>
+    <h1 class="form-title">Create account</h1>
+</div>
 <div class="card">
-    <h1 class="card-title">Create account</h1>
-
     <!-- Social buttons -->
     <div class="social-btns">
         <button class="social-btn" id="googleBtn">
@@ -159,89 +160,5 @@ Register
 {% endblock %}
 
 {% block extra_scripts %}
-<script>
-    (function () {
-        var form = document.querySelector('.card form');
-        var emailEl = document.getElementById('email');
-        var pwdEl = document.getElementById('password');
-        var repeatEl = document.getElementById('repeatPassword');
-        var termsEl = document.getElementById('termsCheck');
-        var emailErr = document.getElementById('emailError');
-        var repeatErr = document.getElementById('repeatError');
-        var createBtn = document.getElementById('createBtn');
 
-        if (!form) return;
-
-        /* Active toggle — Sign in kabi */
-        function updateBtn() {
-            var hasAny = (emailEl && emailEl.value.length > 0) ||
-                (pwdEl && pwdEl.value.length > 0) ||
-                (repeatEl && repeatEl.value.length > 0) ||
-                (termsEl && termsEl.checked);
-            if (createBtn) createBtn.classList.toggle('active', !!hasAny);
-        }
-
-        /* Inputlarga yozilganda xatoni tozala + btn yangilash */
-        emailEl && emailEl.addEventListener('input', function () {
-            if (emailEl.value.trim()) {
-                emailErr.textContent = '';
-                emailEl.classList.remove('error-input');
-            }
-            updateBtn();
-        });
-        pwdEl && pwdEl.addEventListener('input', updateBtn);
-        repeatEl && repeatEl.addEventListener('input', function () {
-            if (repeatEl.value) {
-                repeatErr.textContent = '';
-                repeatEl.classList.remove('error-input');
-            }
-            updateBtn();
-        });
-        termsEl && termsEl.addEventListener('change', updateBtn);
-
-        /* Form submit validatsiyasi */
-        form.addEventListener('submit', function (e) {
-            var hasError = false;
-
-            /* Email tekshirish */
-            if (!emailEl || !emailEl.value.trim()) {
-                if (emailErr) emailErr.textContent = 'Email is required.';
-                if (emailEl) emailEl.classList.add('error-input');
-                hasError = true;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
-                if (emailErr) emailErr.textContent = 'Please enter a valid email address.';
-                if (emailEl) emailEl.classList.add('error-input');
-                hasError = true;
-            }
-
-            /* Password tekshirish */
-            if (!pwdEl || !pwdEl.value.trim()) {
-                hasError = true;
-            }
-
-            /* Repeat password tekshirish */
-            if (!repeatEl || !repeatEl.value.trim()) {
-                if (repeatErr) repeatErr.textContent = 'Please repeat your password.';
-                if (repeatEl) repeatEl.classList.add('error-input');
-                hasError = true;
-            } else if (pwdEl && repeatEl.value !== pwdEl.value) {
-                if (repeatErr) repeatErr.textContent = 'Passwords do not match.';
-                if (repeatEl) repeatEl.classList.add('error-input');
-                hasError = true;
-            }
-
-            /* Terms tekshirish */
-            if (termsEl && !termsEl.checked) {
-                showToast('Please accept the Terms of Service.');
-                hasError = true;
-            }
-
-            if (hasError) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-        });
-    })();
-</script>
 {% endblock %}

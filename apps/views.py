@@ -28,14 +28,15 @@ class LoginFormView(LoginNotRequiredMixin, FormView):
 class RegisterCreateView(LoginNotRequiredMixin, CreateView):
     template_name = 'justjoin/auth/register.html'
     redirect_authenticated_user = True
-    # success_url = reverse_lazy('job_offer_list_page')
+    success_url = reverse_lazy('login_by_email_page')
     form_class = RegisterModelForm
 
     def form_valid(self, form):
-        user = form.save(False)
-        user.is_active = False
+        user = form.save(commit=False)
+        user.is_active = True  # Assuming we want them to login directly or just have them active. If not, they can't login.
+        user.role = form.Meta.model.Roles.CANDIDATE  # Set default role
         user.save()
-        return redirect(self.success_url)
+        return super().form_valid(form)
 
 
 
@@ -45,11 +46,10 @@ class ForgotPassword(TemplateView):
 
 # Test
 class SoicialLoginView(TemplateView):
-    template_name = 'justjoin/auth/login-by-soicial.html'
+    template_name = 'justjoin/auth/login.html'
 
 
-class PasswordSentView(TemplateView):
-    template_name = 'justjoin/auth/password-sent.html'
+
 
 
 
