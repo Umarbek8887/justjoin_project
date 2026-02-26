@@ -67,6 +67,8 @@ class JobOffer(Model):
     slug = SlugField(max_length=255, blank=True, unique=True)
     updated_at = DateTimeField(auto_now_add=True)
     created_at = DateTimeField(auto_now=True)
+    end_time = DateTimeField()
+    is_active = BooleanField(default=True)
 
     working_mode = CharField(choices=WorkingMode.choices, max_length=32, default=WorkingMode.HYBRID)
     contract_type = CharField(choices=ContractType.choices, max_length=32, default=ContractType.INTERNSHIP)
