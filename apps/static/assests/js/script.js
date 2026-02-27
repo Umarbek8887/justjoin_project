@@ -298,3 +298,23 @@ if (eyeBtn1) {
     });
   }
 }
+const signinToggle   = document.getElementById('signinToggle');
+const signinDropdown = document.getElementById('signinDropdown');
+const signinWrap     = document.getElementById('signinWrap');
+
+if (signinToggle && signinDropdown) {
+  signinToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    signinDropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (signinWrap && !signinWrap.contains(e.target)) {
+      signinDropdown.classList.remove('open');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') signinDropdown.classList.remove('open');
+  });
+}

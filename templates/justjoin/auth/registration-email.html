@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm registration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        img {
+            border: 0;
+            display: block;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td align="center" style="padding: 20px 0;">
+            <!-- Main Container -->
+            <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+                   style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+                <!-- Header -->
+                <tr>
+                    <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 30px; text-align: center;">
+                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">{{ company_name|default:"Kompaniya Nomi" }}</h1>
+                        <p style="margin: 10px 0 0 0; color: #ffffff; font-size: 14px; opacity: 0.9;">Sizning ishonchli
+                            hamkoringiz</p>
+                    </td>
+                </tr>
+
+                <!-- Content -->
+                <tr>
+                    <td style="padding: 40px 30px;">
+                        <h2 style="margin: 0 0 20px 0; color: #333333; font-size: 22px;">
+                            Assalomu alaykum {{ username }}!
+                        </h2>
+
+                        <p style="margin: 0 0 15px 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                            {{ message|default:"Bu sizning professional email templatingiz. Siz bu yerda o'z xabaringizni yozishingiz mumkin." }}
+                        </p>
+
+                        {% if additional_text %}
+                            <p style="margin: 0 0 15px 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                                {{ additional_text }}
+                            </p>
+                        {% endif %}
+
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                               style="margin: 30px 0;">
+                            <tr>
+                                <td style="text-align: center;">
+                                    <a href="{{ confirm_link }}"
+                                       style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-size: 16px; font-weight: bold; display: inline-block;">
+                                        Tasdiqlash
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="margin: 20px 0 0 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                            Hurmat bilan {{ first_name }}<br>
+                            <strong style="color: #333333;">{{ company_name|default:"Kompaniya" }} jamoasi</strong>
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td style="background-color: #2d3748; padding: 30px; text-align: center;">
+                        <p style="margin: 0 0 10px 0; color: #a0aec0; font-size: 14px;">
+                            © {{ year|default:"2024" }} {{ company_name|default:"Kompaniya Nomi" }}. Barcha huquqlar
+                            himoyalangan.
+                        </p>
+                        <p style="margin: 0 0 15px 0; color: #a0aec0; font-size: 14px;">
+                            {{ address|default:"Toshkent, O'zbekiston" }} | info@company.uz
+                            | {{ phone|default:"+998 90 123 45 67" }}
+                        </p>
+                        {% if show_social %}
+                            <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                                   style="margin: 0 auto;">
+                                <tr>
+                                    <td style="padding: 0 10px;">
+                                        <a href="{{ telegram_link|default:'#' }}"
+                                           style="color: #667eea; text-decoration: none; font-size: 14px;">Telegram</a>
+                                    </td>
+                                    <td style="padding: 0 10px;">
+                                        <a href="{{ instagram_link|default:'#' }}"
+                                           style="color: #667eea; text-decoration: none; font-size: 14px;">Instagram</a>
+                                    </td>
+                                    <td style="padding: 0 10px;">
+                                        <a href="{{ facebook_link|default:'#' }}"
+                                           style="color: #667eea; text-decoration: none; font-size: 14px;">Facebook</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

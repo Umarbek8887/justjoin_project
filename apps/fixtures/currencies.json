@@ -1,0 +1,266 @@
+[
+  {
+    "model": "apps.currency",
+    "pk": 1,
+    "fields": {
+      "name": "Uzbekistani Som",
+      "iso": "UZS"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 2,
+    "fields": {
+      "name": "US Dollar",
+      "iso": "USD"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 3,
+    "fields": {
+      "name": "Russian Ruble",
+      "iso": "RUB"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 4,
+    "fields": {
+      "name": "Euro",
+      "iso": "EUR"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 5,
+    "fields": {
+      "name": "British Pound",
+      "iso": "GBP"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 6,
+    "fields": {
+      "name": "Japanese Yen",
+      "iso": "JPY"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 7,
+    "fields": {
+      "name": "Swiss Franc",
+      "iso": "CHF"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 8,
+    "fields": {
+      "name": "Canadian Dollar",
+      "iso": "CAD"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 9,
+    "fields": {
+      "name": "Australian Dollar",
+      "iso": "AUD"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 10,
+    "fields": {
+      "name": "Chinese Yuan",
+      "iso": "CNY"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 11,
+    "fields": {
+      "name": "Indian Rupee",
+      "iso": "INR"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 12,
+    "fields": {
+      "name": "Turkish Lira",
+      "iso": "TRY"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 13,
+    "fields": {
+      "name": "Kazakhstani Tenge",
+      "iso": "KZT"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 14,
+    "fields": {
+      "name": "United Arab Emirates Dirham",
+      "iso": "AED"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 15,
+    "fields": {
+      "name": "Saudi Riyal",
+      "iso": "SAR"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 16,
+    "fields": {
+      "name": "South Korean Won",
+      "iso": "KRW"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 17,
+    "fields": {
+      "name": "Singapore Dollar",
+      "iso": "SGD"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 18,
+    "fields": {
+      "name": "New Zealand Dollar",
+      "iso": "NZD"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 19,
+    "fields": {
+      "name": "Hong Kong Dollar",
+      "iso": "HKD"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 20,
+    "fields": {
+      "name": "Mexican Peso",
+      "iso": "MXN"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 21,
+    "fields": {
+      "name": "Brazilian Real",
+      "iso": "BRL"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 22,
+    "fields": {
+      "name": "South African Rand",
+      "iso": "ZAR"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 23,
+    "fields": {
+      "name": "Norwegian Krone",
+      "iso": "NOK"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 24,
+    "fields": {
+      "name": "Swedish Krona",
+      "iso": "SEK"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 25,
+    "fields": {
+      "name": "Danish Krone",
+      "iso": "DKK"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 26,
+    "fields": {
+      "name": "Polish Zloty",
+      "iso": "PLN"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 27,
+    "fields": {
+      "name": "Egyptian Pound",
+      "iso": "EGP"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 28,
+    "fields": {
+      "name": "Malaysian Ringgit",
+      "iso": "MYR"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 29,
+    "fields": {
+      "name": "Thai Baht",
+      "iso": "THB"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 30,
+    "fields": {
+      "name": "Israeli New Shekel",
+      "iso": "ILS"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 31,
+    "fields": {
+      "name": "Qatari Rial",
+      "iso": "QAR"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 32,
+    "fields": {
+      "name": "Kuwaiti Dinar",
+      "iso": "KWD"
+    }
+  },
+  {
+    "model": "apps.currency",
+    "pk": 33,
+    "fields": {
+      "name": "Kyrgystani Som",
+      "iso": "KGS"
+    }
+  }
+]

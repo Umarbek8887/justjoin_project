@@ -1,0 +1,317 @@
+[
+  {
+    "model": "apps.category",
+    "pk": 1,
+    "fields": {
+      "name": "AI/ML",
+      "slug": "ai-ml",
+      "icon": "fa-solid fa-microchip"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 2,
+    "fields": {
+      "name": "JavaScript",
+      "slug": "javascript",
+      "icon": "fa-brands fa-js"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 3,
+    "fields": {
+      "name": "HTML",
+      "slug": "html",
+      "icon": "fa-brands fa-html5"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 4,
+    "fields": {
+      "name": "PHP",
+      "slug": "php",
+      "icon": "fa-brands fa-php"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 5,
+    "fields": {
+      "name": "Ruby",
+      "slug": "ruby",
+      "icon": "fa-solid fa-gem"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 6,
+    "fields": {
+      "name": "Python",
+      "slug": "python",
+      "icon": "fa-brands fa-python"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 7,
+    "fields": {
+      "name": "Java",
+      "slug": "java",
+      "icon": "fa-brands fa-java"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 8,
+    "fields": {
+      "name": "Net",
+      "slug": "net",
+      "icon": "fa-solid fa-code"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 9,
+    "fields": {
+      "name": "Scala",
+      "slug": "scala",
+      "icon": "fa-solid fa-layer-group"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 10,
+    "fields": {
+      "name": "C",
+      "slug": "c",
+      "icon": "fa-solid fa-copyright"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 11,
+    "fields": {
+      "name": "Mobile",
+      "slug": "mobile",
+      "icon": "fa-solid fa-mobile-screen-button"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 12,
+    "fields": {
+      "name": "Testing",
+      "slug": "testing",
+      "icon": "fa-solid fa-magnifying-glass"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 13,
+    "fields": {
+      "name": "DevOps",
+      "slug": "devops",
+      "icon": "fa-solid fa-infinity"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 14,
+    "fields": {
+      "name": "Admin",
+      "slug": "admin",
+      "icon": "fa-solid fa-gears"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 15,
+    "fields": {
+      "name": "UX/UI",
+      "slug": "ux-ui",
+      "icon": "fa-solid fa-pen-nib"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 16,
+    "fields": {
+      "name": "PM",
+      "slug": "pm",
+      "icon": "fa-solid fa-user-tie"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 17,
+    "fields": {
+      "name": "Game",
+      "slug": "game",
+      "icon": "fa-solid fa-gamepad"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 18,
+    "fields": {
+      "name": "Analytic",
+      "slug": "analytic",
+      "icon": "fa-solid fa-chart-line"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 19,
+    "fields": {
+      "name": "Security",
+      "slug": "security",
+      "icon": "fa-solid fa-shield-halved"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 20,
+    "fields": {
+      "name": "Data",
+      "slug": "data",
+      "icon": "fa-solid fa-database"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 21,
+    "fields": {
+      "name": "Go",
+      "slug": "go",
+      "icon": "fa-solid fa-rocket"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 22,
+    "fields": {
+      "name": "Support",
+      "slug": "support",
+      "icon": "fa-solid fa-headset"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 23,
+    "fields": {
+      "name": "ERP",
+      "slug": "erp",
+      "icon": "fa-solid fa-diagram-project"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 24,
+    "fields": {
+      "name": "Architecture",
+      "slug": "architecture",
+      "icon": "fa-solid fa-cubes"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 35,
+    "fields": {
+      "name": "Other",
+      "slug": "other",
+      "icon": "fa-solid fa-laptop-code"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 26,
+    "fields": {
+      "name": "Rust",
+      "slug": "rust",
+      "icon": "fa-solid fa-gear"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 27,
+    "fields": {
+      "name": "Blockchain",
+      "slug": "blockchain",
+      "icon": "fa-solid fa-link"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 28,
+    "fields": {
+      "name": "QA Automation",
+      "slug": "qa-automation",
+      "icon": "fa-solid fa-robot"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 29,
+    "fields": {
+      "name": "Frontend",
+      "slug": "frontend",
+      "icon": "fa-solid fa-window-maximize"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 30,
+    "fields": {
+      "name": "Backend",
+      "slug": "backend",
+      "icon": "fa-solid fa-server"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 31,
+    "fields": {
+      "name": "Fullstack",
+      "slug": "fullstack",
+      "icon": "fa-solid fa-code-merge"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 32,
+    "fields": {
+      "name": "Cloud",
+      "slug": "cloud",
+      "icon": "fa-solid fa-cloud"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 33,
+    "fields": {
+      "name": "iOS",
+      "slug": "ios",
+      "icon": "fa-brands fa-apple"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 34,
+    "fields": {
+      "name": "Android",
+      "slug": "android",
+      "icon": "fa-brands fa-android"
+    }
+  },
+  {
+    "model": "apps.category",
+    "pk": 25,
+    "fields": {
+      "name": "Cybersecurity",
+      "slug": "cybersecurity",
+      "icon": "fa-solid fa-user-secret"
+    }
+  }
+]

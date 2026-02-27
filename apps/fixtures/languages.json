@@ -1,0 +1,282 @@
+[
+  {
+    "model": "apps.languages",
+    "pk": 1,
+    "fields": {
+      "name": "O'zbek"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 2,
+    "fields": {
+      "name": "Русский"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 3,
+    "fields": {
+      "name": "English"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 4,
+    "fields": {
+      "name": "Türkçe"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 5,
+    "fields": {
+      "name": "Қазақ тіli"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 6,
+    "fields": {
+      "name": "Deutsch"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 7,
+    "fields": {
+      "name": "Français"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 8,
+    "fields": {
+      "name": "Español"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 9,
+    "fields": {
+      "name": "Italiano"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 10,
+    "fields": {
+      "name": "中文"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 11,
+    "fields": {
+      "name": "日本語"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 12,
+    "fields": {
+      "name": "한국어"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 13,
+    "fields": {
+      "name": "العربية"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 14,
+    "fields": {
+      "name": "فارسی"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 15,
+    "fields": {
+      "name": "हिन्दी"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 16,
+    "fields": {
+      "name": "Português"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 17,
+    "fields": {
+      "name": "Polski"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 18,
+    "fields": {
+      "name": "Nederlands"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 19,
+    "fields": {
+      "name": "Svenska"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 20,
+    "fields": {
+      "name": "Norsk"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 21,
+    "fields": {
+      "name": "Suomi"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 22,
+    "fields": {
+      "name": "Ελληνικά"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 23,
+    "fields": {
+      "name": "Magyar"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 24,
+    "fields": {
+      "name": "Čeština"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 25,
+    "fields": {
+      "name": "Українська"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 26,
+    "fields": {
+      "name": "Azərbaycanca"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 27,
+    "fields": {
+      "name": "Türkmençe"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 28,
+    "fields": {
+      "name": "Bahasa Indonesia"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 29,
+    "fields": {
+      "name": "Tiếng Việt"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 30,
+    "fields": {
+      "name": "ไทย"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 31,
+    "fields": {
+      "name": "עברית"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 32,
+    "fields": {
+      "name": "اردو"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 33,
+    "fields": {
+      "name": "Română"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 34,
+    "fields": {
+      "name": "Български"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 35,
+    "fields": {
+      "name": "Slovenčina"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 36,
+    "fields": {
+      "name": "ქართული"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 37,
+    "fields": {
+      "name": "Кыргызча"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 38,
+    "fields": {
+      "name": "Тоҷикӣ"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 39,
+    "fields": {
+      "name": "Հայերեն"
+    }
+  },
+  {
+    "model": "apps.languages",
+    "pk": 40,
+    "fields": {
+      "name": "Dansk"
+    }
+  }
+]
