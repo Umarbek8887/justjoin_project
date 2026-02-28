@@ -24,9 +24,6 @@ class LoginFormView(LoginNotRequiredMixin, FormView):
         login(self.request, form.user)
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
 
 class RegisterCreateView(LoginNotRequiredMixin, CreateView):
     template_name = 'justjoin/auth/register.html'
