@@ -27,7 +27,6 @@ class User(AbstractUser):
         return self.role == self.Roles.EMPLOYER
 
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
-        self.is_active = False if self.role == self.Roles.CANDIDATE else True
         super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
 
 
