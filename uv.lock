@@ -432,6 +432,7 @@ dependencies = [
     { name = "pillow" },
     { name = "psycopg2-binary" },
     { name = "requests" },
+    { name = "six" },
 ]
 
 [package.metadata]
@@ -450,6 +451,7 @@ requires-dist = [
     { name = "pillow", specifier = ">=12.1.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.11" },
     { name = "requests", specifier = ">=2.32.5" },
+    { name = "six", specifier = ">=1.17.0" },
 ]
 
 [[package]]

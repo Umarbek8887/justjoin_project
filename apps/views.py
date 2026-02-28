@@ -56,7 +56,7 @@ class ActivateAccountView(View):
 
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
-            user.save()
+            user.save(update_fields=["is_active"])
             login(request, user)
             messages.success(request, "Email tasdiqlandi, endi bemalol login qilsa bo'ladi")
         else:
@@ -83,6 +83,8 @@ class SoicialLoginView(TemplateView):
 
 class MainPage(TemplateView):
     template_name = 'justjoin/main/landing.html'
+
+
 
 # class GoogleLoginView(View):
 #     def get(self, request):
