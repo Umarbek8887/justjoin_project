@@ -85,6 +85,7 @@ class JobOffer(Model):
     category = ForeignKey('apps.Category', on_delete=CASCADE, related_name='job_offers')
 
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.name = self.name.title()
         self.slug = slugify(
             f"{self.company.slug}-{self.name}-{self.company.location_name}-{self.category.name}-{self.pk}")
         super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
@@ -104,6 +105,11 @@ class JobOffer(Model):
     @property
     def image(self):
         return self.company.image
+
+    @property
+    def left_days(self) -> int:
+        delta = self.end_time - self.published_at
+        return delta.days
 
 
 class JobLanguage(Model):

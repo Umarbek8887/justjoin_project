@@ -23,7 +23,8 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <label for="searchKeyword"></label><input type="text" id="searchKeyword" placeholder="Search: Job title, company, keyword"/>
+            <label for="searchKeyword"></label><input type="text" id="searchKeyword"
+                                                      placeholder="Search: Job title, company, keyword"/>
         </div>
         <div class="search-sep"></div>
         <div class="search-right">
@@ -50,238 +51,16 @@
 <!-- ===== CATEGORIES ===== -->
 <div class="cats-bar">
     <div class="cats-scroll">
-        <button class="cat active" data-cat="all">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"></path></svg>
-      </span>
-            <span class="cat-name">AI/ML</span>
-            <span class="cat-num">989</span>
-        </button>
-        <button class="cat" data-cat="js">
+        {% for category in categories %}
+            <button class="cat" data-cat="js">
       <span class="cat-ico" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="3" y="18" font-size="14"
-                                                                           font-weight="bold">JS</text></svg>
+                                                                           font-weight="bold"></text></svg>
       </span>
-            <span class="cat-name">JavaScr...</span>
-            <span class="cat-num">1410</span>
-        </button>
-        <button class="cat" data-cat="html">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#e34f26,#f06529)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="1" y="18" font-size="11"
-                                                                           font-weight="bold">HTML</text></svg>
-      </span>
-            <span class="cat-name">HTML</span>
-            <span class="cat-num">57</span>
-        </button>
-        <button class="cat" data-cat="php">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#6181b6,#8892be)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="2" y="17" font-size="11"
-                                                                           font-weight="bold">PHP</text></svg>
-      </span>
-            <span class="cat-name">PHP</span>
-            <span class="cat-num">328</span>
-        </button>
-        <button class="cat" data-cat="ruby">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#cc342d,#e74c3c)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon
-                points="12,3 20,8 20,16 12,21 4,16 4,8"></polygon></svg>
-      </span>
-            <span class="cat-name">Ruby</span>
-            <span class="cat-num">89</span>
-        </button>
-        <button class="cat" data-cat="python">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#3572a5,#4b8bbe)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="1" y="17" font-size="10"
-                                                                           font-weight="bold">PY</text></svg>
-      </span>
-            <span class="cat-name">Python</span>
-            <span class="cat-num">1060</span>
-        </button>
-        <button class="cat" data-cat="java">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#b07219,#e76f00)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="1" y="17" font-size="10"
-                                                                           font-weight="bold">JAVA</text></svg>
-      </span>
-            <span class="cat-name">Java</span>
-            <span class="cat-num">1818</span>
-        </button>
-        <button class="cat" data-cat="net">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#5c2d91,#7b2fbe)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="1" y="17" font-size="10"
-                                                                           font-weight="bold">.NET</text></svg>
-      </span>
-            <span class="cat-name">Net</span>
-            <span class="cat-num">976</span>
-        </button>
-        <button class="cat" data-cat="scala">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#dc322f,#e74c3c)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="1" y="17" font-size="9"
-                                                                           font-weight="bold">SCALA</text></svg>
-      </span>
-            <span class="cat-name">Scala</span>
-            <span class="cat-num">45</span>
-        </button>
-        <button class="cat" data-cat="c">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#a8b9cc,#5c6bc0)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="5" y="17" font-size="14"
-                                                                           font-weight="bold">C</text></svg>
-      </span>
-            <span class="cat-name">C</span>
-            <span class="cat-num">272</span>
-        </button>
-        <button class="cat" data-cat="mobile">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#e91e63,#f06292)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="7" y="2" width="10" height="20" rx="2"
-                                                                           fill="none" stroke="white"
-                                                                           stroke-width="2"></rect><circle cx="12"
-                                                                                                           cy="18" r="1"
-                                                                                                           fill="white"></circle></svg>
-      </span>
-            <span class="cat-name">Mobile</span>
-            <span class="cat-num">471</span>
-        </button>
-        <button class="cat" data-cat="testing">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#00bcd4,#26c6da)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M9 11l3 3L22 4"></path><path
-                d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" fill="none" stroke="white"
-                stroke-width="2"></path></svg>
-      </span>
-            <span class="cat-name">Testing</span>
-            <span class="cat-num">1182</span>
-        </button>
-        <button class="cat" data-cat="devops">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#0db7ed,#2196f3)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3" fill="none"
-                                                                             stroke="white" stroke-width="2"></circle><path
-                d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"
-                stroke="white" stroke-width="1.5"></path></svg>
-      </span>
-            <span class="cat-name">DevOps</span>
-            <span class="cat-num">1173</span>
-        </button>
-        <button class="cat" data-cat="admin">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#78909c,#90a4ae)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path
-                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="white"
-                stroke-width="2"></path></svg>
-      </span>
-            <span class="cat-name">Admin</span>
-            <span class="cat-num">690</span>
-        </button>
-        <button class="cat" data-cat="uxui">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#ff4081,#f06292)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="18" height="18" rx="2"
-                                                                           fill="none" stroke="white" stroke-width="2"></rect><circle
-                cx="8.5" cy="8.5" r="1.5" fill="white"></circle><polyline points="21,15 16,10 5,21" stroke="white"
-                                                                          stroke-width="2" fill="none"></polyline></svg>
-      </span>
-            <span class="cat-name">UX/UI</span>
-            <span class="cat-num">265</span>
-        </button>
-        <button class="cat" data-cat="pm">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#43a047,#66bb6a)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="3" y="4" width="18" height="18" rx="2"
-                                                                           fill="none" stroke="white" stroke-width="2"></rect><line
-                x1="16" y1="2" x2="16" y2="6" stroke="white" stroke-width="2"></line><line x1="8" y1="2" x2="8" y2="6"
-                                                                                           stroke="white" stroke-width="2"></line><line
-                x1="3" y1="10" x2="21" y2="10" stroke="white" stroke-width="2"></line></svg>
-      </span>
-            <span class="cat-name">PM</span>
-            <span class="cat-num">1228</span>
-        </button>
-        <button class="cat" data-cat="game">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#7b1fa2,#9c27b0)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="2" y="6" width="20" height="12" rx="2"
-                                                                           fill="none" stroke="white" stroke-width="2"></rect><line
-                x1="12" y1="10" x2="12" y2="14" stroke="white" stroke-width="2"></line><line x1="10" y1="12" x2="14" y2="12"
-                                                                                             stroke="white" stroke-width="2"></line><circle
-                cx="17" cy="12" r="1.5" fill="white"></circle></svg>
-      </span>
-            <span class="cat-name">Game</span>
-            <span class="cat-num">83</span>
-        </button>
-        <button class="cat" data-cat="analytics">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#00897b,#26a69a)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"
-                                                                               stroke="white" stroke-width="2"
-                                                                               fill="none"></polyline></svg>
-      </span>
-            <span class="cat-name">Analyti...</span>
-            <span class="cat-num">1088</span>
-        </button>
-        <button class="cat" data-cat="security">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#1565c0,#1976d2)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path
-                d="M12 2L4 6v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6L12 2z" fill="white"></path></svg>
-      </span>
-            <span class="cat-name">Security</span>
-            <span class="cat-num">567</span>
-        </button>
-        <button class="cat" data-cat="data">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#00838f,#00acc1)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><ellipse cx="12" cy="6" rx="8" ry="3" fill="none"
-                                                                              stroke="white" stroke-width="2"></ellipse><path
-                d="M4 6v4c0 1.7 3.6 3 8 3s8-1.3 8-3V6" fill="none" stroke="white" stroke-width="2"></path><path
-                d="M4 10v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4" fill="none" stroke="white" stroke-width="2"></path></svg>
-      </span>
-            <span class="cat-name">Data</span>
-            <span class="cat-num">1936</span>
-        </button>
-        <button class="cat" data-cat="go">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#00acd7,#29b6f6)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><text x="2" y="17" font-size="12"
-                                                                           font-weight="bold">Go</text></svg>
-      </span>
-            <span class="cat-name">Go</span>
-            <span class="cat-num">213</span>
-        </button>
-        <button class="cat" data-cat="support">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#ef6c00,#fb8c00)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path
-                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="white"></path></svg>
-      </span>
-            <span class="cat-name">Support</span>
-            <span class="cat-num">494</span>
-        </button>
-        <button class="cat" data-cat="erp">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#37474f,#546e7a)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="3" y="3" width="7" height="7" rx="1"
-                                                                           fill="white"></rect><rect x="14" y="3" width="7"
-                                                                                                     height="7" rx="1"
-                                                                                                     fill="white"></rect><rect x="3"
-                                                                                                                               y="14"
-                                                                                                                               width="7"
-                                                                                                                               height="7"
-                                                                                                                               rx="1"
-                                                                                                                               fill="white"></rect><rect
-                x="14" y="14" width="7" height="7" rx="1" fill="white"></rect></svg>
-      </span>
-            <span class="cat-name">ERP</span>
-            <span class="cat-num">765</span>
-        </button>
-        <button class="cat" data-cat="arch">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#ad1457,#e91e63)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="2" y="14" width="6" height="8" rx="1"
-                                                                           fill="white"></rect><rect x="9" y="9" width="6"
-                                                                                                     height="13" rx="1"
-                                                                                                     fill="white"></rect><rect
-                x="16" y="4" width="6" height="18" rx="1" fill="white"></rect></svg>
-      </span>
-            <span class="cat-name">Archite...</span>
-            <span class="cat-num">797</span>
-        </button>
-        <button class="cat" data-cat="other">
-      <span class="cat-ico" style="background:linear-gradient(135deg,#f06292,#e91e63)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="2" y="3" width="6" height="14" rx="1"
-                                                                           fill="white"></rect><rect x="10" y="3" width="6"
-                                                                                                     height="8" rx="1"
-                                                                                                     fill="white"></rect><rect
-                x="18" y="3" width="4" height="18" rx="1" fill="white"></rect></svg>
-      </span>
-            <span class="cat-name">Other</span>
-            <span class="cat-num">1210</span>
-        </button>
+                <span class="cat-name">{{ category.name }}</span>
+                <span class="cat-num">{{ category.job_offers.count }}</span>
+            </button>
+        {% endfor %}
     </div>
 </div>
 
@@ -472,15 +251,15 @@
     <!-- JOBS -->
     <div class="jobs-col">
         <div class="jobs-top">
-            <span class="jobs-label">Work: All offers — <strong id="jobCount">19 206 offers</strong></span>
+            <span class="jobs-label">Work: All offers — <strong id="jobCount"> {{ jobs.count }} offers</strong></span>
             <div class="sort-wrap">
                 <span class="sort-label">Sort by:</span>
                 <div class="sort-select-wrap">
                     <label for="sortSelect"></label><select id="sortSelect">
-                        <option>Default</option>
-                        <option>Newest</option>
-                        <option>Salary: High to Low</option>
-                    </select>
+                    <option>Default</option>
+                    <option>Newest</option>
+                    <option>Salary: High to Low</option>
+                </select>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
@@ -489,151 +268,51 @@
         </div>
 
         <div class="jobs-list" id="jobsList">
-
-            <div class="job-card" data-mode="office" data-contract="b2b">
-                <div class="job-logo">
-                    <div class="logo-box" style="background:#e8f4fd"><img
-                            src="https://ui-avatars.com/api/?name=eS&background=0ea5e9&color=fff&size=48&bold=true&font-size=0.4"
-                            width="48" height="48" alt="eService"/></div>
-                </div>
-                <div class="job-mid">
-                    <div class="job-title">Systems and Application Administrator (Postillion RealTime)</div>
-                    <div class="job-meta">
+            {% for job in jobs %}
+                <div class="job-card" data-mode="office" data-contract="b2b">
+                    <div class="job-logo">
+                        <div class="logo-box" style="background:#e8f4fd"><img
+                                src="{{ job.company.image.url }}"
+                                width="48" height="48" alt="eService"/></div>
+                    </div>
+                    <div class="job-mid">
+                        <div class="job-title">{{ job.name }}</div>
+                        <div class="job-meta">
                         <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                   stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7"
+                                   stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3"
+                                                                                                        width="7"
                                                                                                         height="7"></rect><rect
-                                x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> eService Sp. z o.o.</span>
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                   stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle
-                                cx="12" cy="10" r="3"></circle></svg> Warszawa</span>
-                    </div>
-                    <div class="job-tags"><span class="tag">MS SQL</span><span
-                            class="tag">Application administration</span><span class="tag">application product</span>
-                    </div>
-                </div>
-                <div class="job-right">
-                    <span class="super-badge">Super offer</span>
-                    <span class="salary undisclosed">Undisclosed Salary</span>
-                    <div class="job-bottom">
-                        <span class="days">27d left</span>
-                        <button class="bm-btn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                 stroke-width="2">
-                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-                  <div class="job-card" data-mode="hybrid" data-contract="permanent">
-                    <div class="job-logo"><div class="logo-box" style="background:#f0f9ff"><img src="https://ui-avatars.com/api/?name=gp&background=22c55e&color=fff&size=48&bold=true&font-size=0.4" width="48" height="48" alt="globalpayments"/></div></div>
-                    <div class="job-mid">
-                      <div class="job-title">Application Support Analyst</div>
-                      <div class="job-meta">
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> GlobalTech Poland Sp z O. O.</span>
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Warszawa</span>
-                      </div>
-                      <div class="job-tags"><span class="tag">Kubernetes</span><span class="tag">Cloud</span><span class="tag">Kibana</span></div>
+                                x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7"
+                                                                                height="7"></rect></svg>
+                            {{ job.company.name }}</span>
+                            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                       stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle
+                                    cx="12" cy="10" r="3"></circle></svg>
+                                {{ job.company.location_name }}</span>
+                        </div>
+                        <div class="job-tags"><span class="tag">MS SQL</span><span
+                                class="tag">Application administration</span><span
+                                class="tag">application product</span>
+                        </div>
                     </div>
                     <div class="job-right">
-                      <span class="super-badge">Super offer</span>
-                      <span class="salary undisclosed">Undisclosed Salary</span>
-                      <div class="job-bottom"><span class="days">24d left</span><button class="bm-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button></div>
-                    </div>
-                  </div>
-
-                  <div class="job-card" data-mode="hybrid" data-contract="b2b">
-                    <div class="job-logo"><div class="logo-box" style="background:#f0f9ff"><img src="https://ui-avatars.com/api/?name=gp&background=22c55e&color=fff&size=48&bold=true&font-size=0.4" width="48" height="48" alt="globalpayments"/></div></div>
-                    <div class="job-mid">
-                      <div class="job-title">DevOps Engineer</div>
-                      <div class="job-meta">
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> GlobalTech Poland Sp z O. O.</span>
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Warszawa</span>
-                      </div>
-                      <div class="job-tags"><span class="tag">Ansible</span><span class="tag">Grafana</span><span class="tag">Jenkins</span></div>
-                    </div>
-                    <div class="job-right">
-                      <span class="super-badge">Super offer</span>
-                      <span class="salary undisclosed">Undisclosed Salary</span>
-                      <div class="job-bottom"><span class="days">23d left</span><button class="bm-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button></div>
-                    </div>
-                  </div>
-
-                  <div class="job-card" data-mode="office" data-contract="b2b">
-                    <div class="job-logo"><div class="logo-box" style="background:#e8f4fd"><img src="https://ui-avatars.com/api/?name=eS&background=0ea5e9&color=fff&size=48&bold=true&font-size=0.4" width="48" height="48" alt="eService"/></div></div>
-                    <div class="job-mid">
-                      <div class="job-title">IT Senior Project Manager</div>
-                      <div class="job-meta">
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> eService Sp. z o.o.</span>
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Warszawa</span>
-                      </div>
-                      <div class="job-tags"><span class="tag">Project Management</span></div>
-                    </div>
-                    <div class="job-right">
-                      <span class="super-badge">Super offer</span>
-                      <span class="salary undisclosed">Undisclosed Salary</span>
-                      <div class="job-bottom"><span class="days">27d left</span><button class="bm-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button></div>
-                    </div>
-                  </div>
-
-                  <div class="job-card" data-mode="office" data-contract="b2b">
-                    <div class="job-logo"><div class="logo-box" style="background:#e8f4fd"><img src="https://ui-avatars.com/api/?name=eS&background=0ea5e9&color=fff&size=48&bold=true&font-size=0.4" width="48" height="48" alt="eService"/></div></div>
-                    <div class="job-mid">
-                      <div class="job-title">Product Development Specialist</div>
-                      <div class="job-meta">
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> eService Sp. z o.o.</span>
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Warszawa</span>
-                      </div>
-                      <div class="job-tags"><span class="tag">Analiza Biznesowa</span><span class="tag">Project Management</span></div>
-                    </div>
-                    <div class="job-right">
-                      <span class="super-badge">Super offer</span>
-                      <span class="salary undisclosed">Undisclosed Salary</span>
-                      <div class="job-bottom"><span class="days">22d left</span><button class="bm-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button></div>
-                    </div>
-                  </div>
-
-            <div class="job-card" data-mode="remote" data-contract="permanent">
-                <div class="job-logo">
-                    <div class="logo-box logo-dark"><span class="logo-text-white">▲</span></div>
-                </div>
-                <div class="job-mid">
-                    <div class="job-title">Senior Full-Stack / Frontend Engineer</div>
-                    <div class="job-meta">
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                   stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7"
-                                                                                                        height="7"></rect><rect
-                                x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> ZYNT</span>
-                        <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                   stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle
-                                cx="12" cy="10" r="3"></circle></svg> Warszawa</span>
-                        <span class="remote-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                                      stroke="currentColor" stroke-width="2"><circle cx="12" cy="12"
-                                                                                                     r="10"></circle><line
-                                x1="2" y1="12" x2="22" y2="12"></line><path
-                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Fully remote</span>
-                    </div>
-                    <div class="job-tags">
-                        <span class="tag">Next.js</span><span class="tag">Node.js</span><span
-                            class="tag">TypeScript</span>
-                        <span class="tag tag-purple">🔥 1-Click Apply</span>
-                        <span class="tag tag-new">New</span>
+{#                        <span class="super-badge">Super offer</span>#}
+                        <span class="salary undisclosed">Undisclosed Salary</span>
+                        <div class="job-bottom">
+                            <span class="days">{{ job.left_days }}d left</span>
+                            <button class="bm-btn">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2">
+                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="job-right">
-                    <span class="super-badge">Super offer</span>
-                    <span class="salary green">18 000 – 22 000 PLN/month</span>
-                    <div class="job-bottom"><span class="days">3d left</span>
-                        <button class="bm-btn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                 stroke-width="2">
-                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+
+
+
 
         </div>
     </div>

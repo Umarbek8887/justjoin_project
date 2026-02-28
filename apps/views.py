@@ -1,15 +1,16 @@
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.db.models import Count
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
-from django.views.generic import FormView, CreateView, TemplateView
+from django.views.generic import FormView, CreateView, TemplateView, ListView
 
 from apps.forms import LoginForm, RegisterModelForm
 from apps.mixins import LoginNotRequiredMixin
-from apps.models import User
+from apps.models import User, JobOffer, Category
 from apps.tokens import account_activation_token
 from apps.tasks import send_registration_link
 
@@ -78,8 +79,15 @@ class SoicialLoginView(TemplateView):
     template_name = 'justjoin/auth/login.html'
 
 
-class MainPage(TemplateView):
+class MainPage(ListView):
+    queryset = JobOffer.objects.all()
     template_name = 'justjoin/main/landing.html'
+    context_object_name = 'jobs'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all()
+        return context
 
 
 
