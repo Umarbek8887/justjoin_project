@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Junior Full Stack Developer | justjoin.it</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="job-detail4.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="brand">
+    <div class="brand-name">justjoin.it</div>
+    <div class="brand-sub">#1 Job Board for tech industry in Europe</div>
+  </div>
+  <div class="search-bar">
+    <div class="search-left">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search: Job title, company, keyword"/>
+    </div>
+    <div class="search-sep"></div>
+    <div class="search-right">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <input type="text" placeholder="Location"/>
+    </div>
+    <button class="search-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn">Post a job</button>
+    <button class="nav-btn nav-btn-primary">Sign in</button>
+    <button class="icon-btn" id="themeToggle">☀</button>
+    <button class="icon-btn">☰</button>
+  </div>
+</nav>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- LEFT BAR -->
+  <div class="left-bar">
+    <button class="lb-btn" title="Grid">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </button>
+    <button class="lb-btn active" title="Jobs">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+    </button>
+    <button class="lb-btn" title="Salary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </button>
+    <button class="lb-btn" title="Calendar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </button>
+    <button class="lb-btn" title="Bookmark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <button class="lb-btn" title="Bag">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </button>
+    <button class="lb-btn" title="Clock">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </button>
+    <button class="lb-btn" title="Bell">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </button>
+    <button class="lb-btn" title="More">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+    </button>
+    <div class="lb-spacer"></div>
+    <span class="lb-def">DEF</span>
+    <button class="lb-btn" title="Settings">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <button class="lb-btn" title="Logout">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    </button>
+    <button class="lb-avatar">A</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- JOB DETAIL -->
+    <div class="job-detail">
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        <a href="#">All offers</a>
+        <span class="bc-sep">›</span>
+        <a href="#">Warszawa</a>
+        <span class="bc-sep">›</span>
+        <a href="#">JavaScript</a>
+        <span class="bc-sep">›</span>
+        <span class="bc-current">Junior Full Stack Developer</span>
+      </div>
+
+      <!-- Header -->
+      <div class="jd-header" style="margin-top:20px;">
+        <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid var(--border);flex-shrink:0;background:#7c3aed;display:flex;align-items:center;justify-content:center;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" fill="white"/><path d="M2 17l10 5 10-5" stroke="white" stroke-width="2" fill="none"/><path d="M2 12l10 5 10-5" stroke="white" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div class="jd-title-wrap">
+          <div class="jd-title">Junior Full Stack Developer</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+            <div style="display:flex;align-items:center;gap:6px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);border-radius:50px;padding:3px 10px;">
+              <div style="width:18px;height:18px;border-radius:50%;background:#7c3aed;display:flex;align-items:center;justify-content:center;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>
+              </div>
+              <span style="font-size:12px;font-weight:600;color:var(--accent2);">Synthi AI</span>
+            </div>
+          </div>
+          <div class="jd-company-loc" style="margin-top:8px;">
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Gójecka 104, Warszawa
+            </span>
+            <span class="sep">—</span>
+            <span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              DreamAI Technologies
+            </span>
+          </div>
+        </div>
+        <!-- JS Badge - sariq -->
+        <div class="arch-badge" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a1a2e;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#1a1a2e"><text x="3" y="18" font-size="14" font-weight="bold" fill="#1a1a2e">JS</text></svg>
+          JavaScript
+        </div>
+      </div>
+
+      <!-- Pills -->
+      <div class="jd-pills">
+        <div class="pill">
+          <div class="pill-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div><div class="pill-text">Full-time</div></div>
+        </div>
+        <div class="pill">
+          <div class="pill-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div><div class="pill-text">Mandate</div></div>
+        </div>
+        <div class="pill">
+          <div class="pill-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+          <div><div class="pill-text">Junior</div></div>
+        </div>
+        <div class="pill">
+          <div class="pill-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+          <div><div class="pill-text">Office</div></div>
+        </div>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="section-title">Tech Stack</div>
+      <div class="tech-grid-5">
+
+        <!-- Row 1: Junior level (2 red dots) -->
+        <div class="tech-item">
+          <div class="tech-name">Express.js</div>
+          <div class="tech-level">Junior</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-name">Figma</div>
+          <div class="tech-level">Junior</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-name">React</div>
+          <div class="tech-level">Junior</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-name">JavaScript</div>
+          <div class="tech-level">Junior</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-name">Nest.js</div>
+          <div class="tech-level">Nice To Have</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+
+        <!-- Row 2: Nice To Have (1 red dot) -->
+        <div class="tech-item">
+          <div class="tech-name">TypeScript</div>
+          <div class="tech-level">Nice To Have</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-name">Microservices</div>
+          <div class="tech-level">Nice To Have</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-name">MongoDB</div>
+          <div class="tech-level">Nice To Have</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-name">React Native</div>
+          <div class="tech-level">Nice To Have</div>
+          <div class="tech-dots">
+            <div class="dot" style="background:var(--accent)"></div>
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Job Description -->
+      <div class="section-title">Job Description</div>
+      <div class="jd-desc">
+        <p>Dołącz do zespołu <strong>Synthi AI</strong>!</p>
+        <p>Tworzymy <strong>Synthi AI</strong> – aplikację, która zmienia naukę języków w coś naprawdę angażującego. Dzięki AI nauka staje się interaktywna, dostosowana do użytkownika i po prostu działa w praktyce. Mamy już <strong>70 000 aktywnych użytkowników</strong>, a liczba ta rośnie w zawrotnym tempie.</p>
+        <p>Chcesz sprawdzić, jak to działa? Zajrzyj tutaj:<br/>
+          <a href="https://en.synthiaiapp.com" class="jd-link">en.synthiaiapp.com</a>
+        </p>
+
+        <h4>Co będziesz robić?</h4>
+        <ul>
+          <li>Rozwijać i utrzymywać backend aplikacji oparty na Node.js i NestJS</li>
+          <li>Budować i optymalizować interfejsy użytkownika w React i React Native</li>
+          <li>Integrować rozwiązania AI i uczenia maszynowego w produkt</li>
+          <li>Projektować i wdrażać API RESTful oraz mikroserwisy</li>
+          <li>Pracować z bazami danych MongoDB i PostgreSQL</li>
+          <li>Uczestniczyć w code review i doskonalić kulturę inżynierską zespołu</li>
+        </ul>
+
+        <h4>Czego szukamy?</h4>
+        <ul>
+          <li>Znajomości JavaScript / TypeScript na poziomie Junior</li>
+          <li>Doświadczenia z React (frontend) i Express.js lub NestJS (backend)</li>
+          <li>Podstawowej znajomości Figma i umiejętności pracy z designem</li>
+          <li>Chęci do nauki i rozwijania się w dynamicznym środowisku startup</li>
+          <li>Mile widziane: znajomość Microservices, MongoDB, React Native</li>
+        </ul>
+      </div>
+
+      <!-- Sticky bottom -->
+      <div class="sticky-bar">
+        <div class="sticky-info">
+          <div class="sticky-title">Junior Full Stack Developer</div>
+          <div class="sticky-salary">7 500 – 10 000 PLN &nbsp;·&nbsp; Gross per month · Mandate</div>
+        </div>
+        <button class="save-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          Save
+        </button>
+        <button class="apply-btn">Apply</button>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="detail-sidebar">
+
+      <!-- ONE CLICK POPUP -->
+      <div class="one-click-popup" id="oneClickPopup">
+        <button class="one-click-close" id="closePopup">✕</button>
+        <div class="one-click-title">Apply with one click!</div>
+        <div class="one-click-text">Create an account, add your CV, and apply to offers with a built-in application form in just one click.</div>
+      </div>
+
+      <!-- Salary Card -->
+      <div class="salary-card">
+        <div class="salary-section-label">Salary</div>
+        <div class="salary-row">
+          <div class="salary-amount">7 500 – 10 000 PLN</div>
+          <div class="salary-type">Gross per month · Mandate</div>
+        </div>
+        <div class="progress-bar-wrap" style="margin:12px 0 6px;">
+          <div class="progress-bar"><div class="progress-fill" style="width:72%;"></div></div>
+        </div>
+        <button class="apply-full-btn">Apply</button>
+        <div class="days-left">14 day left (until 14.03.2026)</div>
+        <div class="action-row">
+          <button class="action-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            Save
+          </button>
+          <button class="action-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+        </div>
+      </div>
+
+      <!-- Similar Offers -->
+      <div class="section-title similar-title">Check Similar Offers</div>
+
+      <div class="similar-card">
+        <div class="sim-logo"><img src="https://ui-avatars.com/api/?name=pr&background=e74c3c&color=fff&size=36&bold=true&font-size=0.4" alt="project"/></div>
+        <div class="sim-info">
+          <div class="sim-title">Junior Fullstack Devel...</div>
+          <div class="sim-salary">11 000 – 15 600 PLN/mon</div>
+          <div class="sim-tags"><span class="sim-tag">Warszawa</span><span class="sim-tag">Junior</span><span class="sim-tag">B2B, Mandate</span><span class="sim-tag">Remote</span></div>
+        </div>
+        <button class="sim-bm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+      </div>
+
+      <div class="similar-card">
+        <div class="sim-logo"><img src="https://ui-avatars.com/api/?name=Al&background=8b5cf6&color=fff&size=36&bold=true&font-size=0.4" alt="aladdin"/></div>
+        <div class="sim-info">
+          <div class="sim-title">Senior Backend Engine...</div>
+          <div class="sim-salary">20 160 – 23 520 PLN/h</div>
+          <div class="sim-tags"><span class="sim-tag">Warszawa</span><span class="sim-tag">Junior</span><span class="sim-tag">B2B</span><span class="sim-tag">Remote</span></div>
+        </div>
+        <button class="sim-bm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+      </div>
+
+      <div class="similar-card">
+        <div class="sim-logo"><img src="https://ui-avatars.com/api/?name=So&background=3b82f6&color=fff&size=36&bold=true&font-size=0.4" alt="soft"/></div>
+        <div class="sim-info">
+          <div class="sim-title">Software Engineer (Typ...</div>
+          <div class="sim-salary">14 000 – 18 000 PLN/mo</div>
+          <div class="sim-tags"><span class="sim-tag">Remote</span><span class="sim-tag">Junior</span><span class="sim-tag">B2B</span></div>
+        </div>
+        <button class="sim-bm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="job-detail4.js"></script>
+</body>
+</html>
