@@ -129,7 +129,7 @@ class EmployerRegisterView(LoginNotRequiredMixin, FormView):
         user = form.save()
         user.is_active = False
         user.save(update_fields=['is_active'])
-        send_registration_link(user, f"http://{self.request.get_host()}")
+        send_registration_link(user, f"{self.request.scheme}://{self.request.get_host()}")
         return self.render_to_response(self.get_context_data(form=form, success=True))
 
 
@@ -155,7 +155,7 @@ class RegisterCreateView(LoginNotRequiredMixin, CreateView):
         user.is_active = False
         user.role = Roles.CANDIDATE
         user.save()
-        send_registration_link(user, f"http://{self.request.get_host()}")
+        send_registration_link(user, f"{self.request.scheme}://{self.request.get_host()}")
         return self.render_to_response(self.get_context_data(form=form, success=True))
 
 

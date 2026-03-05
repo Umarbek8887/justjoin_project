@@ -15,6 +15,7 @@
 .idea/**/gradle.xml
 .idea/**/libraries
 cmake-build-*/
+
 .idea
 .idea/**/mongoSettings.xml
 apps/migrations

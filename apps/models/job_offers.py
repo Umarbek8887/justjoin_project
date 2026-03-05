@@ -86,6 +86,8 @@ class JobOffer(Model):
 
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
         self.name = self.name.title()
+        if not self.pk:
+            super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
         self.slug = slugify(
             f"{self.company.slug}-{self.name}-{self.company.location_name}-{self.category.name}-{self.pk}")
         super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
