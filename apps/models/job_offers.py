@@ -10,7 +10,7 @@ from django_ckeditor_5.fields import CKEditor5Field
 
 class WorkingMode(TextChoices):
     REMOTE = "remote", "Remote"
-    HYBRID = "hybrid", "hybrid"
+    HYBRID = "hybrid", "Hybrid"
     OFFICE = "office", "Office"
 
 
@@ -108,8 +108,10 @@ class JobOffer(Model):
 
     @property
     def left_days(self) -> int:
-        delta = self.end_time - self.published_at
+        delta = self.end_time - now()
         return delta.days
+
+
 
 
 class JobLanguage(Model):
@@ -165,3 +167,7 @@ class Salary(Model):
     @property
     def currency_iso(self):
         return self.currency.iso
+
+    @property
+    def even(self):
+        return self.pk % 2 == 0

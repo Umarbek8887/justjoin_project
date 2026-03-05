@@ -21,10 +21,8 @@
             <span class="brand-sub">#1 Job Board for tech industry in Europe</span>
         </div>
         <ul class="nav-links">
-            <li><a href="#">Job offers</a></li>
-            <li><a href="#">Salary calculator</a></li>
+            <li><a href="{% url 'main_page' %}">Job offers</a></li>
             <li><a href="#">Company Profiles</a></li>
-            <li><a href="#">Geek</a></li>
         </ul>
         <div class="nav-actions">
             <button class="btn-post">Post a Job</button>
@@ -61,8 +59,8 @@
                             </span>
                             <span>Recruiter zone</span>
                         </div>
-                        <a href="#" class="dropdown-item">Sign in to Employer's panel</a>
-                        <a href="#" class="dropdown-item">Create an account at Employer Panel</a>
+                        <a href="{% url 'employer_login_page' %}" class="dropdown-item">Sign in to Employer's panel</a>
+                        <a href="{% url 'employer_register_page' %}" class="dropdown-item">Create an account at Employer Panel</a>
                     </div>
 
                 </div>

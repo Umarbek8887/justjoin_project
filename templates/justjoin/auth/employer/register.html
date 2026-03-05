@@ -1,0 +1,97 @@
+{% extends 'justjoin/auth/employer/auth-base.html' %}
+{% block title %}
+<title>JustJoin.it – Create Account</title>
+
+{% endblock %}
+{% block card %}
+<div class="card">
+    <div class="tabs">
+        <button class="tab active" onclick="location.href='create-account.html'">Create account</button>
+        <button class="tab" onclick="location.href='{% url 'employer_login_page' %}'">Sign in</button>
+    </div>
+
+    <div class="form-panel">
+        {% if success %}
+        <div class="success-msg">
+            ✅ Account created! Please check your email to activate your account.
+        </div>
+        {% else %}
+        {% for error in form.non_field_errors %}
+        <div class="form-error">{{ error }}</div>
+        {% endfor %}
+
+        <form method="POST" action="{% url 'employer_register_page' %}">
+            {% csrf_token %}
+
+            <div class="form-group full">
+                <label>Name and surname <span class="req">*</span></label>
+                <input type="text" name="full_name" value="{{ form.full_name.value|default:'' }}"
+                    placeholder="Name and surname" />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Country <span class="req">*</span></label>
+                    <input type="text" name="country" value="{{ form.country.value|default:'' }}"
+                        placeholder="e.g. Uzbekistan" />
+                </div>
+
+                <div class="form-group">
+                    <label>Work phone number <span class="req">*</span></label>
+                    <div class="phone-input">
+                        <input type="tel" name="phone_number" value="{{ form.phone_number.value|default:'' }}"
+                            placeholder="+998 90 000 00 00" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full">
+                    <label>Work e-mail address <span class="req">*</span></label>
+                    <input type="email" name="email" value="{{ form.email.value|default:'' }}"
+                        placeholder="forexample@mail.com" />
+                </div>
+            </div>
+
+            <div class="form-group full">
+                <label>Password <span class="req">*</span></label>
+                <div class="pass-wrap">
+                    <input type="password" name="password" id="pass1"
+                        placeholder="Min 8 characters, including 1 number, 1 lowercase letter, 1 uppercase letter..." />
+                    <button type="button" class="eye-btn" onclick="togglePass('pass1')">👁</button>
+                </div>
+
+                <small>Make sure it's at least 8 characters, 1 number, 1 lowercase letter, 1 uppercase letter, and 1
+                    special character.</small>
+            </div>
+
+            <div class="form-group full">
+                <label>Repeat password <span class="req">*</span></label>
+                <div class="pass-wrap">
+                    <input type="password" name="confirm_password" id="pass2" placeholder="Need to be same as above" />
+                    <button type="button" class="eye-btn" onclick="togglePass('pass2')">👁</button>
+                </div>
+
+            </div>
+
+            <label class="checkbox-label">
+                <input type="checkbox" />
+                <span>I agree to receive commercial and marketing information from Just Join IT sp. z o.o. and entities
+                    cooperating with Just Join IT at the provided e-mail address or telephone number.
+                    <a href="#">More</a>
+                </span>
+            </label>
+
+            <small class="terms">By signing up, you confirm that you've read and agree to the site's
+                <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.
+            </small>
+
+            <button type="submit" class="btn-primary">Sign up</button>
+            <p class="alt-link">Do you have an account?
+                <a href="{% url 'employer_login_page' %}">Sign in to Employer Panel</a>
+            </p>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -17,8 +17,8 @@ class CompanyType(TextChoices):
 class Company(Model):
     name = CharField(max_length=255)
     description = CKEditor5Field(blank=True)
-    banner = ImageField(upload_to='media/company/banner/%Y/%m/%d')
-    image = ImageField(upload_to='media/company/avatar/%Y/%m/%d')
+    banner = ImageField(upload_to='company/banner/%Y/%m/%d')
+    image = ImageField(upload_to='company/avatar/%Y/%m/%d')
     slug = SlugField(max_length=255, blank=True, unique=True)
     company_type = CharField(choices=CompanyType.choices, max_length=64, default=CompanyType.OTHER)
     industry = CharField(max_length=64, blank=True)

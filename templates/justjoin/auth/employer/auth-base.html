@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    {% block title %}
+
+    {% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assests/css/emp.css' %}"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="brand">
+        <span class="brand-name">justjoin.it</span>
+        <span class="brand-tag">#1 Job Board for tech industry in Europe</span>
+    </div>
+    <div class="nav-links">
+        <a href="{% url 'main_page' %}">Job offers</a>
+        <a href="#">Company Profiles</a>
+        <div class="signin-dropdown-wrap" id="signinWrap">
+                <button class="btn-signin-nav" id="signinToggle">Sign in</button>
+                <div class="signin-dropdown" id="signinDropdown">
+
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="8" r="4"/>
+                                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                                </svg>
+                            </span>
+                            <span>Candidate zone</span>
+                        </div>
+                        <a href="{% url 'login_page' %}" class="dropdown-item">Sign in to Candidate's profile</a>
+                        <a href="{% url 'register_page' %}" class="dropdown-item">Create an account at Candidate profile</a>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="9" cy="7" r="3"/>
+                                    <path d="M3 20c0-3.3 2.7-6 6-6"/>
+                                    <circle cx="17" cy="11" r="2"/>
+                                    <path d="M13 20c0-2.2 1.8-4 4-4s4 1.8 4 4"/>
+                                </svg>
+                            </span>
+                            <span>Recruiter zone</span>
+                        </div>
+                        <a href="{% url 'employer_login_page' %}" class="dropdown-item">Sign in to Employer's panel</a>
+                        <a href="{% url 'employer_register_page' %}" class="dropdown-item">Create an account at Employer Panel</a>
+                    </div>
+
+                </div>
+            </div>
+        <span class="menu-icon">☰</span>
+    </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-layout">
+    <!-- LEFT HERO -->
+    <div class="hero">
+        <h1>Set up your free Employer Panel<br>and start recruiting!</h1>
+        <ul class="features">
+            <li>
+                <span class="icon">◆</span>
+                <div>
+                    <strong>Proven job ad format</strong>
+                    <p>Create job ads using our well-tested template.</p>
+                </div>
+            </li>
+            <li>
+                <span class="icon">✏️</span>
+                <div>
+                    <strong>Easy job ad management</strong>
+                    <p>Add, edit your job ads, and review incoming candidate applications.</p>
+                </div>
+            </li>
+            <li>
+                <span class="icon">✦</span>
+                <div>
+                    <strong>Employer Profile</strong>
+                    <p>Showcase your company's unique identity and build a strong employer brand.</p>
+                </div>
+            </li>
+            <li>
+                <span class="icon">💬</span>
+                <div>
+                    <strong>Matchmaking Beta</strong>
+                    <p>Chat exclusively with pre-screened candidates matched to your job ads.</p>
+                </div>
+            </li>
+        </ul>
+        <div class="partners">
+            <p>Join the companies that recruit with us</p>
+            <div class="logos">
+                <span>asana</span>
+                <span>allegro</span>
+                <span>BAYER</span>
+                <span>accenture</span>
+                <span>UNIQA</span>
+                <span>ORLEN</span>
+                <span>orange</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT CARD -->
+    {% block card %}
+
+    {% endblock %}
+</main>
+
+<div class="blob blob-green"></div>
+<div class="blob blob-orange"></div>
+<div class="blob blob-purple"></div>
+
+<script src="{% static 'assests/js/emp.js' %}"></script>
+</body>
+</html>

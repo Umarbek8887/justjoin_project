@@ -3,45 +3,45 @@
     "model": "apps.category",
     "pk": 1,
     "fields": {
-      "name": "AI/ML",
-      "slug": "ai-ml",
-      "icon": "fa-solid fa-microchip"
+      "name": "Testing",
+      "slug": "testing",
+      "svg_path": "category/svg/testing-flasks-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 2,
     "fields": {
-      "name": "JavaScript",
-      "slug": "javascript",
-      "icon": "fa-brands fa-js"
+      "name": "Pm",
+      "slug": "pm",
+      "svg_path": "category/svg/manager-businessman-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 3,
     "fields": {
-      "name": "HTML",
-      "slug": "html",
-      "icon": "fa-brands fa-html5"
+      "name": "UX/UI",
+      "slug": "ux-ui",
+      "svg_path": "category/svg/figma-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 4,
     "fields": {
-      "name": "PHP",
-      "slug": "php",
-      "icon": "fa-brands fa-php"
+      "name": "JavaScript",
+      "slug": "java-script",
+      "svg_path": "category/svg/js-official-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 5,
     "fields": {
-      "name": "Ruby",
-      "slug": "ruby",
-      "icon": "fa-solid fa-gem"
+      "name": "AI/ML",
+      "slug": "ai-ml",
+      "svg_path": "category/svg/machine-learning-03-svgrepo-com.svg"
     }
   },
   {
@@ -50,268 +50,169 @@
     "fields": {
       "name": "Python",
       "slug": "python",
-      "icon": "fa-brands fa-python"
+      "svg_path": "category/svg/python-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 7,
     "fields": {
-      "name": "Java",
-      "slug": "java",
-      "icon": "fa-brands fa-java"
+      "name": "Go",
+      "slug": "go",
+      "svg_path": "category/svg/go-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 8,
     "fields": {
-      "name": "Net",
-      "slug": "net",
-      "icon": "fa-solid fa-code"
+      "name": "Scala",
+      "slug": "scala",
+      "svg_path": "category/svg/scala-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 9,
     "fields": {
-      "name": "Scala",
-      "slug": "scala",
-      "icon": "fa-solid fa-layer-group"
+      "name": "Security",
+      "slug": "security",
+      "svg_path": "category/svg/security-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 10,
     "fields": {
-      "name": "C",
-      "slug": "c",
-      "icon": "fa-solid fa-copyright"
+      "name": "Net",
+      "slug": "net",
+      "svg_path": "category/svg/dotnet-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 11,
     "fields": {
-      "name": "Mobile",
-      "slug": "mobile",
-      "icon": "fa-solid fa-mobile-screen-button"
+      "name": "Ruby",
+      "slug": "ruby",
+      "svg_path": "category/svg/ruby-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 12,
     "fields": {
-      "name": "Testing",
-      "slug": "testing",
-      "icon": "fa-solid fa-magnifying-glass"
+      "name": "Mobile",
+      "slug": "mobile",
+      "svg_path": "category/svg/mobile-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 13,
     "fields": {
-      "name": "DevOps",
-      "slug": "devops",
-      "icon": "fa-solid fa-infinity"
+      "name": "Data",
+      "slug": "data",
+      "svg_path": "category/svg/database-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 14,
     "fields": {
-      "name": "Admin",
-      "slug": "admin",
-      "icon": "fa-solid fa-gears"
+      "name": "PHP",
+      "slug": "php",
+      "svg_path": "category/svg/php-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 15,
     "fields": {
-      "name": "UX/UI",
-      "slug": "ux-ui",
-      "icon": "fa-solid fa-pen-nib"
+      "name": "Java",
+      "slug": "java",
+      "svg_path": "category/svg/java-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 16,
     "fields": {
-      "name": "PM",
-      "slug": "pm",
-      "icon": "fa-solid fa-user-tie"
+      "name": "Analytic",
+      "slug": "analytic",
+      "svg_path": "category/svg/graphics-graph-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 17,
     "fields": {
-      "name": "Game",
-      "slug": "game",
-      "icon": "fa-solid fa-gamepad"
+      "name": "Support",
+      "slug": "support",
+      "svg_path": "category/svg/help-information-question-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 18,
     "fields": {
-      "name": "Analytic",
-      "slug": "analytic",
-      "icon": "fa-solid fa-chart-line"
+      "name": "Architecture",
+      "slug": "architecture",
+      "svg_path": "category/svg/cube-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 19,
     "fields": {
-      "name": "Security",
-      "slug": "security",
-      "icon": "fa-solid fa-shield-halved"
+      "name": "Admin",
+      "slug": "admin",
+      "svg_path": "category/svg/person-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 20,
     "fields": {
-      "name": "Data",
-      "slug": "data",
-      "icon": "fa-solid fa-database"
+      "name": "C",
+      "slug": "c",
+      "svg_path": "category/svg/csharp-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 21,
     "fields": {
-      "name": "Go",
-      "slug": "go",
-      "icon": "fa-solid fa-rocket"
+      "name": "Game",
+      "slug": "game",
+      "svg_path": "category/svg/game-console-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 22,
     "fields": {
-      "name": "Support",
-      "slug": "support",
-      "icon": "fa-solid fa-headset"
+      "name": "DevOps",
+      "slug": "devops",
+      "svg_path": "category/svg/dev-ops-solid-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 23,
     "fields": {
-      "name": "ERP",
-      "slug": "erp",
-      "icon": "fa-solid fa-diagram-project"
+      "name": "HTML",
+      "slug": "html",
+      "svg_path": "category/svg/html-5-svgrepo-com.svg"
     }
   },
   {
     "model": "apps.category",
     "pk": 24,
     "fields": {
-      "name": "Architecture",
-      "slug": "architecture",
-      "icon": "fa-solid fa-cubes"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 35,
-    "fields": {
       "name": "Other",
       "slug": "other",
-      "icon": "fa-solid fa-laptop-code"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 26,
-    "fields": {
-      "name": "Rust",
-      "slug": "rust",
-      "icon": "fa-solid fa-gear"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 27,
-    "fields": {
-      "name": "Blockchain",
-      "slug": "blockchain",
-      "icon": "fa-solid fa-link"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 28,
-    "fields": {
-      "name": "QA Automation",
-      "slug": "qa-automation",
-      "icon": "fa-solid fa-robot"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 29,
-    "fields": {
-      "name": "Frontend",
-      "slug": "frontend",
-      "icon": "fa-solid fa-window-maximize"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 30,
-    "fields": {
-      "name": "Backend",
-      "slug": "backend",
-      "icon": "fa-solid fa-server"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 31,
-    "fields": {
-      "name": "Fullstack",
-      "slug": "fullstack",
-      "icon": "fa-solid fa-code-merge"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 32,
-    "fields": {
-      "name": "Cloud",
-      "slug": "cloud",
-      "icon": "fa-solid fa-cloud"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 33,
-    "fields": {
-      "name": "iOS",
-      "slug": "ios",
-      "icon": "fa-brands fa-apple"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 34,
-    "fields": {
-      "name": "Android",
-      "slug": "android",
-      "icon": "fa-brands fa-android"
-    }
-  },
-  {
-    "model": "apps.category",
-    "pk": 25,
-    "fields": {
-      "name": "Cybersecurity",
-      "slug": "cybersecurity",
-      "icon": "fa-solid fa-user-secret"
+      "svg_path": "category/svg/right-arrow-next-svgrepo-com.svg"
     }
   }
 ]

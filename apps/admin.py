@@ -1,8 +1,6 @@
 from django.contrib import admin
-from apps.models import CandidateUser
 
-
-
+from apps.models import Category, EmployerUser, User
 
 
 # @admin.register(CandidateUser)
@@ -12,3 +10,20 @@ from apps.models import CandidateUser
 #     search_fields = ('email', 'location')
 #     filter_horizontal = ('skills',)
 
+
+@admin.register(Category)
+class CategoryModelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'svg')
+    search_fields = ['name']
+
+
+@admin.register(User)
+class UserModelAdmin(admin.ModelAdmin):
+    list_display = ('email', 'role', 'first_name', 'last_name')
+    search_fields = ['email']
+
+
+@admin.register(EmployerUser)
+class EmployerUserModelAdmin(admin.ModelAdmin):
+    list_display = ('phone_number', 'country')
+    search_fields = ['phone_number']

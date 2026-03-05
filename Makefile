@@ -3,4 +3,4 @@ mig:
 	./manage.py migrate
 
 loaddata:
-	./manage.py loaddata currencies languages categories
+	./manage.py loaddata currencies languages categories techstacks

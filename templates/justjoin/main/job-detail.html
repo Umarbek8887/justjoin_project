@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ job.name }} - {{ job.company.name }} | justjoin.it</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'assests/css/detail-test.css' %}"/>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="brand">
+        <div class="brand-name">justjoin.it</div>
+        <div class="brand-sub">#1 Job Board for tech industry in Europe</div>
+    </div>
+    <div class="search-bar">
+        <div class="search-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" placeholder="Search: Job title, company, keyword"/>
+        </div>
+        <div class="search-sep"></div>
+        <div class="search-right">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <input type="text" placeholder="Location"/>
+        </div>
+        <button class="search-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+        </button>
+    </div>
+    <div class="nav-right">
+        {% if not user.is_authenticated %}
+            <button class="btn-post">Post a Job</button>
+            <div class="signin-dropdown-wrap" id="signinWrap">
+                <button class="btn-signin-nav" id="signinToggle">Sign in</button>
+                <div class="signin-dropdown" id="signinDropdown">
+
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="8" r="4"/>
+                                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                                </svg>
+                            </span>
+                            <span>Candidate zone</span>
+                        </div>
+                        <a href="{% url 'login_page' %}" class="dropdown-item">Sign in to Candidate's profile</a>
+                        <a href="{% url 'register_page' %}" class="dropdown-item">Create an account at Candidate
+                            profile</a>
+                    </div>
+
+                    <div class="dropdown-divider"></div>
+
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="9" cy="7" r="3"/>
+                                    <path d="M3 20c0-3.3 2.7-6 6-6"/>
+                                    <circle cx="17" cy="11" r="2"/>
+                                    <path d="M13 20c0-2.2 1.8-4 4-4s4 1.8 4 4"/>
+                                </svg>
+                            </span>
+                            <span>Recruiter zone</span>
+                        </div>
+                        <a href="{% url 'employer_login_page' %}" class="dropdown-item">Sign in to Employer's panel</a>
+                        <a href="{% url 'employer_register_page' %}" class="dropdown-item">Create an account at Employer
+                            Panel</a>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+        <button class="icon-btn" id="themeToggle">☀</button>
+        <button class="icon-btn">☰</button>
+    </div>
+</nav>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+    <!-- LEFT BAR -->
+    <div class="left-bar">
+        <button class="lb-btn" title="Grid">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+        </button>
+        <a href="{% url 'main_page' %}"><button class="lb-btn active" title="Jobs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+            </svg>
+        </button></a>
+        <button class="lb-btn" title="Calendar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+        </button>
+        {% if user.is_authenticated and user.is_candidate %}
+            <button class="lb-btn" title="Bookmark">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </button>
+            <button class="lb-btn" title="Clock">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </button>
+        {% endif %}
+        <div class="lb-spacer"></div>
+
+        {% if user.is_authenticated %}
+            <div class="lb-spacer"></div>
+
+            <a href="{% url 'logout_page' %}?next={{ request.path }}">
+                <button class="lb-btn" title="Logout">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </a>
+            {% if user.is_candidate %}
+                <a href="{% url 'candidate_profile' %}">
+                    <button class="lb-avatar" title="Profile">
+                        <div class="avatar" id="display-avatar">
+                            {% if profile.image %}
+                                <img id="avatar-img" src="{{ profile.image.url }}" alt="Avatar"
+                                     style="width:65%;height:65%;object-fit:cover;border-radius:50%;"/>
+                            {% else %}
+                                <span id="avatar-initials">{{ request.user.first_name|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}</span>
+                            {% endif %}
+                        </div>
+                    </button>
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main-content">
+
+        <!-- JOB DETAIL -->
+        <div class="job-detail">
+
+            <!-- HERO BAND -->
+            <div class="jd-hero">
+
+                <!-- Breadcrumb -->
+                <div class="breadcrumb">
+                    <button class="bc-arrow">&#8249;</button>
+                    <a href="/">All offers</a>
+                    <span class="bc-sep">&#8250;</span>
+                    <a href="#">{{ job.company.location_name }}</a>
+                    <span class="bc-sep">&#8250;</span>
+                    <a href="#">{{ job.category.name }}</a>
+                    <span class="bc-sep">&#8250;</span>
+                    <span class="bc-current">{{ job.name }}</span>
+                </div>
+
+                <!-- Header -->
+                <div class="jd-header">
+                    <div class="jd-logo">
+                        {% if job.company.image %}
+                            <img src="{{ job.company.image.url }}" alt="{{ job.company.name }}"/>
+                        {% else %}
+                            <img src="https://ui-avatars.com/api/?name={{ job.company.name|urlencode }}&background=1a0a2e&color=fff&size=72&bold=true&font-size=0.35"
+                                 alt="{{ job.company.name }}"/>
+                        {% endif %}
+                    </div>
+                    <div class="jd-title-wrap">
+                        <div class="jd-title">{{ job.name }}</div>
+                        <div class="jd-company-loc">
+                                <span>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                        <circle cx="12" cy="10" r="3"/>
+                                    </svg>
+                                    {{ job.company.location_name }}
+                                </span>
+                            <span class="sep">&mdash;</span>
+                            <span>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2">
+                                        <rect x="3" y="3" width="7" height="7"/>
+                                        <rect x="14" y="3" width="7" height="7"/>
+                                        <rect x="14" y="14" width="7" height="7"/>
+                                        <rect x="3" y="14" width="7" height="7"/>
+                                    </svg>
+                                    {{ job.company.name }}
+                                </span>
+                        </div>
+                    </div>
+                    <div class="arch-badge">
+                        <img src="{{ job.category.svg.url }}" class="category-svg" alt="{{ category.name }}">
+                        {{ job.category.name }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- PILLS STRIP -->
+            <div class="jd-pills-wrap">
+                <div class="jd-pills">
+                    <div class="pill">
+                        <div class="pill-ico">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--violet)"
+                                 stroke-width="2">
+                                <path d="M21 19C21 19.552 20.552 20 20 20H17V8H20C20.552 8 21 8.449 21 9V19ZM3 19V9C3 8.449 3.449 8 4 8H7V20H4C3.449 20 3 19.552 3 19ZM9 20H15V8H9V20ZM9 5C9 4.449 9.449 4 10 4H14C14.552 4 15 4.449 15 5V6H9V5ZM20 6H17V5C17 3.346 15.654 2 14 2H10C8.346 2 7 3.346 7 5V6H4C2.346 6 1 7.346 1 9V19C1 20.654 2.346 22 4 22H20C21.654 22 23 20.654 23 19V9C23 7.346 21.654 6 20 6Z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="pill-text">{{ job.get_working_type_display }}</div>
+                        </div>
+                    </div>
+                    <div class="pill">
+                        <div class="pill-ico">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)"
+                                 stroke-width="2">
+                                <path d="M6 22.625C5.16667 22.625 4.45833 22.3333 3.875 21.75C3.29167 21.1667 3 20.4583 3 19.625V18.625C3 18.075 3.19583 17.6042 3.5875 17.2125C3.97917 16.8208 4.45 16.625 5 16.625H6V4.625C6 4.075 6.19583 3.60417 6.5875 3.2125C6.97917 2.82083 7.45 2.625 8 2.625H19C19.55 2.625 20.0208 2.82083 20.4125 3.2125C20.8042 3.60417 21 4.075 21 4.625V19.625C21 20.4583 20.7083 21.1667 20.125 21.75C19.5417 22.3333 18.8333 22.625 18 22.625H6ZM18 20.625C18.2833 20.625 18.5208 20.5292 18.7125 20.3375C18.9042 20.1458 19 19.9083 19 19.625V4.625H8V16.625H15C15.55 16.625 16.0208 16.8208 16.4125 17.2125C16.8042 17.6042 17 18.075 17 18.625V19.625C17 19.9083 17.0958 20.1458 17.2875 20.3375C17.4792 20.5292 17.7167 20.625 18 20.625ZM10 9.625C9.71667 9.625 9.47917 9.52917 9.2875 9.3375C9.09583 9.14583 9 8.90833 9 8.625C9 8.34167 9.09583 8.10417 9.2875 7.9125C9.47917 7.72083 9.71667 7.625 10 7.625H17C17.2833 7.625 17.5208 7.72083 17.7125 7.9125C17.9042 8.10417 18 8.34167 18 8.625C18 8.90833 17.9042 9.14583 17.7125 9.3375C17.5208 9.52917 17.2833 9.625 17 9.625H10ZM10 12.625C9.71667 12.625 9.47917 12.5292 9.2875 12.3375C9.09583 12.1458 9 11.9083 9 11.625C9 11.3417 9.09583 11.1042 9.2875 10.9125C9.47917 10.7208 9.71667 10.625 10 10.625H17C17.2833 10.625 17.5208 10.7208 17.7125 10.9125C17.9042 11.1042 18 11.3417 18 11.625C18 11.9083 17.9042 12.1458 17.7125 12.3375C17.5208 12.5292 17.2833 12.625 17 12.625H10ZM6 20.625H15V18.625H5V19.625C5 19.9083 5.09583 20.1458 5.2875 20.3375C5.47917 20.5292 5.71667 20.625 6 20.625ZM6 20.625H5H15H6Z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="pill-text">{% if job.contract_type == 'specific-task contract' %}
+                                Specific-task
+                            {% else %}
+                                {{ job.get_contract_type_display }}
+                            {% endif %}</div>
+                        </div>
+                    </div>
+                    <div class="pill">
+                        <div class="pill-ico">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)"
+                                 stroke-width="2">
+                                <path d="M12 3 1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9zm6.82 6L12 12.72 5.18 9 12 5.28zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="pill-text">{{ job.get_required_experience_display }}</div>
+                        </div>
+                    </div>
+                    <div class="pill">
+                        <div class="pill-ico">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--pink)"
+                                 stroke-width="2">
+                                <path d="M16.065 24.2315C16.065 24.9782 16.7533 25.5498 17.4766 25.3865C18.7833 25.0832 20.02 24.5698 21.1166 23.8698C21.735 23.4732 21.8283 22.5865 21.3033 22.0615C20.93 21.6882 20.335 21.5948 19.8916 21.8748C18.9933 22.4465 18.0016 22.8665 16.94 23.0998C16.415 23.2165 16.065 23.6948 16.065 24.2315Z"></path>
+                                <path d="M5.57662 13.9998C5.57662 9.57817 8.66829 5.86816 12.81 4.9115C13.3233 4.79483 13.685 4.3165 13.685 3.7915C13.685 3.04483 12.985 2.47316 12.2616 2.64816C7.09329 3.83816 3.24329 8.46983 3.24329 13.9998C3.24329 19.5298 7.09329 24.1615 12.2616 25.3632C12.985 25.5382 13.685 24.9665 13.685 24.2198C13.685 23.6832 13.3233 23.2165 12.81 23.0998C8.66829 22.1315 5.57662 18.4215 5.57662 13.9998Z"></path>
+                                <path d="M25.13 12.8334C25.8766 12.8334 26.4483 12.1451 26.285 11.4218C25.9816 10.1151 25.4683 8.8901 24.7683 7.78176C24.3716 7.15176 23.485 7.0701 22.96 7.5951C22.5866 7.96843 22.4933 8.56343 22.785 9.00676C23.3566 9.89343 23.7766 10.8851 24.01 11.9584C24.115 12.4834 24.5933 12.8334 25.13 12.8334Z"></path>
+                                <path d="M21.1166 4.14177C20.0083 3.44177 18.7833 2.92844 17.4766 2.62511C16.7533 2.46177 16.065 3.03344 16.065 3.76844C16.065 4.29344 16.415 4.78344 16.9283 4.88844C17.99 5.12177 18.9933 5.55344 19.88 6.11344C20.335 6.39344 20.9183 6.31177 21.2916 5.92677C21.8283 5.41344 21.7466 4.53844 21.1166 4.14177Z"></path>
+                                <path d="M22.9483 20.405C23.4733 20.93 24.36 20.8483 24.7566 20.2183C25.4566 19.1216 25.97 17.885 26.2733 16.5783C26.4366 15.855 25.865 15.1666 25.13 15.1666C24.605 15.1666 24.115 15.5166 24.01 16.03C23.7766 17.0916 23.345 18.095 22.785 18.9816C22.4816 19.4366 22.575 20.0316 22.9483 20.405Z"></path>
+                                <path d="M19.5416 12.95C19.5416 10.045 17.325 8.16663 14.875 8.16663C12.425 8.16663 10.2083 10.045 10.2083 12.95C10.2083 14.7116 11.4916 16.7766 14.07 19.1333C14.525 19.5533 15.2133 19.5533 15.68 19.1333C18.2583 16.765 19.5416 14.7116 19.5416 12.95ZM14.875 14C14.1866 14 13.6266 13.44 13.6266 12.7516C13.6266 12.0633 14.1866 11.5033 14.875 11.5033C15.5633 11.5033 16.1233 12.0633 16.1233 12.7516C16.1233 13.44 15.5633 14 14.875 14Z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="pill-text">{{ job.get_working_mode_display }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="jd-content">
+
+                <!-- Tech Stack -->
+                <div class="section-title">Tech Stack</div>
+                <div class="tech-grid">
+
+                    {% for jl in job.job_languages.all %}
+                        {% with level=jl.level %}
+                            <div class="tech-item language-item">
+                                <div>
+                                    <div class="tech-name">{{ jl.language.name }}</div>
+                                    <div class="tech-level">{{ jl.get_level_display }}</div>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+
+                    {% for jts in job.job_tech_stack.all %}
+                        {% with level=jts.level %}
+                            <div class="tech-item stack-item">
+                                <div>
+                                    <div class="tech-name">{{ jts.tech_stack.name }}</div>
+                                    <div class="tech-level">{{ jts.get_level_display }}</div>
+                                    <div class="tech-dots">
+                                        {% if level == "nice to have" %}
+                                            <div class="dot filled"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        {% elif level == "junior" %}
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        {% elif level == "regular" %}
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot"></div>
+                                            <div class="dot"></div>
+                                        {% elif level == "advanced" %}
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot"></div>
+                                        {% elif level == "master" %}
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                            <div class="dot filled"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+
+
+                </div>
+
+                <!-- Job Description -->
+                <div class="section-title">Job Description</div>
+                <div class="jd-desc">
+                    {{ job.description|safe }}
+                </div>
+
+
+                {#                {% if job.company.lat and job.company.long %}#}
+                {#                    <div class="office-section">#}
+                {#                        <div class="section-title">Office Location</div>#}
+                {#                        <div class="office-map"#}
+                {#                             style="height: 300px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">#}
+                {#                            <iframe#}
+                {#                                    id="osm-map"#}
+                {#                                    width="100%"#}
+                {#                                    height="100%"#}
+                {#                                    frameborder="0"#}
+                {#                                    scrolling="no"#}
+                {#                                    marginheight="0"#}
+                {#                                    marginwidth="0"#}
+                {#                                    src=""#}
+                {#                                    loading="lazy">#}
+                {#                            </iframe>#}
+                {#                        </div>#}
+                {#                        <div class="published-date"#}
+                {#                             style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">#}
+                {#                            Published: <strong>{{ job.published_at|date:"d.m.Y" }}</strong>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {##}
+                {#                    <script>#}
+                {#                        (function () {#}
+                {#                            const lat = parseFloat("{{ job.company.lat }}".replace(',', '.'));#}
+                {#                            const lon = parseFloat("{{ job.company.long }}".replace(',', '.'));#}
+                {#                            if (lat && lon) {#}
+                {#                                const offset = 0.005;#}
+                {#                                const minLon = lon - offset;#}
+                {#                                const minLat = lat - offset;#}
+                {#                                const maxLon = lon + offset;#}
+                {#                                const maxLat = lat + offset;#}
+                {#                                const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${minLon}%2C${minLat}%2C${maxLon}%2C${maxLat}&layer=mapnik&marker=${lat}%2C${lon}`;#}
+                {#                                document.getElementById('osm-map').src = mapUrl;#}
+                {#                            }#}
+                {#                        })();#}
+                {#                    </script>#}
+                {#                {% endif %}#}
+
+
+
+
+
+                {% if job.company.lat and job.company.long %}
+                    <div class="office-section">
+                        <div class="section-title">Office Location</div>
+                        <div class="office-map"
+                             style="height: 300px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">
+                            <iframe
+                                    width="100%"
+                                    height="100%"
+                                    frameborder="0"
+                                    style="border:0;"
+                                    src="https://maps.google.com/maps?q={{ job.company.lat }},{{ job.company.long }}&hl=uz&z=14&output=embed"
+                                    allowfullscreen
+                                    loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="published-date"
+                             style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
+                            Published: <strong>{{ job.published_at|date:"d.m.Y" }}</strong>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+
+
+
+
+                {#                {% if job.company.lat and job.company.long %}#}
+                {#                    <div class="office-section">#}
+                {#                        <div class="section-title">Office Location</div>#}
+                {#                        <div class="office-map"#}
+                {#                             style="height: 350px; width: 100%; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow);">#}
+                {#                            <iframe#}
+                {#                                    src="https://yandex.uz/map-widget/v1/?ll={{ job.company.long|stringformat:'f' }}%2C{{ job.company.lat|stringformat:'f' }}&z=15&l=map&pt={{ job.company.long|stringformat:'f' }}%2C{{ job.company.lat|stringformat:'f' }}%2Cpm2rdm"#}
+                {#                                    width="100%"#}
+                {#                                    height="100%"#}
+                {#                                    frameborder="0"#}
+                {#                                    allowfullscreen="true"#}
+                {#                                    style="position:relative;">#}
+                {#                            </iframe>#}
+                {#                        </div>#}
+                {#                        <div class="published-date"#}
+                {#                             style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">#}
+                {#                            Published: <strong>{{ job.published_at|date:"d.m.Y" }}</strong>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                {% endif %}#}
+
+
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-header">
+                    <div class="summary-title">Summary of the Offer</div>
+                    <button class="summary-save">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Save
+                    </button>
+                </div>
+                <div class="summary-body">
+                    <div class="summary-logo">
+                        {% if job.company.image %}
+                            <img src="{{ job.company.image.url }}" alt="{{ job.company.name }}"/>
+                        {% else %}
+                            <img src="https://ui-avatars.com/api/?name={{ job.company.name|urlencode }}&background=cc2200&color=fff&size=52&bold=true&font-size=0.35"
+                                 alt="{{ job.company.name }}"/>
+                        {% endif %}
+                    </div>
+                    <div class="summary-info">
+                        <div class="summary-job-title">{{ job.name }}</div>
+                        <div class="summary-meta">
+                                <span>
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                        <circle cx="12" cy="10" r="3"/>
+                                    </svg>
+                                    {{ job.company.location_name }}
+                                </span>
+                            <span class="sep">—</span>
+                            <span>{{ job.company.name }}</span>
+                        </div>
+                        <div class="summary-salary">
+                            {% if not job.undisclosed_salary %}
+                                {% for salary in job.salaries.all %}
+                                    <span class="{% if salary.even %}sal-b{% else %}sal-g{% endif %}">
+                                        {{ salary.salary_min|int_space }} – {{ salary.salary_max|int_space }} {{ salary.currency.iso }}
+                                    </span>{{ salary.get_salary_type_display }} – {{ job.get_contract_type_display }}
+                                    &nbsp;&nbsp;
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                <button class="summary-apply-btn">Apply</button>
+                <p class="summary-legal">
+                    By applying, I consent to the processing of my personal data for the purpose of conducting
+                    the
+                    recruitment process.
+                    <a href="#">More</a>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="detail-sidebar">
+
+            <div class="salary-card">
+                <div class="salary-label">Salary</div>
+                {% for salary in job.salaries.all %}
+                    <div class="salary-row">
+                        <div class="salary-amount">
+                            {% if job.undisclosed_salary %}
+                                Undisclosed
+                            {% else %}
+                                {{ salary.salary_min|int_space }} – {{ salary.salary_max|int_space }}
+                                {{ salary.currency.iso }}
+                            {% endif %}
+                        </div>
+                        <div class="salary-type">{{ salary.get_salary_type_display|capfirst }}
+                            · {{ job.get_contract_type_display }}</div>
+                    </div>
+                    {% if not forloop.last %}
+                        <div class="salary-divider"></div>
+                    {% endif %}
+                {% empty %}
+                    <div class="salary-row">
+                        <div class="salary-amount">Undisclosed</div>
+                    </div>
+                {% endfor %}
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <button class="apply-full-btn">Apply</button>
+                <div class="days-left">{{ job.left_days }} day left (until {{ job.end_time|date:"d.m.Y" }})
+                </div>
+                <div class="action-row">
+                    <button class="action-btn">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Save
+                    </button>
+                    <button class="action-btn">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
+                            <circle cx="18" cy="5" r="3"/>
+                            <circle cx="6" cy="12" r="3"/>
+                            <circle cx="18" cy="19" r="3"/>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                        </svg>
+                        Share
+                    </button>
+                </div>
+            </div>
+
+            <div class="section-title similar-title">Check Similar Offers</div>
+
+
+            {#            <div class="similar-card">#}
+            {#                <div class="sim-logo"><img#}
+            {#                        src="https://ui-avatars.com/api/?name=CR&background=e74c3c&color=fff&size=36&bold=true&font-size=0.4"#}
+            {#                        alt="crodu"/></div>#}
+            {#                <div class="sim-info">#}
+            {#                    <div class="sim-title">Senior BackEnd/ DevOp...</div>#}
+            {#                    <div class="sim-salary">28 560 – 33 600 PLN/h</div>#}
+            {#                    <div class="sim-tags"><span class="sim-tag">Kraków</span><span class="sim-tag">Senior</span><span#}
+            {#                            class="sim-tag">B2B</span><span class="sim-tag">Remote</span></div>#}
+            {#                </div>#}
+            {#                <button class="sim-bm">#}
+            {#                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">#}
+            {#                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>#}
+            {#                    </svg>#}
+            {#                </button>#}
+            {#            </div>#}
+            {##}
+            {#            <div class="similar-card">#}
+            {#                <div class="sim-logo"><img#}
+            {#                        src="https://ui-avatars.com/api/?name=CQ&background=374151&color=fff&size=36&bold=true&font-size=0.4"#}
+            {#                        alt="cq"/></div>#}
+            {#                <div class="sim-info">#}
+            {#                    <div class="sim-title">Code Quality Lead</div>#}
+            {#                    <div class="sim-salary">21 000 – 25 200 PLN/mo</div>#}
+            {#                    <div class="sim-tags"><span class="sim-tag">Remote</span><span class="sim-tag">Senior</span><span#}
+            {#                            class="sim-tag">B2B</span></div>#}
+            {#                </div>#}
+            {#                <button class="sim-bm">#}
+            {#                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">#}
+            {#                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>#}
+            {#                    </svg>#}
+            {#                </button>#}
+            {#            </div>#}
+
+        </div>
+    </div>
+
+</div>
+
+<script src="{% static 'assests/js/detail-test.js' %}"></script>
+</body>
+
+</html>

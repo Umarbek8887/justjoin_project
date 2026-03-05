@@ -1,5 +1,5 @@
 from django.db.models import ImageField, PositiveSmallIntegerField, FileField, Model, ForeignKey, CASCADE, Q, \
-    OneToOneField
+    OneToOneField, ManyToManyField, DateTimeField
 from django.db.models.constraints import CheckConstraint
 from django.db.models.enums import TextChoices
 from django.db.models.fields import CharField, TextField
@@ -34,7 +34,7 @@ class CandidateUser(Model):
     linkedin_link = CharField(max_length=255, null=True, blank=True)
     other_link = CharField(max_length=255, null=True, blank=True)
     message_to_employee = TextField(null=True)
-    image = ImageField(upload_to='media/profile/avatar/%Y/%m/%d', null=True)
+    image = ImageField(upload_to='profile/avatar/%Y/%m/%d', null=True)
     current_position = CharField(max_length=128, null=True)
     years_of_exp = PositiveSmallIntegerField(default=0, db_default=0, null=True)
     location = CharField(max_length=128, null=True)
@@ -42,7 +42,7 @@ class CandidateUser(Model):
     job_status = CharField(choices=SituationType.choices, max_length=64, default=SituationType.I_NEED_A_JOB_ASAP, null=True)
     availability_after = CharField(choices=AvailabilityAfter.choices, max_length=20,
                                    default=AvailabilityAfter.RIGHT_AWAY, null=True)
-    cv_file = FileField(upload_to='media/cv/%Y/%m/%d', null=True, blank=True)
+    cv_file = FileField(upload_to='cv/%Y/%m/%d', null=True, blank=True)
 
     class Meta:
         db_table = "apps_candidate_user"
@@ -53,7 +53,6 @@ class CandidateOtherPosition(Model):
     candidate_user = ForeignKey('apps.CandidateUser', CASCADE, related_name='candidate_other_positions')
 
     class Meta:
-        verbose_name = 'Candidate Other Position'
         verbose_name_plural = 'Candidate Other Positions'
         db_table = "apps_candidate_user_other_positions"
 
@@ -83,3 +82,20 @@ class CandidateLanguage(Model):
         db_table = "apps_candidate_user_languages"
 
 
+
+
+class Favorite(Model):
+    job_offer = ForeignKey("JobOffer", on_delete=CASCADE, related_name="favorited_by")
+    candidate = ForeignKey("CandidateUser", on_delete=CASCADE, related_name="favorites")
+    created_at = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("candidate", "job_offer")
+
+class Recents(Model):
+    job_offer = ForeignKey("JobOffer", on_delete=CASCADE, related_name="recently_viewed")
+    candidate = ForeignKey("CandidateUser", on_delete=CASCADE, related_name="recents")
+    created_at = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("candidate", "job_offer")

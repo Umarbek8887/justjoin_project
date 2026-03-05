@@ -29,6 +29,6 @@ def send_registration_link(user, host: str):
         'email': user.email,
         'confirm_link': host + url
     }
-    html_content = render_to_string('justjoin/auth/registration-email.html', context)
+    html_content = render_to_string('justjoin/auth/candidate/registration-email.html', context)
 
     send_email(subject, None, [user.email], html_content)

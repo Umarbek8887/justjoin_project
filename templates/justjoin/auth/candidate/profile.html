@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>JustJoin.it – Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assests/css/profile.css' %}"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="brand">
+        <span class="brand-name">justjoin.it</span>
+        <span class="brand-tag">#1 Job Board for tech industry in Europe</span>
+    </div>
+    <div class="nav-center">
+        <a href="{% url 'main_page' %}">Job offers</a>
+        <a href="#">Company Profiles</a>
+    </div>
+    <div class="nav-right">
+        <button class="icon-btn" id="theme-toggle" title="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+        <button class="icon-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+    </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <nav class="side-nav">
+            <a href="#" class="side-link active">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                Profile
+            </a>
+            <a href="#" class="side-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                Matched for you
+            </a>
+            <a href="#" class="side-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+                Favorite offers
+            </a>
+            <a href="#" class="side-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                Application history
+            </a>
+            <a href="#" class="side-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M17.66 17.66l-1.41-1.41M6.34 17.66l1.41-1.41"/>
+                </svg>
+                Recently viewed
+            </a>
+            <a href="#" class="side-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                </svg>
+                Settings
+            </a>
+            <a href="{% url 'logout_page' %}" class="side-link logout">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                Log out
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <h1 class="page-title">Profile</h1>
+
+        <!-- PERSONAL INFO CARD -->
+        <div class="card" id="personal-card">
+            <div class="card-header">
+                <span class="card-label">PERSONAL INFORMATION</span>
+                <button class="edit-btn" id="open-modal" title="Edit profile">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="profile-row">
+                <div class="avatar" id="display-avatar">
+                    {% if request.user.candidate_profile.image %}
+                        <img id="avatar-img" src="{{ request.user.candidate_profile.image.url }}" alt="Avatar"
+                             style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/>
+                    {% else %}
+                        <span id="avatar-initials">{{ request.user.first_name|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}</span>
+                    {% endif %}
+                </div>
+                <div class="profile-info">
+                    <div class="profile-name" id="display-name">
+                        {% if request.user.first_name or request.user.last_name %}
+                            {{ request.user.first_name }} {{ request.user.last_name }}
+                        {% else %}
+                            Name and Surname
+                        {% endif %}
+                    </div>
+                    {% if request.user.candidate_profile.linkedin_link %}
+                        <a href="{{ request.user.candidate_profile.linkedin_link }}" class="linkedin-link"
+                           id="display-linkedin" target="_blank" rel="noopener">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                            {{ request.user.candidate_profile.linkedin_link }}
+                        </a>
+                    {% else %}
+                        <a href="#" class="linkedin-link" id="display-linkedin">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                            Provide your LinkedIn account
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">Message to recruiter</div>
+                <div class="message-box" id="display-message">
+                    {% if request.user.candidate_profile.message_to_employee %}
+                        {{ request.user.candidate_profile.message_to_employee }}
+                    {% else %}
+                        <span class="placeholder-text">Provide a brief introduction or share links to your LinkedIn and Github. We will import this information into our internal application form.</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">Your resume <span class="info-sub">(Attached document will fill in the application form)</span>
+                </div>
+                <div class="upload-box" id="display-cv">
+                    {% if request.user.candidate_profile.cv %}
+                        <div class="upload-inner">
+                            <span class="upload-plus">📄</span>
+                            <span style="color:var(--accent-green)">{{ request.user.candidate_profile.cv_filename }}</span>
+                        </div>
+                    {% else %}
+                        <div class="upload-inner">
+                            <span class="upload-plus">+</span>
+                            <span>Add document</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- JOB SKILLS CARD (blurred preview) -->
+        <div class="card card-blurred">
+            <div class="card-label">JOB SKILLS</div>
+            <div class="blurred-content">
+                <div class="skill-row"></div>
+                <div class="skill-row short"></div>
+                <div class="skill-row"></div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <button class="modal-close" id="close-modal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <span class="modal-title">Edit</span>
+            <div style="width:18px"></div>
+        </div>
+
+        <div class="modal-body" id="modal-body">
+            <form method="POST" action="{% url 'candidate_profile' %}" enctype="multipart/form-data" id="profile-form">
+                {% csrf_token %}
+
+                <!-- PHOTO -->
+                <div class="modal-section">
+                    <div class="modal-label">Profile's photo</div>
+                    <label class="photo-upload-area" id="photo-label" for="photo-input">
+                        {% if request.user.candidate_profile.image %}
+                            <img id="modal-photo-preview" src="{{ request.user.candidate_profile.image.url }}" alt=""
+                                 style="width:40%;height:100%;object-fit:cover;border-radius:10px;"/>
+                        {% else %}
+                            <img id="modal-photo-preview" src="" alt=""
+                                 style="display:none; width:100%; height:100%; object-fit:cover; border-radius:10px;"/>
+                            <div id="photo-placeholder" class="upload-inner"
+                                 style="flex-direction:column; gap:6px; font-size:0.82rem;">
+                                <span class="upload-plus">+</span>
+                                <span>Add photo</span>
+                            </div>
+                        {% endif %}
+                        <input type="file" name="image" id="photo-input" accept="image/jpeg,image/png"
+                               style="display:none"/>
+                    </label>
+                    <small class="hint">Format: JPEG, PNG. Max size 5 MB.</small>
+                </div>
+
+                <!-- NAME -->
+                <div class="modal-section">
+                    <div class="modal-label">Name</div>
+                    <input type="text" name="first_name" class="modal-input" id="input-name"
+                           placeholder="Your name" value="{{ request.user.first_name|default:'' }}"/>
+                </div>
+
+                <!-- SURNAME -->
+                <div class="modal-section">
+                    <div class="modal-label">Surname</div>
+                    <input type="text" name="last_name" class="modal-input" id="input-surname"
+                           placeholder="Your surname" value="{{ request.user.last_name|default:'' }}"/>
+                </div>
+
+                <!-- MESSAGE -->
+                <div class="modal-section">
+                    <div class="modal-label">Message to the employer</div>
+                    <textarea name="message_to_employee" class="modal-input modal-textarea" id="input-message"
+                              placeholder="Type something about you"
+                              maxlength="1000">{{ request.user.candidate_profile.message_to_employee }}</textarea>
+                    <small class="hint">Maximum number of characters 1000.</small>
+                </div>
+
+                <!-- LINKEDIN -->
+                <div class="modal-section">
+                    <div class="modal-label">LinkedIn Profile</div>
+                    <input type="url" name="linkedin_link" class="modal-input" id="input-linkedin"
+                           placeholder="Paste your LinkedIn profile"
+                           value="{{ request.user.candidate_profile.linkedin_link|default:'' }}"/>
+                </div>
+
+                <!-- GITHUB -->
+                <div class="modal-section">
+                    <div class="modal-label">Github Profile</div>
+                    <input type="url" name="github_link" class="modal-input" id="input-github"
+                           placeholder="Paste your GitHub profile"
+                           value="{{ request.user.candidate_profile.github_link|default:'' }}"/>
+                </div>
+
+                <!-- OTHER LINK -->
+                <div class="modal-section">
+                    <div class="modal-label">Other link</div>
+                    <input type="url" name="other_link" class="modal-input" id="input-other"
+                           placeholder="Paste other link to share"
+                           value="{{ request.user.candidate_profile.other_link|default:'' }}"/>
+                </div>
+
+                <!-- CV UPLOAD -->
+                <div class="modal-section">
+                    <div class="modal-label" style="font-size:1.05rem; font-weight:700; margin-bottom:4px;">Upload
+                        CV
+                    </div>
+                    <small class="hint" style="margin-bottom:12px; display:block;">Your attached document will fill
+                        in
+                        the application form. You can only add one file.</small>
+                    <label class="cv-upload-area" for="cv-input" id="cv-label">
+                        <div class="upload-inner" id="cv-placeholder"
+                             {% if request.user.candidate_profile.cv %}style="display:none"{% endif %}>
+                            <span class="upload-plus">+</span>
+                            <span>Add document</span>
+                        </div>
+                        <div id="cv-filename"
+                             style="font-size:0.85rem; color:var(--accent-green); {% if not request.user.candidate_profile.cv %}display:none;{% endif %}">
+                            {% if request.user.candidate_profile.cv %}📄
+                                {{ request.user.candidate_profile.cv_filename }}{% endif %}
+                        </div>
+                        <input type="file" name="cv_file" id="cv-input" accept=".pdf,.docx,image/jpeg,image/png"
+                               style="display:none"/>
+                    </label>
+                    <small class="hint">Format: PDF, DOCX, JPEG, PNG. Max size 5 MB.</small>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-save" id="btn-save" type="submit" form="profile-form">Save changes</button>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assests/js/profile.js' %}"></script>
+</body>
+</html>

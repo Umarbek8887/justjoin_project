@@ -1,0 +1,352 @@
+[
+  {
+    "model": "apps.techstack",
+    "pk": 1,
+    "fields": {
+      "name": "Python"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 2,
+    "fields": {
+      "name": "Django"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 3,
+    "fields": {
+      "name": "JavaScript"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 4,
+    "fields": {
+      "name": "React"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 5,
+    "fields": {
+      "name": "PostgreSQL"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 6,
+    "fields": {
+      "name": "Docker"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 7,
+    "fields": {
+      "name": "AWS"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 8,
+    "fields": {
+      "name": "TypeScript"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 9,
+    "fields": {
+      "name": "Node.js"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 10,
+    "fields": {
+      "name": "Redis"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 11,
+    "fields": {
+      "name": "Vue.js"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 12,
+    "fields": {
+      "name": "Java"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 13,
+    "fields": {
+      "name": "Spring Boot"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 14,
+    "fields": {
+      "name": "Kotlin"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 15,
+    "fields": {
+      "name": "Swift"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 16,
+    "fields": {
+      "name": "Go (Golang)"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 17,
+    "fields": {
+      "name": "Rust"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 18,
+    "fields": {
+      "name": "Kubernetes"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 19,
+    "fields": {
+      "name": "MySQL"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 20,
+    "fields": {
+      "name": "MongoDB"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 21,
+    "fields": {
+      "name": "Angular"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 22,
+    "fields": {
+      "name": "C#"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 23,
+    "fields": {
+      "name": ".NET Core"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 24,
+    "fields": {
+      "name": "PHP"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 25,
+    "fields": {
+      "name": "Laravel"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 26,
+    "fields": {
+      "name": "Flask"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 27,
+    "fields": {
+      "name": "FastAPI"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 28,
+    "fields": {
+      "name": "Tailwind CSS"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 29,
+    "fields": {
+      "name": "Sass"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 30,
+    "fields": {
+      "name": "GraphQL"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 31,
+    "fields": {
+      "name": "Apollo"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 32,
+    "fields": {
+      "name": "Firebase"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 33,
+    "fields": {
+      "name": "Elasticsearch"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 34,
+    "fields": {
+      "name": "Kafka"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 35,
+    "fields": {
+      "name": "RabbitMQ"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 36,
+    "fields": {
+      "name": "Nginx"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 37,
+    "fields": {
+      "name": "Terraform"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 38,
+    "fields": {
+      "name": "Ansible"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 39,
+    "fields": {
+      "name": "Jenkins"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 40,
+    "fields": {
+      "name": "Git"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 41,
+    "fields": {
+      "name": "GitHub Actions"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 42,
+    "fields": {
+      "name": "Next.js"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 43,
+    "fields": {
+      "name": "Nuxt.js"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 44,
+    "fields": {
+      "name": "Flutter"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 45,
+    "fields": {
+      "name": "React Native"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 46,
+    "fields": {
+      "name": "Azure"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 47,
+    "fields": {
+      "name": "Google Cloud"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 48,
+    "fields": {
+      "name": "Pandas"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 49,
+    "fields": {
+      "name": "TensorFlow"
+    }
+  },
+  {
+    "model": "apps.techstack",
+    "pk": 50,
+    "fields": {
+      "name": "PyTorch"
+    }
+  }
+]

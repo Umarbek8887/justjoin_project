@@ -765,10 +765,6 @@ body {
   display: block;
 }
 
-.dropdown-zone {
-  padding: 0.75rem 1rem;
-}
-
 .dropdown-zone-label {
   display: flex;
   align-items: center;
@@ -884,3 +880,58 @@ body {
   background: var(--border);
   margin: 0 1rem;
 }
+/* SVG konteyneri uchun */
+.svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+/* SVG o'zini o'lchami */
+.svg-container svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Sarlavhani (Thank you...) markazda saqlash */
+.page-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+/* Asosiy konteynerni markazlash */
+.main {
+  display: flex;
+  align-items: center;      /* Vertikal markaz */
+  justify-content: center;   /* Gorizontal markaz */
+  min-height: calc(100vh - 60px);
+  padding: 2rem 1rem;
+  width: 100%;             /* To'liq kenglik */
+}
+
+/* Form o'raydigan blokni markazlash */
+.form-wrapper {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;          /* Tashqi tomondan avto-bo'shliq (markazlash kafolati) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeUp 0.45s ease both;
+}
+
+/* MUHIM: register.html dagi .top klassini o'zgartiramiz */
+.form-wrapper.top {
+  align-self: center;      /* flex-start o'rniga center qiling */
+  padding-bottom: 3rem;
+}
+
+/* login.html dagi .centered klassi */
+.form-wrapper.centered {
+  align-items: center;
+  gap: 1.4rem;
+}
+
+
+
