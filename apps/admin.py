@@ -29,7 +29,7 @@ class EmployerUserModelAdmin(admin.ModelAdmin):
     search_fields = ['phone_number']
 
 
-@admin.register(Company)
-class CompanyModelAdmin(admin.ModelAdmin):
-    list_display = ('name', '')
+# @admin.register(Company)
+# class CompanyModelAdmin(admin.ModelAdmin):
+#     list_display = ('name')
 
