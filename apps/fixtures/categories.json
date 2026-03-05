@@ -5,7 +5,7 @@
     "fields": {
       "name": "Testing",
       "slug": "testing",
-      "svg_path": "category/svg/testing-flasks-svgrepo-com.svg"
+      "svg": "category/svg/testing-flasks-svgrepo-com.svg"
     }
   },
   {
@@ -14,7 +14,7 @@
     "fields": {
       "name": "Pm",
       "slug": "pm",
-      "svg_path": "category/svg/manager-businessman-svgrepo-com.svg"
+      "svg": "category/svg/manager-businessman-svgrepo-com.svg"
     }
   },
   {
@@ -23,7 +23,7 @@
     "fields": {
       "name": "UX/UI",
       "slug": "ux-ui",
-      "svg_path": "category/svg/figma-svgrepo-com.svg"
+      "svg": "category/svg/figma-svgrepo-com.svg"
     }
   },
   {
@@ -32,7 +32,7 @@
     "fields": {
       "name": "JavaScript",
       "slug": "java-script",
-      "svg_path": "category/svg/js-official-svgrepo-com.svg"
+      "svg": "category/svg/js-official-svgrepo-com.svg"
     }
   },
   {
@@ -41,7 +41,7 @@
     "fields": {
       "name": "AI/ML",
       "slug": "ai-ml",
-      "svg_path": "category/svg/machine-learning-03-svgrepo-com.svg"
+      "svg": "category/svg/machine-learning-03-svgrepo-com.svg"
     }
   },
   {
@@ -50,7 +50,7 @@
     "fields": {
       "name": "Python",
       "slug": "python",
-      "svg_path": "category/svg/python-svgrepo-com.svg"
+      "svg": "category/svg/python-svgrepo-com.svg"
     }
   },
   {
@@ -59,7 +59,7 @@
     "fields": {
       "name": "Go",
       "slug": "go",
-      "svg_path": "category/svg/go-svgrepo-com.svg"
+      "svg": "category/svg/go-svgrepo-com.svg"
     }
   },
   {
@@ -68,7 +68,7 @@
     "fields": {
       "name": "Scala",
       "slug": "scala",
-      "svg_path": "category/svg/scala-svgrepo-com.svg"
+      "svg": "category/svg/scala-svgrepo-com.svg"
     }
   },
   {
@@ -77,7 +77,7 @@
     "fields": {
       "name": "Security",
       "slug": "security",
-      "svg_path": "category/svg/security-svgrepo-com.svg"
+      "svg": "category/svg/security-svgrepo-com.svg"
     }
   },
   {
@@ -86,7 +86,7 @@
     "fields": {
       "name": "Net",
       "slug": "net",
-      "svg_path": "category/svg/dotnet-svgrepo-com.svg"
+      "svg": "category/svg/dotnet-svgrepo-com.svg"
     }
   },
   {
@@ -95,7 +95,7 @@
     "fields": {
       "name": "Ruby",
       "slug": "ruby",
-      "svg_path": "category/svg/ruby-svgrepo-com.svg"
+      "svg": "category/svg/ruby-svgrepo-com.svg"
     }
   },
   {
@@ -104,7 +104,7 @@
     "fields": {
       "name": "Mobile",
       "slug": "mobile",
-      "svg_path": "category/svg/mobile-svgrepo-com.svg"
+      "svg": "category/svg/mobile-svgrepo-com.svg"
     }
   },
   {
@@ -113,7 +113,7 @@
     "fields": {
       "name": "Data",
       "slug": "data",
-      "svg_path": "category/svg/database-svgrepo-com.svg"
+      "svg": "category/svg/database-svgrepo-com.svg"
     }
   },
   {
@@ -122,7 +122,7 @@
     "fields": {
       "name": "PHP",
       "slug": "php",
-      "svg_path": "category/svg/php-svgrepo-com.svg"
+      "svg": "category/svg/php-svgrepo-com.svg"
     }
   },
   {
@@ -131,7 +131,7 @@
     "fields": {
       "name": "Java",
       "slug": "java",
-      "svg_path": "category/svg/java-svgrepo-com.svg"
+      "svg": "category/svg/java-svgrepo-com.svg"
     }
   },
   {
@@ -140,7 +140,7 @@
     "fields": {
       "name": "Analytic",
       "slug": "analytic",
-      "svg_path": "category/svg/graphics-graph-svgrepo-com.svg"
+      "svg": "category/svg/graphics-graph-svgrepo-com.svg"
     }
   },
   {
@@ -149,7 +149,7 @@
     "fields": {
       "name": "Support",
       "slug": "support",
-      "svg_path": "category/svg/help-information-question-svgrepo-com.svg"
+      "svg": "category/svg/help-information-question-svgrepo-com.svg"
     }
   },
   {
@@ -158,7 +158,7 @@
     "fields": {
       "name": "Architecture",
       "slug": "architecture",
-      "svg_path": "category/svg/cube-svgrepo-com.svg"
+      "svg": "category/svg/cube-svgrepo-com.svg"
     }
   },
   {
@@ -167,7 +167,7 @@
     "fields": {
       "name": "Admin",
       "slug": "admin",
-      "svg_path": "category/svg/person-svgrepo-com.svg"
+      "svg": "category/svg/person-svgrepo-com.svg"
     }
   },
   {
@@ -176,7 +176,7 @@
     "fields": {
       "name": "C",
       "slug": "c",
-      "svg_path": "category/svg/csharp-svgrepo-com.svg"
+      "svg": "category/svg/csharp-svgrepo-com.svg"
     }
   },
   {
@@ -185,7 +185,7 @@
     "fields": {
       "name": "Game",
       "slug": "game",
-      "svg_path": "category/svg/game-console-svgrepo-com.svg"
+      "svg": "category/svg/game-console-svgrepo-com.svg"
     }
   },
   {
@@ -194,7 +194,7 @@
     "fields": {
       "name": "DevOps",
       "slug": "devops",
-      "svg_path": "category/svg/dev-ops-solid-svgrepo-com.svg"
+      "svg": "category/svg/dev-ops-solid-svgrepo-com.svg"
     }
   },
   {
@@ -203,7 +203,7 @@
     "fields": {
       "name": "HTML",
       "slug": "html",
-      "svg_path": "category/svg/html-5-svgrepo-com.svg"
+      "svg": "category/svg/html-5-svgrepo-com.svg"
     }
   },
   {
@@ -212,7 +212,7 @@
     "fields": {
       "name": "Other",
       "slug": "other",
-      "svg_path": "category/svg/right-arrow-next-svgrepo-com.svg"
+      "svg": "category/svg/right-arrow-next-svgrepo-com.svg"
     }
   }
 ]

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.models import Category, EmployerUser, User
+from apps.models import Category, EmployerUser, User, Company
 
 
 # @admin.register(CandidateUser)
@@ -27,3 +27,9 @@ class UserModelAdmin(admin.ModelAdmin):
 class EmployerUserModelAdmin(admin.ModelAdmin):
     list_display = ('phone_number', 'country')
     search_fields = ['phone_number']
+
+
+@admin.register(Company)
+class CompanyModelAdmin(admin.ModelAdmin):
+    list_display = ('name', '')
+
