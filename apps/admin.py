@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from apps.models import Category, EmployerUser, User, Company
 
-
+from .models import JobOffer
 # @admin.register(CandidateUser)
 # class CandidateUserAdmin(admin.ModelAdmin):
 #     list_display = ('email', 'current_position', 'years_of_exp', 'location', 'is_active')
@@ -27,6 +27,15 @@ class UserModelAdmin(admin.ModelAdmin):
 class EmployerUserModelAdmin(admin.ModelAdmin):
     list_display = ('phone_number', 'country')
     search_fields = ['phone_number']
+
+@admin.register(JobOffer)
+class OfferModelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'created_at')
+    search_fields = ['name', 'company__name']
+
+@admin.register(Company)
+class CompanyModelAdmin(admin.ModelAdmin):
+    list_display = ('name')
 
 
 # @admin.register(Company)
