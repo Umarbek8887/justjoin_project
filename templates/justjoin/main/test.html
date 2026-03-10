@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>justjoin.it — Job offers</title>
+    <link rel="stylesheet" href="{% static 'assests/css/temporary2.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"/>
+    <style>
+        .m-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 11px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: background .15s
+        }
+
+        .m-item:hover {
+            background: #f7f7f7
+        }
+
+        .m-item svg {
+            flex-shrink: 0;
+            color: #888
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="brand">
+        <div class="brand-name">justjoin.it</div>
+        <div class="brand-sub">#1 Job Board for tech industry in Europe</div>
+    </div>
+    <div class="search-bar">
+        <div class="search-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <label for="searchKeyword"></label>
+            <input type="text" id="searchKeyword" placeholder="Search: Job title, company, keyword"/>
+        </div>
+        <div class="search-sep"></div>
+        <div class="search-right">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <label for="searchLocation"></label>
+            <input type="text" id="searchLocation" placeholder="Location"/>
+        </div>
+        <button class="search-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </button>
+    </div>
+    <div class="nav-right">
+        {% if not user.is_authenticated %}
+            <button class="btn-post">Post a Job</button>
+            <div class="signin-dropdown-wrap" id="signinWrap">
+                <button class="btn-signin-nav" id="signinToggle">Sign in</button>
+                <div class="signin-dropdown" id="signinDropdown">
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                         stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path
+                                    d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+                            <span>Candidate zone</span>
+                        </div>
+                        <a href="{% url 'login_page' %}" class="dropdown-item">Sign in to Candidate's profile</a>
+                        <a href="{% url 'register_page' %}" class="dropdown-item">Create an account at Candidate
+                            profile</a>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-zone">
+                        <div class="dropdown-zone-label">
+                            <span class="zone-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                         stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path
+                                    d="M3 20c0-3.3 2.7-6 6-6"/><circle cx="17" cy="11" r="2"/><path
+                                    d="M13 20c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg></span>
+                            <span>Recruiter zone</span>
+                        </div>
+                        <a href="{% url 'employer_login_page' %}" class="dropdown-item">Sign in to Employer's panel</a>
+                        <a href="{% url 'employer_register_page' %}" class="dropdown-item">Create an account at Employer
+                            Panel</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <button class="icon-btn" id="themeToggle">☀</button>
+        <button class="icon-btn" onclick="openMenu()">☰</button>
+    </div>
+</nav>
+
+<div class="category-wrapper">
+    <div class="category-scroll-container">
+        {% for category in categories %}
+            <a href="?category={{ category.slug }}" class="category-item {% if forloop.first %}is-active{% endif %}">
+                <div class="category-icon-box shadow-sm">
+                    <img src="{{ category.svg.url }}" class="category-svg" alt="{{ category.name }}">
+                    {% if category.active_jobs_count > 0 %}
+                        <span class="category-badge">{{ category.active_jobs_count }}</span>
+                    {% endif %}
+                </div>
+                <span class="category-label">{{ category.name }}</span>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="body-wrap">
+    <div class="left-bar">
+        <button class="lb-btn" title="Grid">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+        </button>
+        <button class="lb-btn active" title="Jobs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+            </svg>
+        </button>
+        <button class="lb-btn" title="Calendar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+        </button>
+        {% if user.is_authenticated %}
+            {% if user.is_candidate %}
+                <button class="lb-btn" title="Bookmark">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </button>
+                <button class="lb-btn" title="Clock">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </button>
+            {% endif %}
+            <div class="lb-spacer"></div>
+            <a href="{% url 'logout_page' %}?next={{ request.path }}">
+                <button class="lb-btn" title="Logout">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </a>
+            {% if user.is_candidate %}
+                <a href="{% url 'candidate_profile' %}">
+                    <button class="lb-avatar" title="Profile">
+                        <div class="avatar" id="display-avatar">
+                            {% if user.candidate_profile.image %}
+                                <img id="avatar-img" src="{{ user.candidate_profile.image.url }}" alt="Avatar"
+                                     style="width:65%;height:65%;object-fit:cover;border-radius:50%;"/>
+                            {% else %}
+                                <span id="avatar-initials">{{ request.user.first_name|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}</span>
+                            {% endif %}
+                        </div>
+                    </button>
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="filters">
+        <div class="filters-title">Filters</div>
+        <div class="f-group">
+            <div class="f-head" data-target="salary"><span>Salary</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
+            <div class="f-body" id="salary">
+                <label class="f-check"><input type="checkbox" id="salaryOnly"/><span class="f-checkmark"></span><span
+                        class="f-dollar">$</span>With salary only</label>
+                <label><input type="number" class="f-input" placeholder="Minimum monthly earnings"/></label>
+            </div>
+        </div>
+        <div class="f-group">
+            <div class="f-head" data-target="mode"><span>Working mode</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
+            <div class="f-body" id="mode">
+                <button class="f-tag" data-filter="remote" data-group="mode">Remote</button>
+                <button class="f-tag" data-filter="hybrid" data-group="mode">Hybrid</button>
+                <button class="f-tag" data-filter="office" data-group="mode">Office</button>
+            </div>
+        </div>
+        <div class="f-group">
+            <div class="f-head" data-target="contract"><span>Contract type</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
+            <div class="f-body" id="contract">
+                <button class="f-tag" data-filter="b2b" data-group="contract">B2B</button>
+                <button class="f-tag" data-filter="permanent" data-group="contract">Permanent</button>
+                <button class="f-tag" data-filter="internship" data-group="contract">Internship</button>
+                <button class="f-tag" data-filter="mandate contract" data-group="contract">Mandate contract</button>
+                <button class="f-tag" data-filter="specific-task contract" data-group="contract">Specific-task
+                    contract
+                </button>
+            </div>
+        </div>
+        <div class="f-group">
+            <div class="f-head" data-target="worktype"><span>Work type</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
+            <div class="f-body" id="worktype">
+                <button class="f-tag" data-filter="full-time" data-group="worktype">Full-time</button>
+                <button class="f-tag" data-filter="part-time" data-group="worktype">Part-time</button>
+                <button class="f-tag" data-filter="freelance" data-group="worktype">Freelance</button>
+            </div>
+        </div>
+        <div class="f-group">
+            <div class="f-head" data-target="exp"><span>Experience level</span>
+                <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
+            <div class="f-body" id="exp">
+                <button class="f-tag" data-filter="junior" data-group="exp">Junior</button>
+                <button class="f-tag" data-filter="mid" data-group="exp">Mid</button>
+                <button class="f-tag" data-filter="senior" data-group="exp">Senior</button>
+                <button class="f-tag" data-filter="manager / c-level" data-group="exp">Lead / Manager</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="jobs-col">
+        <div class="jobs-top">
+            <span class="jobs-label">Work: All offers — <strong id="jobCount">{{ jobs.count }} offers</strong></span>
+            <div class="sort-wrap">
+                <span class="sort-label">Sort by:</span>
+                <div class="sort-select-wrap">
+                    <label for="sortSelect"></label>
+                    <select id="sortSelect">
+                        <option>Default</option>
+                        <option>Newest</option>
+                        <option>Salary: High to Low</option>
+                    </select>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="jobs-list" id="jobsList">
+            {% for job in jobs %}
+                <div class="job-card" data-mode="{{ job.working_mode }}" data-contract="{{ job.contract_type }}"
+                     data-worktype="{{ job.working_type }}" data-exp="{{ job.required_experience }}">
+                    <div class="job-logo">
+                        <div class="logo-box">
+                            {% if job.company.image %}
+                                <img src="{{ job.company.image.url }}" width="48" height="48"
+                                     alt="{{ job.company.name }}"/>
+                            {% else %}
+                                <img src="https://ui-avatars.com/api/?name={{ job.company.name|urlencode }}&background=1a1a2e&color=fff&size=48&bold=true&font-size=0.4"
+                                     width="48" height="48" alt="{{ job.company.name }}"/>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="job-mid">
+                        <a href="{% url 'detail' job.slug %}" style="text-decoration:none;color:inherit;">
+                            <div class="job-title">{{ job.name }}</div>
+                            <div class="job-meta">
+                                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                           stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14"
+                                                                                                                y="3"
+                                                                                                                width="7"
+                                                                                                                height="7"></rect><rect
+                                        x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7"
+                                                                                        height="7"></rect></svg>
+                                    {{ job.company.name }}</span>
+                                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                           stroke-width="2"><path
+                                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12"
+                                                                                                          cy="10"
+                                                                                                          r="3"></circle></svg>
+                                    {{ job.company.location_name }}</span>
+                                <span class="{% if job.working_mode == 'remote' %}remote-tag{% endif %}">{{ job.get_working_mode_display }}</span>
+                            </div>
+                            <div class="job-tags">
+                                {% for jts in job.job_tech_stack.all|slice:":4" %}
+                                    <span class="tag">{{ jts.tech_stack.name }}</span>{% endfor %}
+                                {% if job.is_new %}<span class="tag tag-new">New</span>{% endif %}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="job-right">
+                        {% with salary=job.salaries.first %}
+                            {% if salary and not job.undisclosed_salary %}
+                                <span class="salary">{{ salary.salary_min|int_space }}
+                                    {% if salary.salary_max is not None %} -
+                                        {{ salary.salary_max|int_space }}{% endif %} {{ salary.currency.iso }} <span
+                                            style="font-size:0.7rem;opacity:0.7">/ {{ salary.salary_type }}</span></span>
+                            {% else %}
+                                <span class="salary undisclosed">Undisclosed Salary</span>
+                            {% endif %}
+                        {% endwith %}
+                        <div class="job-bottom">
+                            <span class="days">{{ job.left_days }}d left</span>
+                            <button class="bm-btn">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2">
+                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <h3>No offers found</h3>
+                    <p>No active job offers at the moment. Check back soon!</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="chat-widget">
+    <div class="chat-avatar">A</div>
+    <span class="chat-label">Chats</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+</div>
+
+<!-- MENU OVERLAY -->
+<div id="menuOverlay" onclick="closeMenu()"
+     style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:500"></div>
+
+<!-- MENU DRAWER -->
+<div id="menuDrawer"
+     style="position:fixed;top:0;right:-340px;width:320px;height:100vh;background:#fff;z-index:501;box-shadow:-2px 0 16px rgba(0,0,0,.12);transition:right .25s ease;overflow-y:auto;font-family:'Inter',sans-serif">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #f0f0f0">
+        <button onclick="closeMenu()"
+                style="background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;display:flex;align-items:center;color:#444">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <span style="font-size:17px;font-weight:700;color:#1a1a1a">Menu</span>
+        <div style="width:32px"></div>
+    </div>
+
+    {% if user.is_authenticated %}
+        <div style="padding:8px 0;border-bottom:1px solid #f0f0f0">
+            <a href="{% url 'candidate_profile' %}" class="m-item">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                My profile</a>
+            <a href="#" class="m-item">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                Chats</a>
+            <a href="#" class="m-item">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                Saved searches</a>
+            <a href="#" class="m-item">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <path d="M14 2v6h6"/>
+                </svg>
+                Application history</a>
+            <a href="#" class="m-item">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+                Favorite offers</a>
+            <a href="#" class="m-item">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                </svg>
+                Settings</a>
+            <a href="{% url 'logout_page' %}?next=/" class="m-item" style="color:#e84393">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+                Log out</a>
+        </div>
+    {% endif %}
+
+    <div style="padding:8px 0;border-bottom:1px solid #f0f0f0">
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+            </svg>
+            Salary calculator</a>
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 2v6h6M16 13H8M16 17H8"/>
+            </svg>
+            IT Salary Report</a>
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l6 6v8a2 2 0 0 1-2 2z"/>
+            </svg>
+            Press Room</a>
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/>
+            </svg>
+            Career</a>
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            Pricing</a>
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4M12 8h.01"/>
+            </svg>
+            Help</a>
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <path d="M14 2v6h6"/>
+            </svg>
+            Terms</a>
+        <a href="#" class="m-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4M12 16h.01"/>
+            </svg>
+            Cookie settings</a>
+    </div>
+
+    {% if not user.is_authenticated %}
+        <div style="padding:16px 20px;border-bottom:1px solid #f0f0f0;display:flex;flex-direction:column;gap:10px">
+            <a href="{% url 'login_page' %}"
+               style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:#f5f5f5;font-size:14px;font-weight:600;color:#1a1a1a;text-decoration:none">
+                <div style="width:36px;height:36px;border-radius:50%;background:#e0e0e0;display:flex;align-items:center;justify-content:center">
+                    <svg width="18" height="18" fill="none" stroke="#555" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                Sign in to Candidate's profile
+            </a>
+            <a href="{% url 'employer_login_page' %}"
+               style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:#f5f5f5;font-size:14px;font-weight:600;color:#1a1a1a;text-decoration:none">
+                <div style="width:36px;height:36px;border-radius:50%;background:#e0e0e0;display:flex;align-items:center;justify-content:center">
+                    <svg width="18" height="18" fill="none" stroke="#555" stroke-width="2" viewBox="0 0 24 24">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                        <path d="M8 21h8M12 17v4"/>
+                    </svg>
+                </div>
+                Sign in to Employer's panel
+            </a>
+        </div>
+    {% endif %}
+
+    <div style="padding:20px">
+        <div style="font-size:12px;color:#999;font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px">
+            Follow us on social media
+        </div>
+        <div style="display:flex;gap:16px;align-items:center">
+            <a href="#" style="color:#1a1a1a">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+            </a>
+            <a href="#" style="color:#1a1a1a">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+            </a>
+            <a href="#" style="color:#1a1a1a">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V9h4v2a6 6 0 0 1 4-3z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                </svg>
+            </a>
+            <a href="#" style="color:#1a1a1a">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assests/js/temporary2.js' %}"></script>
+<script>
+    function openMenu() {
+        document.getElementById('menuOverlay').style.display = 'block';
+        document.getElementById('menuDrawer').style.right = '0';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        document.getElementById('menuOverlay').style.display = 'none';
+        document.getElementById('menuDrawer').style.right = '-340px';
+        document.body.style.overflow = '';
+    }
+</script>
+</body>
+</html>

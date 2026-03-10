@@ -36,6 +36,11 @@ class JobDetailView(DetailView):
         # return context
 
 
+class SomethingView(TemplateView):
+    template_name = 'justjoin/main/test.html'
+
+
+
 class MainPage(ListView):
     queryset = JobOffer.objects.filter(is_active=True).defer('description')
     template_name = 'justjoin/main/job-offers.html'

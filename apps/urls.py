@@ -2,14 +2,17 @@ from django.urls import path, re_path
 
 from apps.views import RegisterCreateView, LoginFormView, ForgotPassword, SoicialLoginView, MainPage, \
     ActivateAccountView, CustomLogoutView, JobDetailView, EmployerLoginView, EmployerRegisterView, \
-    EmployerForgotPassword, GoogleLoginView, GoogleCallbackView, GithubLoginView, GithubCallbackView, CandidateProfileView
+    EmployerForgotPassword, GoogleLoginView, GoogleCallbackView, GithubLoginView, GithubCallbackView, \
+    CandidateProfileView, SomethingView
 
-    # CandidateProfileUpdateView, CandidateProfileChangePasswordView, CandidateProfileInfoUpdateView, \
+# CandidateProfileUpdateView, CandidateProfileChangePasswordView, CandidateProfileInfoUpdateView, \
     # CandidateProfileImageUpdateView
 
 urlpatterns = [
     path('', MainPage.as_view(), name='main_page'),
     path('job-offers/detail/<slug:slug>', JobDetailView.as_view(), name='detail'),
+    path('test', SomethingView.as_view(), name='test'),
+
 
     path('profile', CandidateProfileView.as_view(), name="candidate_profile"),
 
@@ -27,6 +30,7 @@ urlpatterns = [
 
     path('auth/github-login/', GithubLoginView.as_view(), name='github-login'),
     path('auth/github/callback/', GithubCallbackView.as_view()),
+
 
 
     re_path(r'^auth/user/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,40})/$',
