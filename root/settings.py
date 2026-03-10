@@ -16,7 +16,10 @@ ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'apps.User'
 
 INSTALLED_APPS = [
+    # Theme
     'jazzmin',
+
+    # Basic
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

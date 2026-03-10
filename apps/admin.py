@@ -11,6 +11,24 @@ from .models import JobOffer
 #     search_fields = ('email', 'location')
 #     filter_horizontal = ('skills',)
 
+class JobOfferSalaryStackedInline(admin.StackedInline):
+    model = Salary
+    extra = 1
+    max_num = 5
+
+
+class JobOfferLanguageStackedInline(admin.TabularInline):
+    model = JobLanguage
+    extra = 1
+    max_num = 5
+    autocomplete_fields = ["language"]
+
+
+class JobOfferTechStackStackedInline(admin.TabularInline):
+    model = JobTechStack
+    extra = 2
+    autocomplete_fields = ["tech_stack"]
+
 
 @admin.register(Company)
 class CompanyModelAdmin(admin.ModelAdmin):
@@ -43,25 +61,6 @@ class UserModelAdmin(admin.ModelAdmin):
 class EmployerUserModelAdmin(admin.ModelAdmin):
     list_display = ('phone_number', 'country')
     search_fields = ['phone_number']
-
-
-class JobOfferSalaryStackedInline(admin.StackedInline):
-    model = Salary
-    extra = 1
-    max_num = 5
-
-
-class JobOfferLanguageStackedInline(admin.TabularInline):
-    model = JobLanguage
-    extra = 2
-    max_num = 5
-    autocomplete_fields = ["language"]
-
-
-class JobOfferTechStackStackedInline(admin.TabularInline):
-    model = JobTechStack
-    extra = 3
-    autocomplete_fields = ["tech_stack"]
 
 
 @admin.register(JobOffer)

@@ -71,7 +71,7 @@ class JobOffer(Model):
     working_type = CharField(choices=WorkingType.choices, max_length=32, default=WorkingType.FULL_TIME)
     required_experience = CharField(choices=Experience.choices, max_length=32, default=Experience.JUNIOR)
 
-    undisclosed_salary = BooleanField(default=True, editable=False)
+    undisclosed_salary = BooleanField(default=False, editable=False)
 
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
@@ -180,3 +180,6 @@ class Salary(Model):
     @property
     def even(self):
         return self.pk % 2 == 0
+
+    class Meta:
+        verbose_name_plural = "Salaries"

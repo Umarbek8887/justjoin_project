@@ -30,14 +30,14 @@ class JobDetailView(DetailView):
     template_name = 'justjoin/main/job-detail.html'
     context_object_name = 'job'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["similar_jobs"] = JobOffer.objects.all()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+        # context["similar_jobs"] = JobOffer.objects.all()
+        # return context
 
 
 class MainPage(ListView):
-    queryset = JobOffer.objects.filter(is_active=True)
+    queryset = JobOffer.objects.filter(is_active=True).defer('description')
     template_name = 'justjoin/main/job-offers.html'
     context_object_name = 'jobs'
 
