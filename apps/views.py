@@ -42,13 +42,46 @@ class SomethingView(TemplateView):
 
 
 class MainPage(ListView):
-    queryset = JobOffer.objects.filter(is_active=True).defer('description')
     template_name = 'justjoin/main/job-offers.html'
     context_object_name = 'jobs'
+
+    def get_queryset(self):
+        qs = JobOffer.objects.filter(is_active=True).defer('description')
+
+        category = self.request.GET.get('category')
+        working_mode = self.request.GET.getlist('working_mode')
+        contract_type = self.request.GET.getlist('contract_type')
+        working_type = self.request.GET.getlist('working_type')
+        experience = self.request.GET.getlist('experience')
+        salary_only = self.request.GET.get('salary_only')
+
+        if category:
+            qs = qs.filter(category__slug=category)
+        if working_mode:
+            qs = qs.filter(working_mode__in=working_mode)
+        if contract_type:
+            qs = qs.filter(contract_type__in=contract_type)
+        if working_type:
+            qs = qs.filter(working_type__in=working_type)
+        if experience:
+            qs = qs.filter(required_experience__in=experience)
+        if salary_only:
+            qs = qs.filter(undisclosed_salary=False, salaries__isnull=False).distinct()
+
+        return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
+
+        # Pass current filter values to template for active state rendering
+        context["active_category"] = self.request.GET.get('category', '')
+        context["active_working_mode"] = self.request.GET.getlist('working_mode')
+        context["active_contract_type"] = self.request.GET.getlist('contract_type')
+        context["active_working_type"] = self.request.GET.getlist('working_type')
+        context["active_experience"] = self.request.GET.getlist('experience')
+        context["salary_only"] = self.request.GET.get('salary_only', '')
+
         if self.request.user.is_authenticated and self.request.user.is_candidate():
             context["profile"] = self.request.user.candidate_profile
         return context

@@ -321,8 +321,8 @@ body {
 /* Ikonka turadigan aylana */
 .category-icon-box {
     position: relative;
-    width: 48px;
-    height: 48px;
+    width: 55px;
+    height: 55px;
     background-color: #fff;
     border-radius: 50%;
     display: flex;
@@ -334,14 +334,15 @@ body {
 
 /* SVG o'lchamini jilovlash */
 .category-svg {
-    width: 37px;
-    height: 37px;
+    width: 35px;
+    height: 35px;
     color: #555; /* Ikonka rangi */
 }
 
 /* Aktiv (tanlangan) holati */
 .category-item.is-active .category-icon-box {
-    background: linear-gradient(135deg, #a855f7, #ec4899); /* Binafsharang gradient */
+    /*background: linear-gradient(135deg, #a855f7, #ec4899); !* Binafsharang gradient *!*/
+    background: linear-gradient(135deg, #fff); /* Binafsharang gradient */
     border-color: #fff;
 }
 
@@ -370,6 +371,16 @@ body {
 .category-label {
     font-size: 12px;
     font-weight: 500;
+}
+
+.category-item.is-active .category-icon-box {
+    border-color: var(--accent2);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25);
+}
+
+.category-item.is-active .category-label {
+    color: var(--accent2);
+    font-weight: 700;
 }
 
 
@@ -509,7 +520,7 @@ body {
 }
 
 .left-bar::-webkit-scrollbar {
-  display: none; !important;
+  display: none !important;
 }
 
 .lb-btn {
@@ -597,14 +608,35 @@ body {
   scrollbar-color: var(--border) transparent;
 }
 
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
 .filters-title {
   font-family: 'Syne', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 0.75rem;
   letter-spacing: -0.01em;
 }
+
+.filters-clear {
+  font-size: 0.75rem;
+  color: var(--accent2);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.85;
+  transition: opacity var(--transition);
+}
+
+.filters-clear:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 
 .f-group {
   margin-bottom: 2px;
