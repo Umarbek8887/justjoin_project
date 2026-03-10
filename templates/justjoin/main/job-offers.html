@@ -103,8 +103,14 @@
 
 <div class="category-wrapper">
     <div class="category-scroll-container">
+        <a href="?" class="category-item {% if not active_category %}is-active{% endif %}">
+            <div class="category-icon-box shadow-sm">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <span class="category-label">All</span>
+        </a>
         {% for category in categories %}
-            <a href="?category={{ category.slug }}" class="category-item {% if forloop.first %}is-active{% endif %}">
+            <a href="?category={{ category.slug }}" class="category-item {% if active_category == category.slug %}is-active{% endif %}">
                 <div class="category-icon-box shadow-sm">
                     <img src="{{ category.svg.url }}" class="category-svg" alt="{{ category.name }}">
                     {% if category.active_jobs_count > 0 %}
@@ -190,7 +196,12 @@
 
     <!-- FILTERS -->
     <div class="filters">
-        <div class="filters-title">Filters</div>
+        <div class="filters-header">
+            <div class="filters-title">Filters</div>
+            {% if active_working_mode or active_contract_type or active_working_type or active_experience or salary_only %}
+                <a href="?{% if active_category %}category={{ active_category }}{% endif %}" class="filters-clear">Clear all</a>
+            {% endif %}
+        </div>
 
         <!-- Salary -->
         <div class="f-group">
@@ -203,13 +214,10 @@
             </div>
             <div class="f-body" id="salary">
                 <label class="f-check">
-                    <input type="checkbox" id="salaryOnly"/>
+                    <input type="checkbox" id="salaryOnlyCheck" data-param="salary_only" data-value="1" {% if salary_only %}checked{% endif %}/>
                     <span class="f-checkmark"></span>
                     <span class="f-dollar">$</span>
                     With salary only
-                </label>
-                <label>
-                    <input type="number" class="f-input" placeholder="Minimum monthly earnings"/>
                 </label>
             </div>
         </div>
@@ -224,9 +232,9 @@
                 </svg>
             </div>
             <div class="f-body" id="mode">
-                <button class="f-tag" data-filter="remote" data-group="mode">Remote</button>
-                <button class="f-tag" data-filter="hybrid" data-group="mode">Hybrid</button>
-                <button class="f-tag" data-filter="office" data-group="mode">Office</button>
+                <button type="button" class="f-tag {% if 'remote' in active_working_mode %}active{% endif %}" data-filter="remote" data-group="working_mode">Remote</button>
+                <button type="button" class="f-tag {% if 'hybrid' in active_working_mode %}active{% endif %}" data-filter="hybrid" data-group="working_mode">Hybrid</button>
+                <button type="button" class="f-tag {% if 'office' in active_working_mode %}active{% endif %}" data-filter="office" data-group="working_mode">Office</button>
             </div>
         </div>
 
@@ -240,13 +248,11 @@
                 </svg>
             </div>
             <div class="f-body" id="contract">
-                <button class="f-tag" data-filter="b2b" data-group="contract">B2B</button>
-                <button class="f-tag" data-filter="permanent" data-group="contract">Permanent</button>
-                <button class="f-tag" data-filter="internship" data-group="contract">Internship</button>
-                <button class="f-tag" data-filter="mandate contract" data-group="contract">Mandate contract</button>
-                <button class="f-tag" data-filter="specific-task contract" data-group="contract">Specific-task
-                    contract
-                </button>
+                <button type="button" class="f-tag {% if 'b2b' in active_contract_type %}active{% endif %}" data-filter="b2b" data-group="contract_type">B2B</button>
+                <button type="button" class="f-tag {% if 'permanent' in active_contract_type %}active{% endif %}" data-filter="permanent" data-group="contract_type">Permanent</button>
+                <button type="button" class="f-tag {% if 'internship' in active_contract_type %}active{% endif %}" data-filter="internship" data-group="contract_type">Internship</button>
+                <button type="button" class="f-tag {% if 'mandate contract' in active_contract_type %}active{% endif %}" data-filter="mandate contract" data-group="contract_type">Mandate contract</button>
+                <button type="button" class="f-tag {% if 'specific-task contract' in active_contract_type %}active{% endif %}" data-filter="specific-task contract" data-group="contract_type">Specific-task contract</button>
             </div>
         </div>
 
@@ -260,9 +266,9 @@
                 </svg>
             </div>
             <div class="f-body" id="worktype">
-                <button class="f-tag" data-filter="full-time" data-group="worktype">Full-time</button>
-                <button class="f-tag" data-filter="part-time" data-group="worktype">Part-time</button>
-                <button class="f-tag" data-filter="freelance" data-group="worktype">Freelance</button>
+                <button type="button" class="f-tag {% if 'full-time' in active_working_type %}active{% endif %}" data-filter="full-time" data-group="working_type">Full-time</button>
+                <button type="button" class="f-tag {% if 'part-time' in active_working_type %}active{% endif %}" data-filter="part-time" data-group="working_type">Part-time</button>
+                <button type="button" class="f-tag {% if 'freelance' in active_working_type %}active{% endif %}" data-filter="freelance" data-group="working_type">Freelance</button>
             </div>
         </div>
 
@@ -276,10 +282,10 @@
                 </svg>
             </div>
             <div class="f-body" id="exp">
-                <button class="f-tag" data-filter="junior" data-group="exp">Junior</button>
-                <button class="f-tag" data-filter="mid" data-group="exp">Mid</button>
-                <button class="f-tag" data-filter="senior" data-group="exp">Senior</button>
-                <button class="f-tag" data-filter="manager / c-level" data-group="exp">Lead / Manager</button>
+                <button type="button" class="f-tag {% if 'junior' in active_experience %}active{% endif %}" data-filter="junior" data-group="experience">Junior</button>
+                <button type="button" class="f-tag {% if 'mid' in active_experience %}active{% endif %}" data-filter="mid" data-group="experience">Mid</button>
+                <button type="button" class="f-tag {% if 'senior' in active_experience %}active{% endif %}" data-filter="senior" data-group="experience">Senior</button>
+                <button type="button" class="f-tag {% if 'manager / c-level' in active_experience %}active{% endif %}" data-filter="manager / c-level" data-group="experience">Lead / Manager</button>
             </div>
         </div>
     </div>

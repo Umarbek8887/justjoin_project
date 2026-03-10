@@ -39,131 +39,60 @@ document.querySelectorAll('.f-head').forEach(head => {
 });
 
 
-// ===== FILTER TAGS (multi-group single-select) =====
-const activeFilters = {};
+/// ===== FILTER TAGS — URL param based =====
+/**
+ * Build a new URL by toggling a multi-value query param.
+ * If the value already exists it is removed, otherwise it is added.
+ * The `category` param is always preserved.
+ */
+function buildFilterUrl(paramName, value) {
+  const params = new URLSearchParams(window.location.search);
+  const existing = params.getAll(paramName);
+
+  if (existing.includes(value)) {
+    // Remove this value
+    params.delete(paramName);
+    existing.filter(v => v !== value).forEach(v => params.append(paramName, v));
+  } else {
+    params.append(paramName, value);
+  }
+
+  return `${window.location.pathname}?${params.toString()}`;
+}
 
 document.querySelectorAll('.f-tag').forEach(tag => {
   tag.addEventListener('click', () => {
-    const group     = tag.dataset.group;
-    const filter    = tag.dataset.filter;
-    const wasActive = tag.classList.contains('active');
-
-    // Deactivate all in same group
-    document.querySelectorAll(`.f-tag[data-group="${group}"]`).forEach(t => t.classList.remove('active'));
-
-    if (!wasActive) {
-      tag.classList.add('active');
-      activeFilters[group] = filter;
-    } else {
-      delete activeFilters[group];
-    }
-
-    applyFilters();
+    const group  = tag.dataset.group;   // e.g. "working_mode"
+    const filter = tag.dataset.filter;  // e.g. "remote"
+    window.location.href = buildFilterUrl(group, filter);
   });
 });
 
 
-// ===== SEARCH INPUT =====
-const searchInput = document.getElementById('searchKeyword');
-const locationInput = document.getElementById('searchLocation');
-
-if (searchInput) searchInput.addEventListener('input', () => {
-  clearTimeout(searchInput._timer);
-  searchInput._timer = setTimeout(applyFilters, 200);
-});
-
-if (locationInput) locationInput.addEventListener('input', () => {
-  clearTimeout(locationInput._timer);
-  locationInput._timer = setTimeout(applyFilters, 200);
-});
-
-document.querySelector('.search-btn')?.addEventListener('click', applyFilters);
-
-
-// ===== SALARY FILTER =====
-const salaryOnly = document.getElementById('salaryOnly');
-const salaryMin  = document.querySelector('.f-input');
-
-if (salaryOnly) salaryOnly.addEventListener('change', applyFilters);
-if (salaryMin)  salaryMin.addEventListener('input',   () => {
-  clearTimeout(salaryMin._timer);
-  salaryMin._timer = setTimeout(applyFilters, 300);
-});
-
-
-// ===== APPLY ALL FILTERS =====
-function applyFilters() {
-  const cards    = document.querySelectorAll('.job-card');
-  const query    = searchInput?.value.toLowerCase().trim()    || '';
-  const location = locationInput?.value.toLowerCase().trim()  || '';
-  const onlySalary = salaryOnly?.checked || false;
-  let visible = 0;
-
-  cards.forEach((card, i) => {
-    const mode     = card.dataset.mode     || '';
-    const contract = card.dataset.contract || '';
-    const text     = card.textContent.toLowerCase();
-
-    const modeOk     = !activeFilters.mode     || mode === activeFilters.mode;
-    const contractOk = !activeFilters.contract || contract === activeFilters.contract;
-    const queryOk    = !query    || text.includes(query);
-    const locOk      = !location || text.includes(location);
-
-    // Salary: hide undisclosed if checkbox on
-    const salaryEl  = card.querySelector('.salary');
-    const hassalary = salaryEl && !salaryEl.classList.contains('undisclosed');
-    const salaryOk  = !onlySalary || hassalary;
-
-    const show = modeOk && contractOk && queryOk && locOk && salaryOk;
-
-    if (show) {
-      card.classList.remove('hidden');
-      // Re-trigger fade animation
-      card.style.animationDelay = `${visible * 0.04}s`;
-      card.style.animation = 'none';
-      card.offsetHeight; // reflow
-      card.style.animation = '';
-      visible++;
+// ===== SALARY CHECKBOX =====
+const salaryOnlyCheck = document.getElementById('salaryOnlyCheck');
+if (salaryOnlyCheck) {
+  salaryOnlyCheck.addEventListener('change', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (salaryOnlyCheck.checked) {
+      params.set('salary_only', '1');
     } else {
-      card.classList.add('hidden');
+      params.delete('salary_only');
     }
+    window.location.href = `${window.location.pathname}?${params.toString()}`;
   });
-
-  updateCount(visible);
-  showEmptyState(visible === 0);
 }
 
 
-// ===== UPDATE OFFER COUNT =====
-function updateCount(n) {
-  const el = document.getElementById('jobCount');
-  if (!el) return;
-  el.textContent = `${n.toLocaleString()} offers`;
-}
-
-
-// ===== EMPTY STATE =====
-function showEmptyState(show) {
-  let el = document.getElementById('emptyState');
-  const list = document.getElementById('jobsList');
-  if (!list) return;
-
-  if (show && !el) {
-    el = document.createElement('div');
-    el.id = 'emptyState';
-    el.className = 'empty-state';
-    el.innerHTML = `
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      <h3>No offers found</h3>
-      <p>Try adjusting your filters or search terms to see more results.</p>
-    `;
-    list.after(el);
-  } else if (!show && el) {
-    el.remove();
-  }
-}
+// ===== SEARCH =====
+document.querySelector('.search-btn')?.addEventListener('click', () => {
+  const q   = document.getElementById('searchKeyword')?.value.trim()  || '';
+  const loc = document.getElementById('searchLocation')?.value.trim() || '';
+  const params = new URLSearchParams(window.location.search);
+  if (q)   params.set('q', q); else params.delete('q');
+  if (loc) params.set('location', loc); else params.delete('location');
+  window.location.href = `${window.location.pathname}?${params.toString()}`;
+});
 
 
 // ===== BOOKMARKS =====
@@ -237,7 +166,7 @@ document.getElementById('mapBtn')?.addEventListener('click', () => {
 document.addEventListener('keydown', e => {
   if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
     e.preventDefault();
-    searchInput?.focus();
+    document.getElementById('searchKeyword')?.focus();
   }
 });
 
