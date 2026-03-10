@@ -33,8 +33,6 @@ class JobDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["similar_jobs"] = JobOffer.objects.all()
-        if self.request.user.is_authenticated and self.request.user.is_candidate():
-            context["profile"] = self.request.user.candidate_profile
         return context
 
 
@@ -51,14 +49,14 @@ class MainPage(ListView):
         return context
 
 
-class CandidateProfileView(LoginRequiredMixin, View):
+class CandidateProfileView(LoginRequiredMixin, UpdateView):
     template_name = "justjoin/auth/candidate/profile.html"
     success_url = reverse_lazy("candidate_profile")
 
-    def get(self, request):
+    def get(self, request, **kwargs):
         return render(request, self.template_name)
 
-    def post(self, request):
+    def post(self, request, **kwargs):
         user = request.user
         profile = user.candidate_profile
 
@@ -148,7 +146,7 @@ class RegisterCreateView(LoginNotRequiredMixin, CreateView):
     template_name = 'justjoin/auth/candidate/register.html'
     redirect_authenticated_user = True
     form_class = RegisterModelForm
-    success_url = 'login'
+    success_url = reverse_lazy('main_page')
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -164,7 +162,7 @@ class ActivateAccountView(View):
         uid = None
         try:
             uid = force_bytes(urlsafe_base64_decode(uidb64)).decode()
-            user = User.objects.get(pk=uid)
+            user = User.objects.get()
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
 
@@ -259,8 +257,8 @@ class GoogleCallbackView(View):
         if user_info_res.status_code == 200:
             info = user_info_res.json()
             email = info.get("email")
-            first_name = info.get("given_name", "")
-            last_name = info.get("family_name", "")
+            first_name = info.get("given_name")
+            last_name = info.get("family_name")
             picture_url = info.get("picture")
 
             user, created = User.objects.get_or_create(
@@ -355,3 +353,7 @@ class GithubCallbackView(View):
 
         login(request, user)
         return redirect('main_page')
+
+
+
+

@@ -19,7 +19,7 @@ class Company(Model):
     description = CKEditor5Field(blank=True)
     banner = ImageField(upload_to='company/banner/%Y/%m/%d')
     image = ImageField(upload_to='company/avatar/%Y/%m/%d')
-    slug = SlugField(max_length=255, blank=True, unique=True)
+    slug = SlugField(max_length=255, blank=True, unique=True, editable=False)
     company_type = CharField(choices=CompanyType.choices, max_length=64, default=CompanyType.OTHER)
     industry = CharField(max_length=64, blank=True)
     founded = PositiveSmallIntegerField()
@@ -42,6 +42,11 @@ class Company(Model):
         self.slug = slugify(self.name)
         super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Companies'
 
 class CompanyOtherLocations(Model):
     location_name = CharField(max_length=128)

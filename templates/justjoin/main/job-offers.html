@@ -174,8 +174,8 @@
                 <a href="{% url 'candidate_profile' %}">
                     <button class="lb-avatar" title="Profile">
                         <div class="avatar" id="display-avatar">
-                            {% if profile.image %}
-                                <img id="avatar-img" src="{{ profile.image.url }}" alt="Avatar"
+                            {% if user.candidate_profile.image %}
+                                <img id="avatar-img" src="{{ user.candidate_profile.image.url }}" alt="Avatar"
                                      style="width:65%;height:65%;object-fit:cover;border-radius:50%;"/>
                             {% else %}
                                 <span id="avatar-initials">{{ request.user.first_name|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}</span>
@@ -363,7 +363,8 @@
                         {% with salary=job.salaries.first %}
                             {% if salary and not job.undisclosed_salary %}
                                 <span class="salary">
-                            {{ salary.salary_min|int_space }} – {{ salary.salary_max|int_space }}
+                            {{ salary.salary_min|int_space }}{% if salary.salary_max is not None %}
+                                            - {{ salary.salary_max|int_space }}{% endif %}
                             {{ salary.currency.iso }}
                             <span style="font-size:0.7rem;opacity:0.7">/ {{ salary.salary_type }}</span>
                         </span>

@@ -71,15 +71,15 @@ class JobOffer(Model):
     working_type = CharField(choices=WorkingType.choices, max_length=32, default=WorkingType.FULL_TIME)
     required_experience = CharField(choices=Experience.choices, max_length=32, default=Experience.JUNIOR)
 
-    undisclosed_salary = BooleanField(default=False)
+    undisclosed_salary = BooleanField(default=True, editable=False)
 
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
     published_at = DateTimeField()
     end_time = DateTimeField()
-    is_active = BooleanField(default=True)
+    is_active = BooleanField(default=True, db_index=True)
 
-    languages = ManyToManyField('apps.Languages', through='JobLanguage', related_name='jobs')
+    languages = ManyToManyField('apps.Language', through='JobLanguage', related_name='jobs')
     tech_stacks = ManyToManyField('apps.TechStack', through='JobTechStack', related_name='jobs')
     company = ForeignKey('apps.Company', on_delete=CASCADE, related_name='job_offers')
     category = ForeignKey('apps.Category', on_delete=CASCADE, related_name='job_offers')
@@ -90,6 +90,10 @@ class JobOffer(Model):
             super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
         self.slug = slugify(
             f"{self.company.slug}-{self.name}-{self.company.location_name}-{self.category.name}-{self.pk}")
+        # if self.salaries.exists():
+        #     self.undisclosed_salary = False
+        if self.end_time == now():
+            self.is_active = False
         super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
 
     class Meta:
@@ -114,11 +118,9 @@ class JobOffer(Model):
         return delta.days
 
 
-
-
 class JobLanguage(Model):
     job_offer = ForeignKey('apps.JobOffer', on_delete=CASCADE, related_name='job_languages')
-    language = ForeignKey('apps.Languages', on_delete=CASCADE, related_name='language_jobs')
+    language = ForeignKey('apps.Language', on_delete=CASCADE, related_name='language_jobs')
     level = CharField(choices=LanguageLevel.choices, max_length=2, default=LanguageLevel.A1)
 
     class Meta:
@@ -134,8 +136,11 @@ class JobTechStack(Model):
         unique_together = ('job_offer', 'tech_stack')
 
 
-class Languages(Model):
+class Language(Model):
     name = CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
 
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
         self.name = self.name.capitalize()
@@ -145,6 +150,9 @@ class Languages(Model):
 class TechStack(Model):
     name = CharField(max_length=128)
 
+    def __str__(self):
+        return self.name
+
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
         self.name = self.name.capitalize()
         super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
@@ -153,6 +161,9 @@ class TechStack(Model):
 class Currency(Model):
     name = CharField(max_length=64)
     iso = CharField(max_length=8, unique=True)
+
+    def __str__(self):
+        return self.iso
 
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
         self.iso = self.iso.upper()
@@ -165,10 +176,6 @@ class Salary(Model):
     salary_type = CharField(choices=SalaryType.choices, max_length=12, default=SalaryType.MONTHLY)
     currency = ForeignKey('apps.Currency', on_delete=PROTECT, related_name='salaries')
     job_offer = ForeignKey('apps.JobOffer', on_delete=CASCADE, related_name='salaries')
-
-    @property
-    def currency_iso(self):
-        return self.currency.iso
 
     @property
     def even(self):
