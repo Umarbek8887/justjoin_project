@@ -82,6 +82,9 @@ web_modules/
 .env.local
 .cache
 .parcel-cache
+media
+!media/category/svg/
+media.zip
 .next
 out
 .nuxt
