@@ -9,7 +9,7 @@
     <title>{{ job.name }} - {{ job.company.name }} | justjoin.it</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"/>
-    <link rel="stylesheet" href="{% static 'assests/css/detail-test.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assests/css/style2.css' %}"/>
 </head>
 
 <body>
@@ -383,7 +383,7 @@
                 {#                            Published: <strong>{{ job.published_at|date:"d.m.Y" }}</strong>#}
                 {#                        </div>#}
                 {#                    </div>#}
-                {##}
+
                 {#                    <script>#}
                 {#                        (function () {#}
                 {#                            const lat = parseFloat("{{ job.company.lat }}".replace(',', '.'));#}
@@ -493,11 +493,11 @@
                         <div class="summary-salary">
                             {% if not job.undisclosed_salary %}
                                 {% for salary in job.salaries.all %}
-                                    <span class="{% if salary.even %}sal-b{% else %}sal-g{% endif %}">
+                                    <span class="sal-{% if salary.even %}b{% else %}g{% endif %}">
                                         {{ salary.salary_min|int_space }}
                                         {% if salary.salary_max is not None %}
                                             - {{ salary.salary_max|int_space }}{% endif %} {{ salary.currency.iso }}
-                                    </span>{{ salary.get_salary_type_display }} – {{ job.get_contract_type_display }}
+                                    </span>{{ salary.get_type_display }} – {{ job.get_contract_type_display }}
                                     &nbsp;&nbsp;
                                 {% endfor %}
                             {% endif %}
@@ -532,7 +532,7 @@
                                 {{ salary.currency.iso }}
                             {% endif %}
                         </div>
-                        <div class="salary-type">{{ salary.get_salary_type_display|capfirst }}
+                        <div class="salary-type">{{ salary.get_type_display|capfirst }}
                             · {{ job.get_contract_type_display }}</div>
                     </div>
                     {% if not forloop.last %}
@@ -573,49 +573,69 @@
                 </div>
             </div>
 
+
             <div class="section-title similar-title">Check Similar Offers</div>
 
+            {% for similar_job in similar_jobs %}
+                <div class="similar-card">
+                    <a href="{% url 'detail' similar_job.slug %}">
 
-            {#            <div class="similar-card">#}
-            {#                <div class="sim-logo"><img#}
-            {#                        src="https://ui-avatars.com/api/?name=CR&background=e74c3c&color=fff&size=36&bold=true&font-size=0.4"#}
-            {#                        alt="crodu"/></div>#}
-            {#                <div class="sim-info">#}
-            {#                    <div class="sim-title">Senior BackEnd/ DevOp...</div>#}
-            {#                    <div class="sim-salary">28 560 – 33 600 PLN/h</div>#}
-            {#                    <div class="sim-tags"><span class="sim-tag">Kraków</span><span class="sim-tag">Senior</span><span#}
-            {#                            class="sim-tag">B2B</span><span class="sim-tag">Remote</span></div>#}
-            {#                </div>#}
-            {#                <button class="sim-bm">#}
-            {#                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">#}
-            {#                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>#}
-            {#                    </svg>#}
-            {#                </button>#}
-            {#            </div>#}
-            {##}
-            {#            <div class="similar-card">#}
-            {#                <div class="sim-logo"><img#}
-            {#                        src="https://ui-avatars.com/api/?name=CQ&background=374151&color=fff&size=36&bold=true&font-size=0.4"#}
-            {#                        alt="cq"/></div>#}
-            {#                <div class="sim-info">#}
-            {#                    <div class="sim-title">Code Quality Lead</div>#}
-            {#                    <div class="sim-salary">21 000 – 25 200 PLN/mo</div>#}
-            {#                    <div class="sim-tags"><span class="sim-tag">Remote</span><span class="sim-tag">Senior</span><span#}
-            {#                            class="sim-tag">B2B</span></div>#}
-            {#                </div>#}
-            {#                <button class="sim-bm">#}
-            {#                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">#}
-            {#                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>#}
-            {#                    </svg>#}
-            {#                </button>#}
-            {#            </div>#}
+                        <div class="sim-logo">
+                            {% if similar_job.company.image %}
+                                <img src="{{ similar_job.company.image.url }}" alt="{{ similar_job.company.name }}"/>
+                            {% else %}
+                                <img src="https://ui-avatars.com/api/?name={{ similar_job.company.name|urlencode }}&background=1a0a2e&color=fff&size=72&bold=true&font-size=0.35"
+                                     alt="{{ similar_job.company.name }}"/>
+                            {% endif %}
+                        </div>
 
+                        <div class="sim-info">
+                            <div class="sim-title">{{ similar_job.name }}</div>
+
+                            <div class="sim-salary {% if not similar_job.salaries.first or similar_job.undisclosed_salary %}undisclosed{% endif %}">
+                                {% with similar_job.salaries.first as salary %}
+                                    {% if salary and not similar_job.undisclosed_salary %}
+
+                                        {{ salary.salary_min|int_space }}{% if salary.salary_max %} –
+                                            {{ salary.salary_max|int_space }}{% endif %} {{ salary.currency.iso }}/
+                                        {{ salary.get_type_display|capfirst }}
+                                    {% else %}
+                                        Undisclosed Salary
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+
+                            <div class="sim-tags">
+                                {% if similar_job.company.origin %}
+                                    <span class="sim-tag">{{ similar_job.company.origin }}</span>
+                                {% endif %}
+                                <span class="sim-tag">{{ similar_job.get_required_experience_display }}</span>
+                                <span class="sim-tag">{{ similar_job.get_contract_type_display }}</span>
+                                <span class="sim-tag">{{ similar_job.get_working_mode_display }}</span>
+                            </div>
+                        </div>
+
+                        <button class="sim-bm"
+                                onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('saved'); const p=this.querySelector('path'); p&&p.setAttribute('fill', this.classList.contains('saved') ? 'currentColor' : 'none');">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </button>
+
+                    </a>
+                </div>
+            {% empty %}
+                <div style="font-size:13px; color:var(--muted); text-align:center; padding: 20px 0;">
+                    No similar offers found
+                </div>
+            {% endfor %}
         </div>
     </div>
 
 </div>
 
-<script src="{% static 'assests/js/detail-test.js' %}"></script>
+<script src="{% static 'assests/js/script2.js' %}"></script>
 </body>
 
 </html>

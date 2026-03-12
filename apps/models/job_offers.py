@@ -85,7 +85,7 @@ class JobOffer(Model):
     category = ForeignKey('apps.Category', on_delete=CASCADE, related_name='job_offers')
 
     def save(self, *, force_insert=False, force_update=False, using=None, update_fields=None):
-        self.name = self.name.title()
+        # self.name = self.name.title()
         if not self.pk:
             super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
         self.slug = slugify(
@@ -173,7 +173,7 @@ class Currency(Model):
 class Salary(Model):
     salary_min = PositiveIntegerField(null=True, blank=True)
     salary_max = PositiveIntegerField(null=True, blank=True)
-    salary_type = CharField(choices=SalaryType.choices, max_length=12, default=SalaryType.MONTHLY)
+    type = CharField(choices=SalaryType.choices, max_length=12, default=SalaryType.MONTHLY)
     currency = ForeignKey('apps.Currency', on_delete=PROTECT, related_name='salaries')
     job_offer = ForeignKey('apps.JobOffer', on_delete=CASCADE, related_name='salaries')
 

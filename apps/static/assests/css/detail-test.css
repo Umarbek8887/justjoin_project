@@ -519,6 +519,24 @@ body {
     transition: box-shadow var(--tr);
 }
 
+
+
+.salary {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #16a34a;
+  font-family: 'DM Mono', 'Courier New', monospace;
+  text-align: right;
+}
+
+.salary.undisclosed {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
+}
+
+
 .tech-item:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
@@ -1356,5 +1374,268 @@ body {
   opacity: 0.9;
   transform: translateY(-1px);
 }
+
+
+/* ════════════════════════════════════════════
+   SIMILAR OFFERS — Premium Redesign
+   ════════════════════════════════════════════ */
+
+/* Section header */
+.similar-title {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.similar-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* Card wrapper */
+.similar-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+    transition: box-shadow 0.22s ease, border-color 0.22s ease, transform 0.18s ease;
+    position: relative;
+}
+
+.similar-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(233,30,140,0.04), rgba(139,92,246,0.06));
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.similar-card:hover {
+    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+    border-color: rgba(139, 92, 246, 0.28);
+    transform: translateY(-2px);
+}
+
+.similar-card:hover::before {
+    opacity: 1;
+}
+
+/* Inner anchor (reset link styles) */
+.similar-card a {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 14px 12px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 1;
+}
+
+/* Top accent line */
+.similar-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 14px 14px 0 0;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+}
+
+.similar-card:hover::after {
+    opacity: 1;
+}
+
+/* Logo */
+.sim-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease;
+}
+
+.similar-card:hover .sim-logo {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.sim-logo img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* Info block */
+.sim-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sim-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s ease;
+}
+
+.similar-card:hover .sim-title {
+    color: var(--accent2);
+}
+
+/* Salary */
+.sim-salary {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sim-salary::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+}
+
+.sim-salary.undisclosed {
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.sim-salary.undisclosed::before {
+    background: var(--muted);
+}
+
+/* Tags */
+.sim-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.sim-tag {
+    padding: 2px 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.similar-card:hover .sim-tag {
+    border-color: rgba(139, 92, 246, 0.2);
+    color: var(--accent2);
+    background: rgba(139, 92, 246, 0.05);
+}
+
+/* Bookmark button */
+.sim-bm {
+    width: 28px;
+    height: 28px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--muted);
+    flex-shrink: 0;
+    align-self: flex-start;
+    transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s;
+}
+
+.sim-bm:hover {
+    color: var(--accent2);
+    border-color: rgba(139, 92, 246, 0.35);
+    background: rgba(139, 92, 246, 0.06);
+    transform: scale(1.1);
+}
+
+.sim-bm.saved {
+    color: var(--accent2);
+    border-color: var(--accent2);
+    background: rgba(139, 92, 246, 0.08);
+}
+
+.sim-bm.saved svg path {
+    fill: var(--accent2);
+}
+
+/* Dark mode tweaks */
+body.dark .similar-card {
+    background: #1a1a2e;
+    border-color: #2e2e4a;
+}
+
+body.dark .similar-card:hover {
+    box-shadow: 0 6px 28px rgba(139, 92, 246, 0.18);
+    border-color: rgba(139, 92, 246, 0.38);
+}
+
+body.dark .sim-logo {
+    background: #0f0f1a;
+}
+
+body.dark .sim-tag {
+    background: #0f0f1a;
+    border-color: #2e2e4a;
+}
+
+body.dark .similar-card:hover .sim-tag {
+    background: rgba(139, 92, 246, 0.1);
+}
+
+/* Animate in on load */
+@keyframes simCardIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.similar-card {
+    animation: simCardIn 0.35s ease both;
+}
+
+.similar-card:nth-child(2) { animation-delay: 0.05s; }
+.similar-card:nth-child(3) { animation-delay: 0.10s; }
+.similar-card:nth-child(4) { animation-delay: 0.15s; }
+.similar-card:nth-child(5) { animation-delay: 0.20s; }
 
 

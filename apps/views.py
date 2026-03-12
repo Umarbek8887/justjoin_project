@@ -16,6 +16,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.views.generic import FormView, CreateView, TemplateView, ListView, DetailView, UpdateView
 
+from apps.filters import JobOfferFilter
 from apps.forms import LoginForm, RegisterModelForm, EmployerRegisterForm, EmployerLoginForm
 from apps.mixins import LoginNotRequiredMixin
 from apps.models import User, JobOffer, Category, CandidateUser
@@ -25,60 +26,65 @@ from apps.tokens import account_activation_token
 from root import settings
 
 
-class JobDetailView(DetailView):
-    queryset = JobOffer.objects.filter(is_active=True)
-    template_name = 'justjoin/main/job-detail.html'
-    context_object_name = 'job'
+# class JobDetailView(DetailView):
+#     queryset = JobOffer.objects.filter(is_active=True)
+#     template_name = 'justjoin/main/job-detail.html'
+#     context_object_name = 'job'
+#
+#     # def get_context_data(self, **kwargs):
+#     #     context = super().get_context_data(**kwargs)
+#     #     context["similar_jobs"] = JobOffer.objects.filter(category=)
+#     #     return context
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-        # context["similar_jobs"] = JobOffer.objects.all()
-        # return context
+
+class JobDetailView(DetailView):
+    queryset = (
+        JobOffer.objects
+        .filter(is_active=True)
+        .select_related("company", "category")
+        .prefetch_related("salaries")
+    )
+    template_name = "justjoin/main/job-detail.html"
+    context_object_name = "job"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        job = self.object
+        similar_jobs = (
+            JobOffer.objects
+            .filter(is_active=True,
+                    category=job.category,
+                    company__origin=job.company.origin,
+                    required_experience=job.required_experience
+                    )
+            .exclude(pk=job.pk)
+            .select_related("company")
+            .prefetch_related("salaries")
+            .order_by("-published_at")[:4]
+            .defer("description", "end_time", "created_at", "updated_at")
+        )
+        context["similar_jobs"] = similar_jobs
+        return context
 
 
 class MainPage(ListView):
-    template_name = 'justjoin/main/job-offers.html'
-    context_object_name = 'jobs'
+    template_name = "justjoin/main/job-offers.html"
+    context_object_name = "jobs"
 
     def get_queryset(self):
-        qs = JobOffer.objects.filter(is_active=True).defer('description')
-
-        category = self.request.GET.get('category')
-        working_mode = self.request.GET.getlist('working_mode')
-        contract_type = self.request.GET.getlist('contract_type')
-        working_type = self.request.GET.getlist('working_type')
-        experience = self.request.GET.getlist('experience')
-        salary_only = self.request.GET.get('salary_only')
-
-        if category:
-            qs = qs.filter(category__slug=category)
-        if working_mode:
-            qs = qs.filter(working_mode__in=working_mode)
-        if contract_type:
-            qs = qs.filter(contract_type__in=contract_type)
-        if working_type:
-            qs = qs.filter(working_type__in=working_type)
-        if experience:
-            qs = qs.filter(required_experience__in=experience)
-        if salary_only:
-            qs = qs.filter(undisclosed_salary=False, salaries__isnull=False).distinct()
-
+        qs = JobOffer.objects.filter(is_active=True).defer("description", "end_time", "created_at", "updated_at")
+        qs = JobOfferFilter(self.request, qs).filter()
         return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
-
-        # Pass current filter values to template for active state rendering
-        context["active_category"] = self.request.GET.get('category', '')
-        context["active_working_mode"] = self.request.GET.getlist('working_mode')
-        context["active_contract_type"] = self.request.GET.getlist('contract_type')
-        context["active_working_type"] = self.request.GET.getlist('working_type')
-        context["active_experience"] = self.request.GET.getlist('experience')
-        context["salary_only"] = self.request.GET.get('salary_only', '')
-
-        if self.request.user.is_authenticated and self.request.user.is_candidate():
-            context["profile"] = self.request.user.candidate_profile
+        context["active_category"] = self.request.GET.get("category", "")
+        context["active_working_mode"] = self.request.GET.getlist("working_mode")
+        context["active_contract_type"] = self.request.GET.getlist("contract_type")
+        context["active_working_type"] = self.request.GET.getlist("working_type")
+        context["active_experience"] = self.request.GET.getlist("experience")
+        context["salary_only"] = self.request.GET.get("salary_only", "")
         return context
 
 
@@ -112,7 +118,6 @@ class CandidateProfileView(LoginRequiredMixin, UpdateView):
 
         # messages.success(request, "Profile updated successfully.")
         return redirect(self.success_url)
-
 
 
 class CandidateProfileChangePasswordView(LoginRequiredMixin, UpdateView):
@@ -215,6 +220,7 @@ class CustomLogoutView(View):
     def get(self, request):
         next_page = request.GET.get('next') or request.META.get('HTTP_REFERER') or 'main_page'
         logout(request)
+        # return redirect(next_page if next_page != 'candidate_profile' else '')
         return redirect(next_page)
 
 
@@ -386,7 +392,3 @@ class GithubCallbackView(View):
 
         login(request, user)
         return redirect('main_page')
-
-
-
-
