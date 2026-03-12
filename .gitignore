@@ -85,7 +85,6 @@ web_modules/
 media
 !media/category/svg/
 !media/company/avatar/
-media.zip
 .next
 out
 .nuxt
