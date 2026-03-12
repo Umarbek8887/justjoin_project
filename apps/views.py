@@ -68,6 +68,7 @@ class JobDetailView(DetailView):
 
 
 class MainPage(ListView):
+    # FilteView
     template_name = "justjoin/main/job-offers.html"
     context_object_name = "jobs"
 
@@ -91,6 +92,8 @@ class MainPage(ListView):
 class CandidateProfileView(LoginRequiredMixin, UpdateView):
     template_name = "justjoin/auth/candidate/profile.html"
     success_url = reverse_lazy("candidate_profile")
+
+    # FormClass
 
     def get(self, request, **kwargs):
         return render(request, self.template_name)
@@ -163,6 +166,11 @@ class EmployerRegisterView(LoginNotRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = form.save()
+
+        #
+        #
+        #
+        #
         user.is_active = False
         user.save(update_fields=['is_active'])
         send_registration_link(user, f"{self.request.scheme}://{self.request.get_host()}")
@@ -392,3 +400,91 @@ class GithubCallbackView(View):
 
         login(request, user)
         return redirect('main_page')
+
+
+# Linkedin
+# class LinkedInLoginView(View):
+#     def get(self, request):
+#         state = secrets.token_urlsafe(16)
+#         request.session['linkedin_oauth_state'] = state
+#
+#         scope = "openid profile email"
+#
+#         params = {
+#             "response_type": "code",
+#             "client_id": settings.LINKEDIN_CLIENT_ID,
+#             "redirect_uri": settings.LINKEDIN_REDIRECT_URI,
+#             "scope": scope,
+#             "state": state
+#         }
+#
+#         auth_url = f"https://www.linkedin.com/oauth/v2/authorization?{urllib.parse.urlencode(params)}"
+#         return redirect(auth_url)
+#
+#
+# class LinkedInCallbackView(View):
+#     def get(self, request):
+#         state = request.GET.get("state")
+#         session_state = request.session.pop('linkedin_oauth_state', None)
+#
+#         if not state or state != session_state:
+#             return redirect('login_page')
+#
+#         code = request.GET.get("code")
+#         if not code:
+#             return redirect('login_page')
+#
+#         # Access token olish
+#         token_res = requests.post(
+#             "https://www.linkedin.com/oauth/v2/accessToken",
+#             data={
+#                 "grant_type": "authorization_code",
+#                 "code": code,
+#                 "redirect_uri": settings.LINKEDIN_REDIRECT_URI,
+#                 "client_id": settings.LINKEDIN_CLIENT_ID,
+#                 "client_secret": settings.LINKEDIN_CLIENT_SECRET
+#             },
+#             headers={"Content-Type": "application/x-www-form-urlencoded"}
+#         ).json()
+#
+#         access_token = token_res.get("access_token")
+#         if not access_token:
+#             return redirect('login_page')
+#
+#         # User info olish
+#         user_info_res = requests.get(
+#             "https://api.linkedin.com/v2/userinfo",
+#             headers={"Authorization": f"Bearer {access_token}"}
+#         )
+#
+#         if user_info_res.status_code != 200:
+#             return redirect('login_page')
+#
+#         info = user_info_res.json()
+#
+#         email = info.get("email")
+#         first_name = info.get("given_name")
+#         last_name = info.get("family_name")
+#         picture = info.get("picture")
+#
+#         user, created = User.objects.get_or_create(
+#             email=email,
+#             defaults={
+#                 "first_name": first_name,
+#                 "last_name": last_name,
+#                 "is_active": True,
+#                 "role": Roles.CANDIDATE
+#             }
+#         )
+#
+#         if created:
+#             CandidateUser.objects.create(
+#                 user=user,
+#                 image=picture,
+#                 linkedin_link=info.get("profile")
+#             )
+#             user.set_unusable_password()
+#             user.save()
+#
+#         login(request, user)
+#         return redirect('main_page')
