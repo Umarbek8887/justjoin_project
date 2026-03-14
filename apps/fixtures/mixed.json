@@ -1,0 +1,1210 @@
+[
+  {
+    "model": "apps.joboffer",
+    "pk": 1,
+    "fields": {
+      "name": "Senior Python Developer",
+      "description": "<h4>About the Role</h4><p>We are looking for an experienced Python Developer to join our backend team. You will be responsible for designing and maintaining high-load microservices.</p>",
+      "slug": "uzinfocom-senior-python-developer-tashkent-backend-1",
+      "working_mode": "hybrid",
+      "contract_type": "b2b",
+      "working_type": "full-time",
+      "required_experience": "senior",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-01T09:00:00Z",
+      "updated_at": "2026-03-01T09:00:00Z",
+      "published_at": "2026-03-01T09:00:00Z",
+      "end_time": "2026-06-01T23:59:00Z",
+      "is_active": true,
+      "company": 1,
+      "category": 1
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 2,
+    "fields": {
+      "name": "DevOps Engineer",
+      "description": "<h4>About the Role</h4><p>Join our infrastructure team to build and maintain CI/CD pipelines.</p>",
+      "slug": "uzinfocom-devops-engineer-tashkent-devops-2",
+      "working_mode": "remote",
+      "contract_type": "permanent",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-02T10:00:00Z",
+      "updated_at": "2026-03-02T10:00:00Z",
+      "published_at": "2026-03-02T10:00:00Z",
+      "end_time": "2026-06-15T23:59:00Z",
+      "is_active": true,
+      "company": 1,
+      "category": 2
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 3,
+    "fields": {
+      "name": "React Frontend Developer",
+      "description": "<h4>About the Role</h4><p>We are seeking a talented React developer.</p>",
+      "slug": "payme-react-frontend-developer-tashkent-frontend-3",
+      "working_mode": "hybrid",
+      "contract_type": "permanent",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-03T08:30:00Z",
+      "updated_at": "2026-03-03T08:30:00Z",
+      "published_at": "2026-03-03T08:30:00Z",
+      "end_time": "2026-07-30T23:59:00Z",
+      "is_active": true,
+      "company": 2,
+      "category": 3
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 4,
+    "fields": {
+      "name": "Mobile Developer (Flutter)",
+      "description": "<h4>About the Role</h4><p>Build and ship cross-platform mobile applications.</p>",
+      "slug": "payme-mobile-developer-flutter-tashkent-mobile-4",
+      "working_mode": "office",
+      "contract_type": "permanent",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-04T09:00:00Z",
+      "updated_at": "2026-03-04T09:00:00Z",
+      "published_at": "2026-03-04T09:00:00Z",
+      "end_time": "2026-06-25T23:59:00Z",
+      "is_active": true,
+      "company": 2,
+      "category": 4
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 5,
+    "fields": {
+      "name": "Backend Java Engineer",
+      "description": "<h4>About the Role</h4><p>Join our core banking team.</p>",
+      "slug": "click-backend-java-engineer-tashkent-backend-5",
+      "working_mode": "hybrid",
+      "contract_type": "b2b",
+      "working_type": "full-time",
+      "required_experience": "senior",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-05T10:00:00Z",
+      "updated_at": "2026-03-05T10:00:00Z",
+      "published_at": "2026-03-05T10:00:00Z",
+      "end_time": "2026-08-20T23:59:00Z",
+      "is_active": true,
+      "company": 3,
+      "category": 1
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 6,
+    "fields": {
+      "name": "QA Automation Engineer",
+      "description": "<h4>About the Role</h4><p>We are looking for a QA Automation Engineer.</p>",
+      "slug": "click-qa-automation-engineer-tashkent-qa-6",
+      "working_mode": "hybrid",
+      "contract_type": "permanent",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-05T11:00:00Z",
+      "updated_at": "2026-03-05T11:00:00Z",
+      "published_at": "2026-03-05T11:00:00Z",
+      "end_time": "2026-07-10T23:59:00Z",
+      "is_active": true,
+      "company": 3,
+      "category": 5
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 7,
+    "fields": {
+      "name": "Data Engineer",
+      "description": "<h4>About the Role</h4><p>Build robust data pipelines.</p>",
+      "slug": "humans-data-engineer-tashkent-data-7",
+      "working_mode": "remote",
+      "contract_type": "b2b",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-06T09:00:00Z",
+      "updated_at": "2026-03-06T09:00:00Z",
+      "published_at": "2026-03-06T09:00:00Z",
+      "end_time": "2026-08-30T23:59:00Z",
+      "is_active": true,
+      "company": 4,
+      "category": 6
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 8,
+    "fields": {
+      "name": "Node.js Backend Developer",
+      "description": "<h4>About the Role</h4><p>Join our product team.</p>",
+      "slug": "humans-nodejs-backend-developer-tashkent-backend-8",
+      "working_mode": "hybrid",
+      "contract_type": "permanent",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-07T09:00:00Z",
+      "updated_at": "2026-03-07T09:00:00Z",
+      "published_at": "2026-03-07T09:00:00Z",
+      "end_time": "2026-07-25T23:59:00Z",
+      "is_active": true,
+      "company": 4,
+      "category": 1
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 9,
+    "fields": {
+      "name": "Full Stack Developer (Django + Vue.js)",
+      "description": "<h4>About the Role</h4><p>We need a versatile full stack developer.</p>",
+      "slug": "uzum-full-stack-developer-tashkent-fullstack-9",
+      "working_mode": "hybrid",
+      "contract_type": "permanent",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-08T08:00:00Z",
+      "updated_at": "2026-03-08T08:00:00Z",
+      "published_at": "2026-03-08T08:00:00Z",
+      "end_time": "2026-06-15T23:59:00Z",
+      "is_active": true,
+      "company": 5,
+      "category": 7
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 10,
+    "fields": {
+      "name": "Junior Python Developer",
+      "description": "<h4>About the Role</h4><p>Great opportunity for a junior developer.</p>",
+      "slug": "uzum-junior-python-developer-tashkent-backend-10",
+      "working_mode": "office",
+      "contract_type": "internship",
+      "working_type": "full-time",
+      "required_experience": "junior",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-09T09:00:00Z",
+      "updated_at": "2026-03-09T09:00:00Z",
+      "published_at": "2026-03-09T09:00:00Z",
+      "end_time": "2026-06-20T23:59:00Z",
+      "is_active": true,
+      "company": 5,
+      "category": 1
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 11,
+    "fields": {
+      "name": "iOS Developer (Swift)",
+      "description": "<h4>About the Role</h4><p>Build and ship high-quality iOS applications.</p>",
+      "slug": "yandex-taxi-ios-developer-swift-tashkent-mobile-11",
+      "working_mode": "hybrid",
+      "contract_type": "b2b",
+      "working_type": "full-time",
+      "required_experience": "mid",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-10T10:00:00Z",
+      "updated_at": "2026-03-10T10:00:00Z",
+      "published_at": "2026-03-10T10:00:00Z",
+      "end_time": "2026-08-01T23:59:00Z",
+      "is_active": true,
+      "company": 6,
+      "category": 4
+    }
+  },
+  {
+    "model": "apps.joboffer",
+    "pk": 12,
+    "fields": {
+      "name": "Machine Learning Engineer",
+      "description": "<h4>About the Role</h4><p>Join our AI team.</p>",
+      "slug": "yandex-taxi-machine-learning-engineer-tashkent-ai-12",
+      "working_mode": "remote",
+      "contract_type": "b2b",
+      "working_type": "full-time",
+      "required_experience": "senior",
+      "undisclosed_salary": false,
+      "created_at": "2026-03-10T11:00:00Z",
+      "updated_at": "2026-03-10T11:00:00Z",
+      "published_at": "2026-03-10T11:00:00Z",
+      "end_time": "2026-08-10T23:59:00Z",
+      "is_active": true,
+      "company": 6,
+      "category": 8
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 1,
+    "fields": {
+      "job_offer": 1,
+      "tech_stack": 1,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 2,
+    "fields": {
+      "job_offer": 1,
+      "tech_stack": 2,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 3,
+    "fields": {
+      "job_offer": 1,
+      "tech_stack": 5,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 4,
+    "fields": {
+      "job_offer": 1,
+      "tech_stack": 10,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 5,
+    "fields": {
+      "job_offer": 1,
+      "tech_stack": 6,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 6,
+    "fields": {
+      "job_offer": 1,
+      "tech_stack": 27,
+      "level": "junior"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 7,
+    "fields": {
+      "job_offer": 2,
+      "tech_stack": 6,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 8,
+    "fields": {
+      "job_offer": 2,
+      "tech_stack": 18,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 9,
+    "fields": {
+      "job_offer": 2,
+      "tech_stack": 7,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 10,
+    "fields": {
+      "job_offer": 2,
+      "tech_stack": 37,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 11,
+    "fields": {
+      "job_offer": 2,
+      "tech_stack": 38,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 12,
+    "fields": {
+      "job_offer": 2,
+      "tech_stack": 39,
+      "level": "nice to have"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 13,
+    "fields": {
+      "job_offer": 3,
+      "tech_stack": 4,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 14,
+    "fields": {
+      "job_offer": 3,
+      "tech_stack": 8,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 15,
+    "fields": {
+      "job_offer": 3,
+      "tech_stack": 42,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 16,
+    "fields": {
+      "job_offer": 3,
+      "tech_stack": 30,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 17,
+    "fields": {
+      "job_offer": 3,
+      "tech_stack": 28,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 18,
+    "fields": {
+      "job_offer": 4,
+      "tech_stack": 44,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 19,
+    "fields": {
+      "job_offer": 4,
+      "tech_stack": 32,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 20,
+    "fields": {
+      "job_offer": 4,
+      "tech_stack": 3,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 21,
+    "fields": {
+      "job_offer": 4,
+      "tech_stack": 40,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 22,
+    "fields": {
+      "job_offer": 5,
+      "tech_stack": 12,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 23,
+    "fields": {
+      "job_offer": 5,
+      "tech_stack": 13,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 24,
+    "fields": {
+      "job_offer": 5,
+      "tech_stack": 5,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 25,
+    "fields": {
+      "job_offer": 5,
+      "tech_stack": 34,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 26,
+    "fields": {
+      "job_offer": 5,
+      "tech_stack": 6,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 27,
+    "fields": {
+      "job_offer": 6,
+      "tech_stack": 1,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 28,
+    "fields": {
+      "job_offer": 6,
+      "tech_stack": 40,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 29,
+    "fields": {
+      "job_offer": 6,
+      "tech_stack": 39,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 30,
+    "fields": {
+      "job_offer": 6,
+      "tech_stack": 5,
+      "level": "junior"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 31,
+    "fields": {
+      "job_offer": 7,
+      "tech_stack": 1,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 32,
+    "fields": {
+      "job_offer": 7,
+      "tech_stack": 34,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 33,
+    "fields": {
+      "job_offer": 7,
+      "tech_stack": 48,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 34,
+    "fields": {
+      "job_offer": 7,
+      "tech_stack": 7,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 35,
+    "fields": {
+      "job_offer": 7,
+      "tech_stack": 5,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 36,
+    "fields": {
+      "job_offer": 8,
+      "tech_stack": 9,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 37,
+    "fields": {
+      "job_offer": 8,
+      "tech_stack": 8,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 38,
+    "fields": {
+      "job_offer": 8,
+      "tech_stack": 20,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 39,
+    "fields": {
+      "job_offer": 8,
+      "tech_stack": 10,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 40,
+    "fields": {
+      "job_offer": 8,
+      "tech_stack": 6,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 41,
+    "fields": {
+      "job_offer": 9,
+      "tech_stack": 2,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 42,
+    "fields": {
+      "job_offer": 9,
+      "tech_stack": 11,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 43,
+    "fields": {
+      "job_offer": 9,
+      "tech_stack": 5,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 44,
+    "fields": {
+      "job_offer": 9,
+      "tech_stack": 10,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 45,
+    "fields": {
+      "job_offer": 9,
+      "tech_stack": 6,
+      "level": "junior"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 46,
+    "fields": {
+      "job_offer": 10,
+      "tech_stack": 1,
+      "level": "junior"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 47,
+    "fields": {
+      "job_offer": 10,
+      "tech_stack": 2,
+      "level": "junior"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 48,
+    "fields": {
+      "job_offer": 10,
+      "tech_stack": 5,
+      "level": "nice to have"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 49,
+    "fields": {
+      "job_offer": 10,
+      "tech_stack": 40,
+      "level": "junior"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 50,
+    "fields": {
+      "job_offer": 11,
+      "tech_stack": 15,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 51,
+    "fields": {
+      "job_offer": 11,
+      "tech_stack": 32,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 52,
+    "fields": {
+      "job_offer": 11,
+      "tech_stack": 40,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 53,
+    "fields": {
+      "job_offer": 11,
+      "tech_stack": 6,
+      "level": "junior"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 54,
+    "fields": {
+      "job_offer": 12,
+      "tech_stack": 1,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 55,
+    "fields": {
+      "job_offer": 12,
+      "tech_stack": 50,
+      "level": "master"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 56,
+    "fields": {
+      "job_offer": 12,
+      "tech_stack": 49,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 57,
+    "fields": {
+      "job_offer": 12,
+      "tech_stack": 48,
+      "level": "advanced"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 58,
+    "fields": {
+      "job_offer": 12,
+      "tech_stack": 6,
+      "level": "regular"
+    }
+  },
+  {
+    "model": "apps.jobtechstack",
+    "pk": 59,
+    "fields": {
+      "job_offer": 12,
+      "tech_stack": 18,
+      "level": "nice to have"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 1,
+    "fields": {
+      "job_offer": 1,
+      "language": 3,
+      "level": "c1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 2,
+    "fields": {
+      "job_offer": 1,
+      "language": 1,
+      "level": "c2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 3,
+    "fields": {
+      "job_offer": 2,
+      "language": 3,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 4,
+    "fields": {
+      "job_offer": 2,
+      "language": 2,
+      "level": "b1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 5,
+    "fields": {
+      "job_offer": 3,
+      "language": 3,
+      "level": "c1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 6,
+    "fields": {
+      "job_offer": 3,
+      "language": 1,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 7,
+    "fields": {
+      "job_offer": 4,
+      "language": 3,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 8,
+    "fields": {
+      "job_offer": 4,
+      "language": 1,
+      "level": "c1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 9,
+    "fields": {
+      "job_offer": 5,
+      "language": 3,
+      "level": "c1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 10,
+    "fields": {
+      "job_offer": 5,
+      "language": 1,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 11,
+    "fields": {
+      "job_offer": 6,
+      "language": 3,
+      "level": "b1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 12,
+    "fields": {
+      "job_offer": 6,
+      "language": 1,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 13,
+    "fields": {
+      "job_offer": 7,
+      "language": 3,
+      "level": "c1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 14,
+    "fields": {
+      "job_offer": 7,
+      "language": 1,
+      "level": "b1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 15,
+    "fields": {
+      "job_offer": 8,
+      "language": 3,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 16,
+    "fields": {
+      "job_offer": 8,
+      "language": 1,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 17,
+    "fields": {
+      "job_offer": 9,
+      "language": 3,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 18,
+    "fields": {
+      "job_offer": 9,
+      "language": 1,
+      "level": "c1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 19,
+    "fields": {
+      "job_offer": 10,
+      "language": 1,
+      "level": "b1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 20,
+    "fields": {
+      "job_offer": 10,
+      "language": 3,
+      "level": "a2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 21,
+    "fields": {
+      "job_offer": 11,
+      "language": 3,
+      "level": "c1"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 22,
+    "fields": {
+      "job_offer": 11,
+      "language": 1,
+      "level": "b2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 23,
+    "fields": {
+      "job_offer": 12,
+      "language": 3,
+      "level": "c2"
+    }
+  },
+  {
+    "model": "apps.joblanguage",
+    "pk": 24,
+    "fields": {
+      "job_offer": 12,
+      "language": 1,
+      "level": "b1"
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 1,
+    "fields": {
+      "salary_min": 3500,
+      "salary_max": 5000,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 1
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 2,
+    "fields": {
+      "salary_min": 35000000,
+      "salary_max": 50000000,
+      "type": "monthly",
+      "currency": 1,
+      "job_offer": 1
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 3,
+    "fields": {
+      "salary_min": 2500,
+      "salary_max": 3500,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 2
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 4,
+    "fields": {
+      "salary_min": 20,
+      "salary_max": 28,
+      "type": "hourly",
+      "currency": 2,
+      "job_offer": 2
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 5,
+    "fields": {
+      "salary_min": 2000,
+      "salary_max": 3000,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 3
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 6,
+    "fields": {
+      "salary_min": 25000000,
+      "salary_max": 38000000,
+      "type": "monthly",
+      "currency": 1,
+      "job_offer": 3
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 7,
+    "fields": {
+      "salary_min": 1800,
+      "salary_max": 2800,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 4
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 8,
+    "fields": {
+      "salary_min": 3000,
+      "salary_max": 4500,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 5
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 9,
+    "fields": {
+      "salary_min": 30000000,
+      "salary_max": 45000000,
+      "type": "monthly",
+      "currency": 1,
+      "job_offer": 5
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 10,
+    "fields": {
+      "salary_min": 1500,
+      "salary_max": 2200,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 6
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 11,
+    "fields": {
+      "salary_min": 2800,
+      "salary_max": 4000,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 7
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 12,
+    "fields": {
+      "salary_min": 18,
+      "salary_max": 25,
+      "type": "hourly",
+      "currency": 2,
+      "job_offer": 7
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 13,
+    "fields": {
+      "salary_min": 2200,
+      "salary_max": 3200,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 8
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 14,
+    "fields": {
+      "salary_min": 2500,
+      "salary_max": 3500,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 9
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 15,
+    "fields": {
+      "salary_min": 800,
+      "salary_max": 1200,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 10
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 16,
+    "fields": {
+      "salary_min": 10000000,
+      "salary_max": 15000000,
+      "type": "monthly",
+      "currency": 1,
+      "job_offer": 10
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 17,
+    "fields": {
+      "salary_min": 2500,
+      "salary_max": 3800,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 11
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 18,
+    "fields": {
+      "salary_min": 4000,
+      "salary_max": 6000,
+      "type": "monthly",
+      "currency": 2,
+      "job_offer": 12
+    }
+  },
+  {
+    "model": "apps.salary",
+    "pk": 19,
+    "fields": {
+      "salary_min": 25,
+      "salary_max": 38,
+      "type": "hourly",
+      "currency": 2,
+      "job_offer": 12
+    }
+  }
+]

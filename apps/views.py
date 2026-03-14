@@ -36,11 +36,6 @@ class JobDetailView(DetailView):
         # return context
 
 
-class SomethingView(TemplateView):
-    template_name = 'justjoin/main/test.html'
-
-
-
 class MainPage(ListView):
     template_name = 'justjoin/main/job-offers.html'
     context_object_name = 'jobs'

@@ -1,0 +1,50 @@
+[
+  {
+    "model": "apps.user",
+    "pk": 1,
+    "fields": {
+      "password": "argon2$argon2id$v=19$m=65536,t=3,p=4$c29tZXNhbHQ$P6+pCidWpGkFjU770W2v6g",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Aziz",
+      "last_name": "Rahimov",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-03-12T12:00:00Z",
+      "email": "aziz@employer.uz",
+      "role": "employer"
+    }
+  },
+  {
+    "model": "apps.user",
+    "pk": 2,
+    "fields": {
+      "password": "argon2$argon2id$v=19$m=65536,t=3,p=4$c29tZXNhbHQ$P6+pCidWpGkFjU770W2v6g",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Nodira",
+      "last_name": "Sodiqova",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-03-12T12:05:00Z",
+      "email": "nodira@hr.uz",
+      "role": "employer"
+    }
+  },
+  {
+    "model": "apps.user",
+    "pk": 3,
+    "fields": {
+      "password": "argon2$argon2id$v=19$m=65536,t=3,p=4$c29tZXNhbHQ$P6+pCidWpGkFjU770W2v6g",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Botir",
+      "last_name": "Ergashev",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-03-12T12:10:00Z",
+      "email": "botir@work.uz",
+      "role": "employer"
+    }
+  }
+]

@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.forms import Form, CharField, ModelForm, EmailField
 
-from apps.models import User, EmployerUser
+from apps.models import User, EmployerUser, CandidateUser
 from apps.models.users import Roles
 
 
@@ -82,6 +82,17 @@ class RegisterModelForm(ModelForm):
 
         return cleaned_data
 
+    def save(self, commit = False):
+        data = self.cleaned_data
+        user = User.objects.create(
+            email=data['email'],
+            password=data['password'],
+            role=Roles.CANDIDATE,
+            is_active=False
+        )
+        return user
+
+
 
 class EmployerRegisterForm(Form):
     email = EmailField(required=True)
@@ -138,6 +149,7 @@ class EmployerRegisterForm(Form):
             role=Roles.EMPLOYER,
             first_name=data['full_name'].split()[0],
             last_name=data['full_name'].split()[1],
+            is_active=False
         )
         EmployerUser.objects.create(
             user=user,
@@ -172,3 +184,23 @@ class EmployerLoginForm(Form):
 
         self.user = user
         return cleaned_data
+
+
+
+class UserBasicForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name"]
+
+
+class CandidateProfileForm(ModelForm):
+    class Meta:
+        model = CandidateUser
+        fields = [
+            "image", "cv_file",
+            "message_to_employee",
+            "linkedin_link", "github_link", "other_link",
+        ]
+
+
+

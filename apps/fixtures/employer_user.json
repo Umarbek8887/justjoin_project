@@ -1,0 +1,29 @@
+[
+  {
+    "model": "apps.employeruser",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "phone_number": "+998901234567",
+      "country": "O'zbekiston"
+    }
+  },
+  {
+    "model": "apps.employeruser",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "phone_number": "+998937654321",
+      "country": "O'zbekiston"
+    }
+  },
+  {
+    "model": "apps.employeruser",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "phone_number": "+998990001122",
+      "country": "O'zbekiston"
+    }
+  }
+]
