@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'debug_toolbar',
+    'django_filters',
     'django_ckeditor_5',
     'django_celery_beat',
     'django_celery_results',
@@ -121,7 +122,6 @@ GOOGLE_REDIRECT_URI = 'http://localhost:8000/auth/google/callback'
 GITHUB_CLIENT_ID = os.getenv('GITHUB_CLIENT_ID')
 GITHUB_CLIENT_SECRET = os.getenv('GITHUB_CLIENT_SECRET')
 GITHUB_REDIRECT_URI = 'http://localhost:8000/auth/github/callback/'
-
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -88,7 +88,7 @@ const salaryOnlyCheck = document.getElementById('salaryOnlyCheck');
 if (salaryOnlyCheck) {
   salaryOnlyCheck.addEventListener('change', () => {
     const params = new URLSearchParams(window.location.search);
-    salaryOnlyCheck.checked ? params.set('salary_only', '1') : params.delete('salary_only');
+    salaryOnlyCheck.checked ? params.set('salary_only', 'true') : params.delete('salary_only');
     window.location.href = `${window.location.pathname}?${params.toString()}`;
   });
 }
@@ -325,3 +325,30 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   items.forEach(item => grid.appendChild(item));
 });
+
+
+let offset = 20
+let loading = false
+
+window.addEventListener("scroll", async () => {
+
+    if (loading) return
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+
+        loading = true
+
+        const params = new URLSearchParams(window.location.search)
+        params.set("offset", offset)
+
+        const response = await fetch(`/jobs?${params.toString()}`)
+        const html = await response.text()
+
+        document
+            .querySelector("#job-container")
+            .insertAdjacentHTML("beforeend", html)
+
+        offset += 20
+        loading = false
+    }
+})

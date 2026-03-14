@@ -9,32 +9,23 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
-from django.views.generic import FormView, CreateView, TemplateView, ListView, DetailView, UpdateView
+from django.views.generic import FormView, CreateView, TemplateView, DetailView, UpdateView
+from django_filters.views import FilterView
 
 from apps.filters import JobOfferFilter
-from apps.forms import LoginForm, RegisterModelForm, EmployerRegisterForm, EmployerLoginForm
+from apps.forms import LoginForm, RegisterModelForm, EmployerRegisterForm, EmployerLoginForm, CandidateProfileForm, \
+    UserBasicForm
 from apps.mixins import LoginNotRequiredMixin
 from apps.models import User, JobOffer, Category, CandidateUser
 from apps.models.users import Roles
 from apps.tasks import send_registration_link
 from apps.tokens import account_activation_token
 from root import settings
-
-
-# class JobDetailView(DetailView):
-#     queryset = JobOffer.objects.filter(is_active=True)
-#     template_name = 'justjoin/main/job-detail.html'
-#     context_object_name = 'job'
-#
-#     # def get_context_data(self, **kwargs):
-#     #     context = super().get_context_data(**kwargs)
-#     #     context["similar_jobs"] = JobOffer.objects.filter(category=)
-#     #     return context
 
 
 class JobDetailView(DetailView):
@@ -67,15 +58,13 @@ class JobDetailView(DetailView):
         return context
 
 
-class MainPage(ListView):
-    # FilteView
+class MainPage(FilterView):
+    queryset = JobOffer.objects.filter(is_active=True).defer(
+        "description", "end_time", "created_at", "updated_at"
+    ).select_related('company', 'category')
     template_name = "justjoin/main/job-offers.html"
     context_object_name = "jobs"
-
-    def get_queryset(self):
-        qs = JobOffer.objects.filter(is_active=True).defer("description", "end_time", "created_at", "updated_at")
-        qs = JobOfferFilter(self.request, qs).filter()
-        return qs
+    filterset_class = JobOfferFilter
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -91,36 +80,15 @@ class MainPage(ListView):
 
 class CandidateProfileView(LoginRequiredMixin, UpdateView):
     template_name = "justjoin/auth/candidate/profile.html"
+    form_class = CandidateProfileForm
     success_url = reverse_lazy("candidate_profile")
 
-    # FormClass
+    def get_object(self, queryset=None):
+        return self.request.user.candidate_profile
 
-    def get(self, request, **kwargs):
-        return render(request, self.template_name)
-
-    def post(self, request, **kwargs):
-        user = request.user
-        profile = user.candidate_profile
-
-        user.first_name = request.POST.get("first_name", "")
-        user.last_name = request.POST.get("last_name", "")
-        user.save()
-
-        profile.message_to_employee = request.POST.get("message_to_employee", "")
-        profile.linkedin_link = request.POST.get("linkedin_link", "")
-        profile.github_link = request.POST.get("github_link", "")
-        profile.other_link = request.POST.get("other_link", "")
-
-        if request.FILES.get("image"):
-            profile.image = request.FILES.get("image")
-
-        if request.FILES.get("cv_file"):
-            profile.cv_file = request.FILES.get("cv_file")
-
-        profile.save()
-
-        # messages.success(request, "Profile updated successfully.")
-        return redirect(self.success_url)
+    def form_valid(self, form):
+        UserBasicForm(self.request.POST, instance=self.request.user).save()
+        return super().form_valid(form)
 
 
 class CandidateProfileChangePasswordView(LoginRequiredMixin, UpdateView):
@@ -143,9 +111,6 @@ class CandidateProfileChangePasswordView(LoginRequiredMixin, UpdateView):
         update_session_auth_hash(self.request, self.request.user)
         return HttpResponseRedirect(self.get_success_url())
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
 
 # Auth
 class EmployerLoginView(LoginNotRequiredMixin, FormView):
@@ -166,13 +131,6 @@ class EmployerRegisterView(LoginNotRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = form.save()
-
-        #
-        #
-        #
-        #
-        user.is_active = False
-        user.save(update_fields=['is_active'])
         send_registration_link(user, f"{self.request.scheme}://{self.request.get_host()}")
         return self.render_to_response(self.get_context_data(form=form, success=True))
 
@@ -195,10 +153,7 @@ class RegisterCreateView(LoginNotRequiredMixin, CreateView):
     success_url = reverse_lazy('main_page')
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.role = Roles.CANDIDATE
-        user.save()
+        user = form.save()
         send_registration_link(user, f"{self.request.scheme}://{self.request.get_host()}")
         return self.render_to_response(self.get_context_data(form=form, success=True))
 
@@ -251,7 +206,6 @@ class SoicialLoginView(LoginNotRequiredMixin, TemplateView):
 # Google
 class GoogleLoginView(View):
     def get(self, request):
-        # CSRF hujumidan himoyalanish uchun state yaratamiz
         state = secrets.token_urlsafe(16)
         request.session['google_oauth2_state'] = state
 
@@ -262,8 +216,8 @@ class GoogleLoginView(View):
             "client_id": settings.GOOGLE_CLIENT_ID,
             "redirect_uri": settings.GOOGLE_REDIRECT_URI,
             "scope": scope,
-            "state": state,  # State qo'shildi
-            "prompt": "select_account"  # Foydalanuvchiga akkauntni tanlash imkonini beradi
+            "state": state,
+            "prompt": "select_account"
         }
 
         auth_url = f"https://accounts.google.com/o/oauth2/v2/auth?{urllib.parse.urlencode(params)}"
@@ -276,7 +230,7 @@ class GoogleCallbackView(View):
         session_state = request.session.pop('google_oauth2_state', None)
 
         if not state or state != session_state:
-            return redirect('login_page')  # State mos kelmasa, xavfli so'rov bo'lishi mumkin
+            return redirect('login_page')
 
         code = request.GET.get("code")
         if not code:
@@ -305,14 +259,12 @@ class GoogleCallbackView(View):
             info = user_info_res.json()
             email = info.get("email")
             first_name = info.get("given_name")
-            last_name = info.get("family_name")
             picture_url = info.get("picture")
 
             user, created = User.objects.get_or_create(
                 email=email,
                 defaults={
                     "first_name": first_name,
-                    "last_name": last_name,
                     "is_active": True,
                     "role": Roles.CANDIDATE
                 }
@@ -400,7 +352,6 @@ class GithubCallbackView(View):
 
         login(request, user)
         return redirect('main_page')
-
 
 # Linkedin
 # class LinkedInLoginView(View):

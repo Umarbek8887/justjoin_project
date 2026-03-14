@@ -1,34 +1,22 @@
-class JobOfferFilter:
-    def __init__(self, request, queryset):
-        self.request = request
-        self.qs = queryset
+from django_filters import FilterSet, CharFilter, MultipleChoiceFilter, BooleanFilter
 
-    def filter(self):
-        qs = self.qs
+from apps.models import JobOffer
+from apps.models.job_offers import WorkingMode, ContractType, WorkingType, Experience
 
-        category = self.request.GET.get("category")
-        working_mode = self.request.GET.getlist("working_mode")
-        contract_type = self.request.GET.getlist("contract_type")
-        working_type = self.request.GET.getlist("working_type")
-        experience = self.request.GET.getlist("experience")
-        salary_only = self.request.GET.get("salary_only")
 
-        if category:
-            qs = qs.filter(category__slug=category)
+class JobOfferFilter(FilterSet):
+    category = CharFilter(field_name="category__slug")
+    working_mode = MultipleChoiceFilter(field_name="working_mode", choices=WorkingMode.choices)
+    contract_type = MultipleChoiceFilter(field_name="contract_type", choices=ContractType.choices)
+    working_type = MultipleChoiceFilter(field_name="working_type", choices=WorkingType.choices)
+    experience = MultipleChoiceFilter(field_name="required_experience", choices=Experience.choices)
+    salary_only = BooleanFilter(method="filter_salary")
 
-        if working_mode:
-            qs = qs.filter(working_mode__in=working_mode)
+    class Meta:
+        model = JobOffer
+        fields = []
 
-        if contract_type:
-            qs = qs.filter(contract_type__in=contract_type)
-
-        if working_type:
-            qs = qs.filter(working_type__in=working_type)
-
-        if experience:
-            qs = qs.filter(required_experience__in=experience)
-
-        if salary_only:
-            qs = qs.filter(undisclosed_salary=False, salaries__isnull=False).distinct()
-
-        return qs
+    def filter_salary(self, queryset, name, value):
+        if value:
+            return queryset.filter(undisclosed_salary=False, salaries__isnull=False).distinct()
+        return queryset
