@@ -327,28 +327,113 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-let offset = 20
-let loading = false
+/* ════════════════════════════════
+   INFINITE SCROLL
+════════════════════════════════ */
+(function () {
+  const jobsList = document.getElementById('jobsList');
+  if (!jobsList) return;
 
-window.addEventListener("scroll", async () => {
+  let loading = false;
 
-    if (loading) return
+  // Spinner element
+  const spinner = document.createElement('div');
+  spinner.id = 'scroll-spinner';
+  Object.assign(spinner.style, {
+    display: 'none',
+    textAlign: 'center',
+    padding: '20px',
+    color: 'var(--text-muted)',
+    fontSize: '13px',
+  });
+  spinner.innerHTML = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         style="animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px">
+      <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+    </svg>
+    Loading more offers…
+  `;
+  jobsList.after(spinner);
 
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+  // spin keyframe
+  if (!document.getElementById('spin-style')) {
+    const s = document.createElement('style');
+    s.id = 'spin-style';
+    s.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
 
-        loading = true
+  function getSentinel() {
+    return document.getElementById('scroll-sentinel');
+  }
 
-        const params = new URLSearchParams(window.location.search)
-        params.set("offset", offset)
+  async function loadMore(nextPage) {
+    if (loading) return;
+    loading = true;
+    spinner.style.display = 'block';
 
-        const response = await fetch(`/jobs?${params.toString()}`)
-        const html = await response.text()
+    // Mavjud filter parametrlarini saqlagan holda page qo'shamiz
+    const params = new URLSearchParams(window.location.search);
+    params.set('page', nextPage);
 
-        document
-            .querySelector("#job-container")
-            .insertAdjacentHTML("beforeend", html)
+    try {
+      const res = await fetch(`${window.location.pathname}?${params.toString()}`, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      });
+      if (!res.ok) throw new Error('Network error');
+      const html = await res.text();
 
-        offset += 20
-        loading = false
+      // Eski sentinelni olib tashlaymiz
+      const old = getSentinel();
+      if (old) old.remove();
+
+      // Yangi kartochkalarni qo'shamiz
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      const newCards = [...tmp.children];
+      newCards.forEach((el, i) => {
+        el.style.animationDelay = `${i * 0.04}s`;
+        jobsList.appendChild(el);
+      });
+
+      // Yangi sentinelni kuzatamiz
+      const newSentinel = getSentinel();
+      if (newSentinel) observer.observe(newSentinel);
+
+    } catch (err) {
+      console.error('Infinite scroll error:', err);
+    } finally {
+      loading = false;
+      spinner.style.display = 'none';
     }
-})
+  }
+
+  // IntersectionObserver — sentinel ko'ringanda yuklaydi
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const nextPage = entry.target.dataset.nextPage;
+      if (nextPage) loadMore(nextPage);
+    });
+  }, { rootMargin: '200px' }); // 200px oldin trigger bo'ladi — silliq tajriba
+
+  // Sahifa ochilganda birinchi sentinelni kuzatamiz
+  const initial = getSentinel();
+  if (initial) observer.observe(initial);
+})();
+
+
+/* ── TECH STACK SORT (highest level first) ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const levelOrder = { master: 5, advanced: 4, regular: 3, junior: 2, 'nice to have': 1 };
+  const grid = document.querySelector('.tech-grid');
+  if (!grid) return;
+
+  const items = [...grid.querySelectorAll('.stack-item')];
+  items.sort((a, b) => {
+    const lvA = a.querySelector('.tech-level')?.innerText.trim().toLowerCase() || '';
+    const lvB = b.querySelector('.tech-level')?.innerText.trim().toLowerCase() || '';
+    return (levelOrder[lvB] || 0) - (levelOrder[lvA] || 0);
+  });
+  items.forEach(item => grid.appendChild(item));
+});

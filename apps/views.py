@@ -8,7 +8,8 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
@@ -16,6 +17,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.views.generic import FormView, CreateView, TemplateView, DetailView, UpdateView
 from django_filters.views import FilterView
+from django.template.loader import render_to_string
 
 from apps.filters import JobOfferFilter
 from apps.forms import LoginForm, RegisterModelForm, EmployerRegisterForm, EmployerLoginForm, CandidateProfileForm, \
@@ -65,6 +67,24 @@ class MainPage(FilterView):
     template_name = "justjoin/main/job-offers.html"
     context_object_name = "jobs"
     filterset_class = JobOfferFilter
+    # # # A
+    paginate_by = 10
+    def get(self, request, *args, **kwargs):
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            self.object_list = self.get_filterset(self.get_filterset_class()).qs
+            paginator = Paginator(self.object_list, self.paginate_by)
+            page_number = request.GET.get('page', 1)
+            page_obj = paginator.get_page(page_number)
+            context = {
+                'jobs': page_obj,
+                'has_next': page_obj.has_next(),
+                'next_page': page_obj.next_page_number() if page_obj.has_next() else None,
+            }
+            html = render_to_string('justjoin/main/partial.html', context, request=request)
+            return HttpResponse(html)
+
+        return super().get(request, *args, **kwargs)
+    # # # B
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,6 +95,12 @@ class MainPage(FilterView):
         context["active_working_type"] = self.request.GET.getlist("working_type")
         context["active_experience"] = self.request.GET.getlist("experience")
         context["salary_only"] = self.request.GET.get("salary_only", "")
+        # # # A
+        paginator = self.get_paginator(self.object_list, self.paginate_by)
+        page_obj = paginator.get_page(1)
+        context["has_next"] = page_obj.has_next()
+        context["next_page"] = 2 if page_obj.has_next() else None
+        # # # B
         return context
 
 

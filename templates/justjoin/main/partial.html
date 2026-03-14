@@ -1,0 +1,79 @@
+{% load static %}
+{% load custom_tags %}
+
+{% for job in jobs %}
+    <div class="job-card" data-mode="{{ job.working_mode }}" data-contract="{{ job.contract_type }}"
+         data-worktype="{{ job.working_type }}" data-exp="{{ job.required_experience }}">
+        <div class="job-logo">
+            <div class="logo-box">
+                {% if job.company.image %}
+                    <img src="{{ job.company.image.url }}" width="48" height="48" alt="{{ job.company.name }}"/>
+                {% else %}
+                    <img src="https://ui-avatars.com/api/?name={{ job.company.name|urlencode }}&background=1a1a2e&color=fff&size=48&bold=true&font-size=0.4"
+                         width="48" height="48" alt="{{ job.company.name }}"/>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="job-mid">
+            <a href="{% url 'detail' job.slug %}" style="text-decoration:none;color:inherit;">
+                <div class="job-title">{{ job.name }}</div>
+                <div class="job-meta">
+                    <span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        {{ job.company.name }}
+                    </span>
+                    <span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        {{ job.company.location_name }}
+                    </span>
+                    <span class="{% if job.working_mode == 'remote' %}remote-tag{% endif %}">
+                        {{ job.get_working_mode_display }}
+                    </span>
+                </div>
+                <div class="job-tags">
+                    {% for jts in job.job_tech_stack.all|slice:":4" %}
+                        <span class="tag">{{ jts.tech_stack.name }}</span>
+                    {% endfor %}
+                    {% if job.is_new %}
+                        <span class="tag tag-new">New</span>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+
+        <div class="job-right">
+            {% with salary=job.salaries.first %}
+                {% if salary and not job.undisclosed_salary %}
+                    <span class="salary">
+                        {{ salary.salary_min|int_space }}{% if salary.salary_max is not None %} - {{ salary.salary_max|int_space }}{% endif %}
+                        {{ salary.currency.iso }}
+                        <span style="font-size:0.7rem;opacity:0.7">/ {{ salary.type }}</span>
+                    </span>
+                {% else %}
+                    <span class="salary undisclosed">Undisclosed Salary</span>
+                {% endif %}
+            {% endwith %}
+            <div class="job-bottom">
+                <span class="days">{{ job.left_days }}d left</span>
+                <button class="bm-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% if has_next %}
+    <div id="scroll-sentinel" data-next-page="{{ next_page }}"></div>
+{% endif %}
