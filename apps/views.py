@@ -8,15 +8,20 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
-from django.views.generic import FormView, CreateView, TemplateView, ListView, DetailView, UpdateView
+from django.views.generic import FormView, CreateView, TemplateView, DetailView, UpdateView
+from django_filters.views import FilterView
+from django.template.loader import render_to_string
 
-from apps.forms import LoginForm, RegisterModelForm, EmployerRegisterForm, EmployerLoginForm
+from apps.filters import JobOfferFilter
+from apps.forms import LoginForm, RegisterModelForm, EmployerRegisterForm, EmployerLoginForm, CandidateProfileForm, \
+    UserBasicForm
 from apps.mixins import LoginNotRequiredMixin
 from apps.models import User, JobOffer, Category, CandidateUser
 from apps.models.users import Roles
@@ -26,93 +31,90 @@ from root import settings
 
 
 class JobDetailView(DetailView):
-    queryset = JobOffer.objects.filter(is_active=True)
-    template_name = 'justjoin/main/job-detail.html'
-    context_object_name = 'job'
+    queryset = (
+        JobOffer.objects
+        .filter(is_active=True)
+        .select_related("company", "category")
+        .prefetch_related("salaries")
+    )
+    template_name = "justjoin/main/job-detail.html"
+    context_object_name = "job"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-        # context["similar_jobs"] = JobOffer.objects.all()
-        # return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        job = self.object
+        similar_jobs = (
+            JobOffer.objects
+            .filter(is_active=True,
+                    category=job.category,
+                    company__origin=job.company.origin,
+                    required_experience=job.required_experience
+                    )
+            .exclude(pk=job.pk)
+            .select_related("company")
+            .prefetch_related("salaries")
+            .order_by("-published_at")[:4]
+            .defer("description", "end_time", "created_at", "updated_at")
+        )
+        context["similar_jobs"] = similar_jobs
+        return context
 
 
-class MainPage(ListView):
-    template_name = 'justjoin/main/job-offers.html'
-    context_object_name = 'jobs'
+class MainPage(FilterView):
+    queryset = JobOffer.objects.filter(is_active=True).defer(
+        "description", "end_time", "created_at", "updated_at"
+    ).select_related('company', 'category')
+    template_name = "justjoin/main/job-offers.html"
+    context_object_name = "jobs"
+    filterset_class = JobOfferFilter
+    # # # A
+    paginate_by = 10
+    def get(self, request, *args, **kwargs):
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            self.object_list = self.get_filterset(self.get_filterset_class()).qs
+            paginator = Paginator(self.object_list, self.paginate_by)
+            page_number = request.GET.get('page', 1)
+            page_obj = paginator.get_page(page_number)
+            context = {
+                'jobs': page_obj,
+                'has_next': page_obj.has_next(),
+                'next_page': page_obj.next_page_number() if page_obj.has_next() else None,
+            }
+            html = render_to_string('justjoin/main/partial.html', context, request=request)
+            return HttpResponse(html)
 
-    def get_queryset(self):
-        qs = JobOffer.objects.filter(is_active=True).defer('description')
-
-        category = self.request.GET.get('category')
-        working_mode = self.request.GET.getlist('working_mode')
-        contract_type = self.request.GET.getlist('contract_type')
-        working_type = self.request.GET.getlist('working_type')
-        experience = self.request.GET.getlist('experience')
-        salary_only = self.request.GET.get('salary_only')
-
-        if category:
-            qs = qs.filter(category__slug=category)
-        if working_mode:
-            qs = qs.filter(working_mode__in=working_mode)
-        if contract_type:
-            qs = qs.filter(contract_type__in=contract_type)
-        if working_type:
-            qs = qs.filter(working_type__in=working_type)
-        if experience:
-            qs = qs.filter(required_experience__in=experience)
-        if salary_only:
-            qs = qs.filter(undisclosed_salary=False, salaries__isnull=False).distinct()
-
-        return qs
+        return super().get(request, *args, **kwargs)
+    # # # B
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
-
-        # Pass current filter values to template for active state rendering
-        context["active_category"] = self.request.GET.get('category', '')
-        context["active_working_mode"] = self.request.GET.getlist('working_mode')
-        context["active_contract_type"] = self.request.GET.getlist('contract_type')
-        context["active_working_type"] = self.request.GET.getlist('working_type')
-        context["active_experience"] = self.request.GET.getlist('experience')
-        context["salary_only"] = self.request.GET.get('salary_only', '')
-
-        if self.request.user.is_authenticated and self.request.user.is_candidate():
-            context["profile"] = self.request.user.candidate_profile
+        context["active_category"] = self.request.GET.get("category", "")
+        context["active_working_mode"] = self.request.GET.getlist("working_mode")
+        context["active_contract_type"] = self.request.GET.getlist("contract_type")
+        context["active_working_type"] = self.request.GET.getlist("working_type")
+        context["active_experience"] = self.request.GET.getlist("experience")
+        context["salary_only"] = self.request.GET.get("salary_only", "")
+        # # # A
+        paginator = self.get_paginator(self.object_list, self.paginate_by)
+        page_obj = paginator.get_page(1)
+        context["has_next"] = page_obj.has_next()
+        context["next_page"] = 2 if page_obj.has_next() else None
+        # # # B
         return context
 
 
 class CandidateProfileView(LoginRequiredMixin, UpdateView):
     template_name = "justjoin/auth/candidate/profile.html"
+    form_class = CandidateProfileForm
     success_url = reverse_lazy("candidate_profile")
 
-    def get(self, request, **kwargs):
-        return render(request, self.template_name)
+    def get_object(self, queryset=None):
+        return self.request.user.candidate_profile
 
-    def post(self, request, **kwargs):
-        user = request.user
-        profile = user.candidate_profile
-
-        user.first_name = request.POST.get("first_name", "")
-        user.last_name = request.POST.get("last_name", "")
-        user.save()
-
-        profile.message_to_employee = request.POST.get("message_to_employee", "")
-        profile.linkedin_link = request.POST.get("linkedin_link", "")
-        profile.github_link = request.POST.get("github_link", "")
-        profile.other_link = request.POST.get("other_link", "")
-
-        if request.FILES.get("image"):
-            profile.image = request.FILES.get("image")
-
-        if request.FILES.get("cv_file"):
-            profile.cv_file = request.FILES.get("cv_file")
-
-        profile.save()
-
-        # messages.success(request, "Profile updated successfully.")
-        return redirect(self.success_url)
-
+    def form_valid(self, form):
+        UserBasicForm(self.request.POST, instance=self.request.user).save()
+        return super().form_valid(form)
 
 
 class CandidateProfileChangePasswordView(LoginRequiredMixin, UpdateView):
@@ -135,9 +137,6 @@ class CandidateProfileChangePasswordView(LoginRequiredMixin, UpdateView):
         update_session_auth_hash(self.request, self.request.user)
         return HttpResponseRedirect(self.get_success_url())
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
 
 # Auth
 class EmployerLoginView(LoginNotRequiredMixin, FormView):
@@ -158,8 +157,6 @@ class EmployerRegisterView(LoginNotRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = form.save()
-        user.is_active = False
-        user.save(update_fields=['is_active'])
         send_registration_link(user, f"{self.request.scheme}://{self.request.get_host()}")
         return self.render_to_response(self.get_context_data(form=form, success=True))
 
@@ -182,10 +179,7 @@ class RegisterCreateView(LoginNotRequiredMixin, CreateView):
     success_url = reverse_lazy('main_page')
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.role = Roles.CANDIDATE
-        user.save()
+        user = form.save()
         send_registration_link(user, f"{self.request.scheme}://{self.request.get_host()}")
         return self.render_to_response(self.get_context_data(form=form, success=True))
 
@@ -215,6 +209,7 @@ class CustomLogoutView(View):
     def get(self, request):
         next_page = request.GET.get('next') or request.META.get('HTTP_REFERER') or 'main_page'
         logout(request)
+        # return redirect(next_page if next_page != 'candidate_profile' else '')
         return redirect(next_page)
 
 
@@ -237,7 +232,6 @@ class SoicialLoginView(LoginNotRequiredMixin, TemplateView):
 # Google
 class GoogleLoginView(View):
     def get(self, request):
-        # CSRF hujumidan himoyalanish uchun state yaratamiz
         state = secrets.token_urlsafe(16)
         request.session['google_oauth2_state'] = state
 
@@ -248,8 +242,8 @@ class GoogleLoginView(View):
             "client_id": settings.GOOGLE_CLIENT_ID,
             "redirect_uri": settings.GOOGLE_REDIRECT_URI,
             "scope": scope,
-            "state": state,  # State qo'shildi
-            "prompt": "select_account"  # Foydalanuvchiga akkauntni tanlash imkonini beradi
+            "state": state,
+            "prompt": "select_account"
         }
 
         auth_url = f"https://accounts.google.com/o/oauth2/v2/auth?{urllib.parse.urlencode(params)}"
@@ -262,7 +256,7 @@ class GoogleCallbackView(View):
         session_state = request.session.pop('google_oauth2_state', None)
 
         if not state or state != session_state:
-            return redirect('login_page')  # State mos kelmasa, xavfli so'rov bo'lishi mumkin
+            return redirect('login_page')
 
         code = request.GET.get("code")
         if not code:
@@ -291,14 +285,12 @@ class GoogleCallbackView(View):
             info = user_info_res.json()
             email = info.get("email")
             first_name = info.get("given_name")
-            last_name = info.get("family_name")
             picture_url = info.get("picture")
 
             user, created = User.objects.get_or_create(
                 email=email,
                 defaults={
                     "first_name": first_name,
-                    "last_name": last_name,
                     "is_active": True,
                     "role": Roles.CANDIDATE
                 }
@@ -387,6 +379,89 @@ class GithubCallbackView(View):
         login(request, user)
         return redirect('main_page')
 
-
-
-
+# Linkedin
+# class LinkedInLoginView(View):
+#     def get(self, request):
+#         state = secrets.token_urlsafe(16)
+#         request.session['linkedin_oauth_state'] = state
+#
+#         scope = "openid profile email"
+#
+#         params = {
+#             "response_type": "code",
+#             "client_id": settings.LINKEDIN_CLIENT_ID,
+#             "redirect_uri": settings.LINKEDIN_REDIRECT_URI,
+#             "scope": scope,
+#             "state": state
+#         }
+#
+#         auth_url = f"https://www.linkedin.com/oauth/v2/authorization?{urllib.parse.urlencode(params)}"
+#         return redirect(auth_url)
+#
+#
+# class LinkedInCallbackView(View):
+#     def get(self, request):
+#         state = request.GET.get("state")
+#         session_state = request.session.pop('linkedin_oauth_state', None)
+#
+#         if not state or state != session_state:
+#             return redirect('login_page')
+#
+#         code = request.GET.get("code")
+#         if not code:
+#             return redirect('login_page')
+#
+#         # Access token olish
+#         token_res = requests.post(
+#             "https://www.linkedin.com/oauth/v2/accessToken",
+#             data={
+#                 "grant_type": "authorization_code",
+#                 "code": code,
+#                 "redirect_uri": settings.LINKEDIN_REDIRECT_URI,
+#                 "client_id": settings.LINKEDIN_CLIENT_ID,
+#                 "client_secret": settings.LINKEDIN_CLIENT_SECRET
+#             },
+#             headers={"Content-Type": "application/x-www-form-urlencoded"}
+#         ).json()
+#
+#         access_token = token_res.get("access_token")
+#         if not access_token:
+#             return redirect('login_page')
+#
+#         # User info olish
+#         user_info_res = requests.get(
+#             "https://api.linkedin.com/v2/userinfo",
+#             headers={"Authorization": f"Bearer {access_token}"}
+#         )
+#
+#         if user_info_res.status_code != 200:
+#             return redirect('login_page')
+#
+#         info = user_info_res.json()
+#
+#         email = info.get("email")
+#         first_name = info.get("given_name")
+#         last_name = info.get("family_name")
+#         picture = info.get("picture")
+#
+#         user, created = User.objects.get_or_create(
+#             email=email,
+#             defaults={
+#                 "first_name": first_name,
+#                 "last_name": last_name,
+#                 "is_active": True,
+#                 "role": Roles.CANDIDATE
+#             }
+#         )
+#
+#         if created:
+#             CandidateUser.objects.create(
+#                 user=user,
+#                 image=picture,
+#                 linkedin_link=info.get("profile")
+#             )
+#             user.set_unusable_password()
+#             user.save()
+#
+#         login(request, user)
+#         return redirect('main_page')

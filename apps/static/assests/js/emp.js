@@ -250,3 +250,4 @@ if (signinToggle && signinDropdown) {
     if (e.key === 'Escape') signinDropdown.classList.remove('open');
   });
 }
+
